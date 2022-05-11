@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/19 17:06:01 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/05 08:03:41 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 15:56:13 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,30 @@ BLUE			=	"\033[0;36m"
 WHITE			=	"\033[0;37m"
 END				=	"\033[0;0m"
 
-SRCS	= $(wildcard sources/*.c)
-OBJS	= $(SRCS:.c=.o)
+SRCS			= $(wildcard sources/*.c)
+OBJS			= $(SRCS:.c=.o)
+BIN				= ./bin
 
-NAME	= libftprintf.a
-CC		= gcc
-RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror 
+NAME			= libftprintf.a
+CC				= gcc
+RM				= rm -rf
+CFLAGS			= -Wall -Wextra -Werror 
 
-all :  $(NAME)
+all : $(BIN) $(NAME)
 
 $(NAME) : $(OBJS)
 	@echo $(YELLOW) "Archieving object files... $(NAME)" $(END)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
+
+$(BIN):
+	@mkdir bin
 
 .c.o : 
 	@echo $(YELLOW) "Compiling..." $< $(END)
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # $< input files
 # $@ output files
@@ -45,7 +50,8 @@ $(NAME) : $(OBJS)
 
 clean :
 	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(OBJS)
+	@$(RM) $(wildcard $(BIN)/*.o)
+	@$(RM) $(BIN)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/05 07:38:29 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 15:52:43 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,13 @@ END				=	"\033[0;0m"
 
 SRCS			= $(wildcard sources/*.c)
 OBJS			= $(SRCS:.c=.o)
+BIN				= ./bin
 
 # Command and Flags
 
 NAME			= minishell
 CC				= gcc
-RM				= rm -f
+RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
 LIB				= ./libft/libft.a
 
@@ -41,19 +42,23 @@ INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
 INC				= ./includes
 
-all : $(LIB) ${NAME}
+all : $(LIB) $(NAME)
 
 $(LIB):
-	make -C ./libft
+	@make -C ./libft
 
-$(NAME) : ${OBJS}
+$(NAME) : $(BIN) $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
 	@$(CC) $(OBJS) -o $(NAME) $(LIB)
+	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
+
+$(BIN):
+	@mkdir bin
 
 .c.o:
 	@echo $(YELLOW) "Compiling..." $< $(END)
-	@${CC} ${CFLAGS} -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)	
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
 
 # $< input files
 # $@ output files
@@ -61,21 +66,22 @@ $(NAME) : ${OBJS}
 
 clean :
 	@echo $(YELLOW) "Removing object files..." $(END)
-	@${RM} ${OBJS}
+	@$(RM) $(wildcard $(BIN)/*.o)
+	@$(RM) $(BIN)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
-	@${RM} ${NAME}
+	@$(RM) $(NAME)
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 ffclean: fclean
-	make fclean -C ./libft
+	@make fclean -C ./libft
 
 norm :
 	@norminette libft/
 	@norminette sources/*.[ch]
-	@norminette includes/
+	@norminette includes/*.[ch]
 
 re : fclean all
 

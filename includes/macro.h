@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 07:39:05 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/11 14:59:36 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/05/09 19:42:35 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/05/09 19:57:25 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MACRO_H
+# define MACRO_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
-# include <signal.h>
-# include <pthread.h>
-# include <stdbool.h>
-
-# include <libft.h>
-# include <ft_printf.h>
-# include <get_next_line.h>
-# include <macro.h>
+# define SUCCESS 0
+# define FAILED 1
 
 #endif
