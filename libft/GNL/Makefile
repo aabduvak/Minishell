@@ -6,9 +6,11 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:43:54 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/11 15:56:17 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 18:07:47 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Colors
 
 BLACK			=	"\033[0;30m"
 RED				=	"\033[0;31m"
@@ -19,44 +21,50 @@ BLUE			=	"\033[0;36m"
 WHITE			=	"\033[0;37m"
 END				=	"\033[0;0m"
 
+# Files
+
 SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:.c=.o)
-BIN				= ./bin
+OBJS			= $(SRCS:sources/%.c=bin/%.o)
+
+# Command and Flags
 
 NAME			= get_next_line.a
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
-LIB				= libftprintf.a
 
-all : $(LIB) $(NAME)
+# Directories
+LIB				= ft_printf/libftprintf.a
+BIN				= bin/
+
+all : $(LIB) $(BIN) $(NAME)
 
 $(LIB) :
 	@make -C ../ft_printf	
 
-$(NAME) : $(BIN) $(OBJS)
+$(NAME) : $(OBJS)
 	@echo $(YELLOW) "Copying and archieving object files...$(NAME)" $(END)
-	@cp ../ft_printf/$(LIB) ./$(NAME)
+	@cp ../$(LIB) ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN):
 	@mkdir bin
 
-.c.o :
+$(BIN)%.o: sources/%.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(wildcard $(BIN)/*.o)
+	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
+	@$(RM) $(OBJS)
 	@$(RM) $(BIN)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
+	@$(RM) $(BIN)
 	@$(RM) $(NAME)
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
@@ -75,4 +83,4 @@ help :
 	@echo "make norm   --------- will control all *.c and *.h codes to norminette standart"
 	@echo "            --------- if finds norminette error will break"
 
-.PHONY: all clean fclean re .c.o
+.PHONY: all clean fclean re

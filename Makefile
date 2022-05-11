@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/11 15:52:43 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 18:05:06 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ END				=	"\033[0;0m"
 # Files
 
 SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:.c=.o)
-BIN				= ./bin
+OBJS			= $(SRCS:sources/%.c=bin/%.o)
 
 # Command and Flags
 
@@ -41,22 +40,24 @@ INC_FT			= ./libft/sources
 INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
 INC				= ./includes
+BIN				= bin/
 
-all : $(LIB) $(NAME)
+# Rules
+
+all : $(LIB) $(BIN) $(NAME)
 
 $(LIB):
 	@make -C ./libft
 
-$(NAME) : $(BIN) $(OBJS)
+$(BIN):
+	@mkdir $(BIN)
+
+$(NAME):  $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
 	@$(CC) $(OBJS) -o $(NAME) $(LIB)
-	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
-$(BIN):
-	@mkdir bin
-
-.c.o:
+$(BIN)%.o: sources/%.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
 
@@ -65,14 +66,14 @@ $(BIN):
 # in makefile used to create oputput files in their subfolder
 
 clean :
-	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(wildcard $(BIN)/*.o)
-	@$(RM) $(BIN)
+	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
+	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
 	@$(RM) $(NAME)
+	@$(RM) $(BIN)
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 ffclean: fclean

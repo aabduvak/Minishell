@@ -6,9 +6,11 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/24 01:44:57 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/11 15:53:47 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 18:05:26 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Colors
 
 BLACK			=	"\033[0;30m"
 RED				=	"\033[0;31m"
@@ -19,41 +21,48 @@ BLUE			=	"\033[0;36m"
 WHITE			=	"\033[0;37m"
 END				=	"\033[0;0m"
 
-SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:.c=.o)
-BIN				= ./bin
+# Files
 
-INCS			= libft.h
+SRCS			= $(wildcard sources/*.c)
+OBJS			= $(SRCS:sources/%.c=bin/%.o)
+
+# Command and Flags
+
 NAME			= libft.a
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
 LIB				= GNL/get_next_line.a
 
-all : $(LIB) $(NAME)
+# Directories
+
+BIN				= bin/
+INCS			= ./libft.h
+
+# Rules
+
+all : $(LIB) $(BIN) $(NAME)
 
 $(LIB):
 	@make -C ./GNL
 
-$(NAME) : $(BIN) $(OBJS)
+$(NAME) : $(OBJS)
 	@echo $(YELLOW) "Copying and archieving object files...$(NAME)" $(END)
 	@cp $(LIB) ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN):
-	@mkdir bin
+	@mkdir $(BIN)
 
-.c.o :
+$(BIN)%.o: sources/%.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(wildcard $(BIN)/*.o)
-	@$(RM) $(BIN)
+	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
+	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
@@ -61,9 +70,12 @@ fclean : clean
 	@make fclean -C ./ft_printf
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
 	@$(RM) $(NAME)
+	@$(RM) $(BIN)
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 norm :
+	@make norm -C ft_printf/
+	@make norm -C GNL/
 	@norminette sources/*.[ch]
 
 re : fclean all
@@ -78,4 +90,4 @@ help :
 	@echo "make norm   --------- will control all *.c and *.h codes to norminette standart"
 	@echo "            --------- if finds norminette error will break"
 
-.PHONY: all clean fclean re .c.o
+.PHONY: all clean fclean re help

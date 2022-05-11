@@ -6,9 +6,11 @@
 #    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/19 17:06:01 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/11 15:56:13 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/11 18:09:09 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Colors
 
 BLACK			=	"\033[0;30m"
 RED				=	"\033[0;31m"
@@ -19,14 +21,21 @@ BLUE			=	"\033[0;36m"
 WHITE			=	"\033[0;37m"
 END				=	"\033[0;0m"
 
+# Files
+
 SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:.c=.o)
-BIN				= ./bin
+OBJS			= $(SRCS:sources/%.c=bin/%.o)
+
+# Command and Flags
 
 NAME			= libftprintf.a
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror 
+
+# Directories
+
+BIN				= bin/
 
 all : $(BIN) $(NAME)
 
@@ -34,13 +43,12 @@ $(NAME) : $(OBJS)
 	@echo $(YELLOW) "Archieving object files... $(NAME)" $(END)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@mv $(OBJS) $(BIN)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN):
-	@mkdir bin
+	@mkdir $(BIN)
 
-.c.o : 
+$(BIN)%.o: sources/%.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -49,13 +57,13 @@ $(BIN):
 # in makefile used to create oputput files in their subfolder
 
 clean :
-	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(wildcard $(BIN)/*.o)
-	@$(RM) $(BIN)
+	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
+	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
+	@$(RM) $(BIN)
 	@$(RM) $(NAME)
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
@@ -75,4 +83,4 @@ help :
 	@echo "make norm       --------- controls all *.c and *.h codes to norminette standart"
 	@echo "                --------- if finds norminette error will break"
 
-.PHONY: all clean fclean re .c.o bonus
+.PHONY: all clean fclean re help
