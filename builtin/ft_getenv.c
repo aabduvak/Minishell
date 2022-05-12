@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:51:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 05:07:54 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:23:26 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ char	*ft_getenv(char *name, t_list *envl)
 			return (env_name + idx);
 		envl = envl->next;
 	}
-	return (NULL);
+	return ("");
 }
