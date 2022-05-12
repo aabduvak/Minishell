@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 19:42:35 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 03:19:02 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/05/12 03:16:44 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/05/12 03:47:52 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACRO_H
-# define MACRO_H
+#include <minishell.h>
 
-# define SUCCESS 0
-# define FAILED 1
-# define ERROR -1
+int	unset(t_list *lst, char *name)
+{
+	char	**str;
+	t_list	*tmp;
 
-#endif
+	while (lst)
+	{
+		tmp = lst->next;
+		str = ft_split((char *) lst->content, '=');
+		if (!ft_strncmp(str[0], name, ft_strlen(name)))
+		{
+			ft_lstdelone(lst, free);
+			lst = tmp;
+			return (SUCCESS);
+		}
+		lst = lst->next;
+		free(str[0]);
+		free(str[1]);
+		free(str[2]);
+		free(str);
+	}
+	return (FAILED);
+}
