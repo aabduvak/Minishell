@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/29 04:46:41 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 03:05:09 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/05/12 02:53:08 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/05/12 02:57:34 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strchr(const char *str, int c)
+void	env(t_list *lst)
 {
-	if (!str)
-		return (NULL);
-	while (*str != (char) c && *str != '\0')
-		str++;
-	if (*str == (char)c)
-		return ((char *)str);
-	return (NULL);
+	if (!lst)
+		return ;
+	while (lst->next)
+	{
+		printf("%s\n", (char *) lst->content);
+		lst = lst->next;
+	}
 }

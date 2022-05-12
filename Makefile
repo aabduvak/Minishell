@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/11 18:05:06 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/12 02:08:40 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,34 +32,35 @@ NAME			= minishell
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
-LIB				= ./libft/libft.a
+LIB				= ./builtin/builtin.a
 
 # Directories
 
 INC_FT			= ./libft/sources
 INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
+INC_BL			= ./builtin
 INC				= ./includes
 BIN				= bin/
 
 # Rules
 
-all : $(LIB) $(BIN) $(NAME)
+all : $(LIB)  $(NAME)
 
 $(LIB):
-	@make -C ./libft
+	@make -C ./builtin
 
 $(BIN):
 	@mkdir $(BIN)
 
-$(NAME):  $(OBJS)
+$(NAME): $(BIN) $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
 	@$(CC) $(OBJS) -o $(NAME) $(LIB)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN)%.o: sources/%.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC_BL) -I$(INC)
 
 # $< input files
 # $@ output files
@@ -77,6 +78,7 @@ fclean : clean
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 ffclean: fclean
+	@make fclean -C ./builtin
 	@make fclean -C ./libft
 
 norm :

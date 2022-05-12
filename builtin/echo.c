@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/29 04:46:41 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 03:05:09 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/05/12 01:37:14 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/05/12 02:10:53 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strchr(const char *str, int c)
+void	echo(char *str, int flag)
 {
-	if (!str)
-		return (NULL);
-	while (*str != (char) c && *str != '\0')
-		str++;
-	if (*str == (char)c)
-		return ((char *)str);
-	return (NULL);
+	if (flag)
+		printf("%s", str);
+	else
+		printf("%s\n", str);
 }

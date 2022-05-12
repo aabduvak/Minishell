@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 00:56:02 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/12 01:19:26 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/12 02:08:59 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS			= $(SRCS:%.c=bin/%.o)
 
 # Command and Flags
 
-NAMES			= echo cd pwd export unset env exit 
+NAME			= builtin.a
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
@@ -40,21 +40,24 @@ INC_GN			= ../libft/GNL/sources
 INC_PR			= ../libft/ft_printf/sources
 INC				= ../includes
 BIN				= bin/
-ECO 			= echo
+LIB				= ../libft/libft.a
 
 # Rules
 
-all : $(BIN) $(NAMES)
-	
+all : $(LIB)  $(NAME)
+
+$(LIB):
+	@make -C ../libft
 
 $(BIN):
 	@mkdir $(BIN)
 
-$(NAMES):  $(OBJS)
-	@echo $(YELLOW) "Building...$(ECO)" $(END)
-	@$(CC) $(OBJS) -o $(ECO) $(LIB)
-	@echo $(GREEN) "$(ECO) created successfully!\n" $(END)
-	
+$(NAME): $(BIN) $(OBJS)
+	@echo $(YELLOW) "Copying and archieving object files...$(NAME)" $(END)
+	@cp $(LIB) ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN)%.o: %.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
@@ -65,23 +68,15 @@ $(BIN)%.o: %.c
 # in makefile used to create oputput files in their subfolder
 
 clean :
-	@echo $(YELLOW) "Removing object files...$(NAMES)" $(END)
+	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
 	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
-	@echo $(YELLOW) "Removing $(NAMES)..." $(END)
-	@$(RM) $(NAMES)
+	@echo $(YELLOW) "Removing $(NAME)..." $(END)
+	@$(RM) $(NAME)
 	@$(RM) $(BIN)
-	@echo $(RED) "$(NAMES) deleted successfully!\n" $(END)
-
-ffclean: fclean
-	@make fclean -C ./libft
-
-norm :
-	@norminette libft/
-	@norminette sources/*.[ch]
-	@norminette includes/*.[ch]
+	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 re : fclean all
 
