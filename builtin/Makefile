@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 00:56:02 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/12 11:52:26 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/12 15:02:04 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,21 +23,12 @@ END				=	"\033[0;0m"
 
 # Files
 
-SRCS_ECHO		= echo.c
-OBJS_ECHO		= $(SRCS_ECHO:%.c=bin/%.o)
-SRCS_PWD		= pwd.c
-OBJS_PWD		= $(SRCS_ENV:%.c=bin/%.o)
-SRCS_ENV		= pwd.c
-OBJS_ENV		= $(SRCS_ENV:%.c=bin/%.o)
-
-# Executables
-
-NAME_ECHO		= echo
-NAME_PWD		= pwd
-NAME_ENV		= env
+SRCS			= $(wildcard *.c)
+OBJS			= $(SRCS:%.c=bin/%.o)
 
 # Command and Flags
 
+NAME			= builtin.a
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
@@ -53,7 +44,7 @@ LIB				= ../libft/libft.a
 
 # Rules
 
-all : $(LIB) $(NAME_ECHO) $(NAME_PWD)
+all : $(LIB) $(NAME)
 
 $(LIB):
 	@make -C ../libft
@@ -61,20 +52,12 @@ $(LIB):
 $(BIN):
 	@mkdir $(BIN)
 
-$(NAME_ECHO): $(BIN) $(OBJS_ECHO)
-	@echo $(YELLOW) "Building...$(NAME_ECHO)" $(END)
-	@$(CC) $(OBJS_ECHO) -o $(NAME_ECHO) $(LIB)
-	@echo $(GREEN) "$(NAME_ECHO) created successfully!\n" $(END)
-
-$(NAME_PWD): $(BIN) $(OBJS_PWD)
-	@echo $(YELLOW) "Building...$(NAME_PWD)" $(END)
-	@$(CC) $(OBJS_PWD) -o $(NAME_PWD) $(LIB)
-	@echo $(GREEN) "$(NAME_PWD) created successfully!\n" $(END)
-
-$(NAME_ENV): $(BIN) $(OBJS_ENV)
-	@echo $(YELLOW) "Building...$(NAME_ENV)" $(END)
-	@$(CC) $(OBJS_ENV) -o $(NAME_ENV) $(LIB)
-	@echo $(GREEN) "$(NAME_ENV) created successfully!\n" $(END)
+$(NAME) : $(BIN) $(OBJS)
+	@echo $(YELLOW) "Copying and archieving object files...$(NAME)" $(END)
+	@cp $(LIB) ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN)%.o: %.c
 	@echo $(YELLOW) "Compiling..." $< $(END)
@@ -86,14 +69,12 @@ $(BIN)%.o: %.c
 
 clean :
 	@echo $(YELLOW) "Removing object files..." $(END)
-	@$(RM) $(OBJS_ECHO) $(OBJS_PWD) $(OBJS_ENV)
+	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
 fclean : clean
-	@echo $(YELLOW) "Removing $(NAME_ECHO) $(NAME_PWD) $(NAME_ENV)..." $(END)
-	@$(RM) $(NAME_ECHO)
-	@$(RM) $(NAME_PWD)
-	@$(RM) $(NAME_ENV)
+	@echo $(YELLOW) "Removing $(NAME)..." $(END)
+	@$(RM) $(NAME)
 	@$(RM) $(BIN)
 	@echo $(RED) "Executables deleted successfully!\n" $(END)
 

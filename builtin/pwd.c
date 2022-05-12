@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:37:11 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 11:48:58 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:26:06 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,4 @@ void	pwd(void)
 	}
 	printf("%s\n", buf);
 	free(buf);
-}
-
-int	main(void)
-{
-	pwd();
-	return (SUCCESS);
 }
