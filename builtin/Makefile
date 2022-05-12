@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 00:56:02 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/12 02:08:59 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/12 15:02:04 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ LIB				= ../libft/libft.a
 
 # Rules
 
-all : $(LIB)  $(NAME)
+all : $(LIB) $(NAME)
 
 $(LIB):
 	@make -C ../libft
@@ -52,7 +52,7 @@ $(LIB):
 $(BIN):
 	@mkdir $(BIN)
 
-$(NAME): $(BIN) $(OBJS)
+$(NAME) : $(BIN) $(OBJS)
 	@echo $(YELLOW) "Copying and archieving object files...$(NAME)" $(END)
 	@cp $(LIB) ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
@@ -68,7 +68,7 @@ $(BIN)%.o: %.c
 # in makefile used to create oputput files in their subfolder
 
 clean :
-	@echo $(YELLOW) "Removing object files...$(NAME)" $(END)
+	@echo $(YELLOW) "Removing object files..." $(END)
 	@$(RM) $(OBJS)
 	@echo $(RED) "All files deleted successfully!\n" $(END)
 
@@ -76,7 +76,7 @@ fclean : clean
 	@echo $(YELLOW) "Removing $(NAME)..." $(END)
 	@$(RM) $(NAME)
 	@$(RM) $(BIN)
-	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
+	@echo $(RED) "Executables deleted successfully!\n" $(END)
 
 re : fclean all
 

@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/12 02:08:40 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/05/12 15:36:49 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ LIB				= ./builtin/builtin.a
 INC_FT			= ./libft/sources
 INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
-INC_BL			= ./builtin
-INC				= ./includes
+INC_BL			= ./builtin/
+INC				= ./includes/
 BIN				= bin/
 
 # Rules
