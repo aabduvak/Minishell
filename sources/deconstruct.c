@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:43:30 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 10:47:22 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/12 10:55:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**deconstruct(t_list *envl)
 	envp = (char **)malloc(sizeof(char *) * (size + 1));
 	while (idx < size)
 	{
-		envp[idx] = (char *)envl->content;
+		envp[idx++] = ft_strdup((char *)envl->content);
 		envl = envl->next;
 	}
 	envp[idx] = 0;
