@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 00:38:59 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/03/06 05:21:05 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:42:28 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t size);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strdup(char *src);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 // Part II
 char	*ft_substr(char const *str, unsigned int start, size_t leng);
