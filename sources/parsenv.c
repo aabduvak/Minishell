@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:21:20 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 12:09:57 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/12 17:06:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ size_t	get_len(t_list *envl, char *input)
 
 char	*parsenv(t_list *envl, char *input)
 {
-	printf("%zu\n", get_len(envl, input));
 	return (0);
 }
