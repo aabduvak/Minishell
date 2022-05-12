@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:32 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 03:28:23 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/12 04:44:08 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_setenv(char *var_name, char *value, t_list *envl)
 	char	*tmp;
 	char	*env_res;
 
-	if (!var_name || !value || *var_name)
+	if (!var_name || !value || !*var_name)
 		return ;
 	unset(envl, var_name);
 	tmp = ft_strjoin(var_name, "=");

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:39:05 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 02:05:16 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/05/12 04:29:23 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 # include <macro.h>
+# include <builtin.h>
 
 #endif
