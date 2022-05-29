@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:51:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/13 14:34:38 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/29 06:01:29 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int env_compare(char *s1, char *s2)
+static int	env_compare(char *s1, char *s2)
 {
 	while (*s1 && *s1 != '=' && *s2 && *s1 == *s2)
 	{

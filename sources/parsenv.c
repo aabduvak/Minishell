@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsenv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:21:20 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/13 14:54:18 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/05/29 06:01:16 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static size_t	get_len(t_list *envl, char *input)
 
 	env_idx = 0;
 	parsed_len = 0;
-	while(input[env_idx])
+	while (input[env_idx])
 	{
 		params_len = 0;
 		if (input[env_idx + params_len++] == '$')
 		{
 			if (!check_first_letter(input[env_idx + params_len++]) && ++env_idx)
-				continue;
+				continue ;
 			while (check_letter(input[env_idx + params_len]))
 				params_len++;
 			env_name = ft_substr(input, env_idx + 1, params_len);
@@ -87,7 +87,8 @@ char	*parsenv(t_list *envl, char *input)
 				p_len++;
 			env_name = ft_substr(input, 1, p_len - 1);
 			parsed[idx++] = '\"';
-			envcpy(parsed + idx, ft_getenv(env_name, envl), ft_strlen(ft_getenv(env_name, envl)));
+			envcpy(parsed + idx, ft_getenv(env_name, envl), 
+				ft_strlen(ft_getenv(env_name, envl)));
 			idx += ft_strlen(ft_getenv(env_name, envl));
 			parsed[idx++] = '\"';
 			input += p_len;
