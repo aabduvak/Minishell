@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/05/12 15:36:49 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/06/01 15:47:23 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(BIN):
 
 $(NAME): $(BIN) $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
-	@$(CC) $(OBJS) -o $(NAME) $(LIB)
+	@$(CC) $(OBJS) -lreadline  -o $(NAME) $(LIB)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN)%.o: sources/%.c

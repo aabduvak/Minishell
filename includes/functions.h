@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 12:03:56 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:27:38 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
 
 # include <libft.h>
 
@@ -27,5 +27,8 @@ void	ft_setenv(char *var_name, char *value, t_list *envl);
 char	*ft_getenv(char *name, t_list *envl);
 t_list	*construct(char	**envp);
 char	**deconstruct(t_list *envl);
+char	*get_fullpath(char *path, char *name);
+int		file_checker(char *path, char *name);
+
 
 #endif

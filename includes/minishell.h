@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:39:05 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 05:50:51 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:26:55 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 # include <ft_printf.h>
 # include <get_next_line.h>
 # include <macro.h>
-# include <builtin.h>
+# include <functions.h>
 
 #endif

@@ -3,39 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   file_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 06:00:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/29 06:00:54 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:22:50 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell>
+#include <minishell.h>
 
-int	file_checker(char *path, char *name)
+void	free_list(char **list)
 {
-	int		i;
-	char	**list;
-	int		result;
-	char	*fullpath;
-	char	*tmp;
+	char	**head;
 
-	i = -1;
-	result = -1;
-	list = ft_split(path, ':');
-	while (list[++i])
-	{
-		tmp = ft_strjoin(list[i], "/");
-		fullpath = ft_strjoin(tmp, name);
-		result = access(fullpath, F_OK | X_OK);
-		free(tmp);
-		free(fullpath);
-		free(list[i]);
-		if (!result)
-			break ;
-	}
-	free(list);
-	return (result);
+	head = list;
+	while (list && *list)
+		free(*list++);
+	free(head);
 }
 
 char	*get_fullpath(char *path, char *name)
@@ -44,20 +28,25 @@ char	*get_fullpath(char *path, char *name)
 	char	**list;
 	char	*fullpath;
 	char	*tmp;
+	int		access_result;
 
 	i = -1;
 	list = ft_split(path, ':');
 	fullpath = 0;
-	while (list[++i])
+	access_result = access(name, F_OK);
+	if (!access_result)
+		fullpath = ft_strdup(name);
+	while (list[++i] && access_result)
 	{
+		free(fullpath);
 		tmp = ft_strjoin(list[i], "/");
 		fullpath = ft_strjoin(tmp, name);
 		free(tmp);
-		free(list[i]);
-		if (!file_checker(fullpath, name))
-			break ;
+		access_result = access(fullpath, F_OK);
 	}
-	free(list);
-	return (fullpath);
+	free_list(list);
+	if (!access_result && !access(fullpath, X_OK))
+		return (fullpath);
+	free(fullpath);
+	return (NULL);
 }
-
