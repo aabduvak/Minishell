@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:44 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 12:39:46 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:16:41 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	unset(t_list *lst, char *name)
 		{
 			tmp->next = lst->next;
 			ft_lstdelone(lst, free);
-			return (SUCCESS);
+			return (FT_TRUE);
 		}
 		tmp = lst;
 		lst = lst->next;
@@ -32,5 +32,5 @@ int	unset(t_list *lst, char *name)
 		free(str[1]);
 		free(str);
 	}
-	return (FAILED);
+	return (FT_FALSE);
 }

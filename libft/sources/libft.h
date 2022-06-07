@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 00:38:59 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 17:42:28 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:05:33 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *str1, const char *str2, size_t size);
+int		ft_strcmp(char *str1, char *str2);
 int		ft_count_words(char const *str, char c);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t size);
