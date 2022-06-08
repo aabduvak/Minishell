@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 01:24:07 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 03:09:12 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTS_H
 
 # include <stdlib.h>
+# include <../libft/sources/libft.h>
 
 typedef enum e_red {
 	READ,
@@ -24,7 +25,7 @@ typedef enum e_red {
 
 typedef struct s_redirect {
 	char	*name;
-	t_red	redirect;
+	t_red	type;
 }	t_redirect;
 
 typedef struct s_stdfd {
@@ -41,7 +42,7 @@ typedef struct s_process
 	char				**args;
 	t_list				*envp;
 	t_stdfd				stdfd;
-	t_redirect			redirect;
+	t_redirect			*redirect;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;

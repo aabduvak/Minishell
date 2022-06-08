@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/06/01 15:47:23 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/06/08 05:43:28 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ norm :
 	@norminette sources/*.[ch]
 	@norminette includes/*.[ch]
 
-re : fclean all
+re : ffclean all
 
 run : $(NAME)
 	@./$(NAME)

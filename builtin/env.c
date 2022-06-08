@@ -6,19 +6,23 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:53:08 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 14:25:26 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 05:30:09 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	env(t_list *lst)
+void	env(t_process *process)
 {
-	if (!lst)
+	t_list	*lst;
+
+	if (!process)
 		return ;
+	lst = process->envp;
 	while (lst)
 	{
-		printf("%s\n", (char *) lst->content);
+		if (contains_char(lst->content, '='))
+			printf("%s\n", (char *) lst->content);
 		lst = lst->next;
 	}
 }
