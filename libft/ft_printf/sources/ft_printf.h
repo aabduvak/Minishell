@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:32:34 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/02/15 16:57:57 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 06:02:03 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-void	ft_putchar(char c, int *ret_val);
-void	ft_putstr(char *str, int *ret_val);
+void	ft_putchar(int fd, char c, int *ret_val);
+void	ft_putstr(int fd, char *str, int *ret_val);
 size_t	ft_strlen(const char *str);
-void	ft_convert(size_t num, char *repres, int *ret_val);
-int		ft_printf(const char *str, ...);
-void	ft_abs(int data, int *ret_val);
+void	ft_convert(int fd, size_t num, char *repres, int *ret_val);
+int		ft_printf(int fd, const char *str, ...);
+void	ft_abs(int fd, int data, int *ret_val);
 
 #endif

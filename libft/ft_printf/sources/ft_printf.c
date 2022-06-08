@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:32:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 03:34:06 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 06:04:03 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,30 @@
  * @copyright Copyright (c) 2022 
  */
 
-static int	ft_controller(char ch, va_list list, int *ret_val)
+static int	ft_controller(char ch, va_list list, int *ret_val, int fd)
 {
 	if (ch == 'c')
-		ft_putchar(va_arg(list, int), ret_val);
+		ft_putchar(fd, va_arg(list, int), ret_val);
 	else if (ch == 's')
-		ft_putstr(va_arg(list, char *), ret_val);
+		ft_putstr(fd, va_arg(list, char *), ret_val);
 	else if (ch == 'd' || ch == 'i')
-		ft_abs(va_arg(list, int), ret_val);
+		ft_abs(fd, va_arg(list, int), ret_val);
 	else if (ch == 'u')
-		ft_convert(va_arg(list, unsigned int), "0123456789", ret_val);
+		ft_convert(fd, va_arg(list, unsigned int), "0123456789", ret_val);
 	else if (ch == 'x')
-		ft_convert(va_arg(list, unsigned int),
+		ft_convert(fd, va_arg(list, unsigned int),
 			"0123456789abcdef", ret_val);
 	else if (ch == 'X')
-		ft_convert(va_arg(list, unsigned int),
+		ft_convert(fd, va_arg(list, unsigned int),
 			"0123456789ABCDEF", ret_val);
 	else if (ch == 'p')
 	{
-		ft_putstr("0x", ret_val);
-		ft_convert(va_arg(list, unsigned long), "0123456789abcdef", ret_val);
+		ft_putstr(fd, "0x", ret_val);
+		ft_convert(fd, va_arg(list, unsigned long), 
+			"0123456789abcdef", ret_val);
 	}
 	else if (ch == '%')
-		ft_putchar('%', ret_val);
+		ft_putchar(fd, '%', ret_val);
 	else
 		return (-1);
 	return (0);
@@ -76,7 +77,7 @@ static int	ft_controller(char ch, va_list list, int *ret_val)
  * @copyright Copyright (c) 2022 
  */
 
-int	ft_printf(const char *str, ...)
+int	ft_printf(int fd, const char *str, ...)
 {
 	va_list	list;
 	int		is_empty;
@@ -92,12 +93,12 @@ int	ft_printf(const char *str, ...)
 			while (*(++str) == 32)
 				is_empty = 1;
 			if (is_empty)
-				ft_putchar(' ', &ret_val);
-			if (ft_controller(*str, list, &ret_val) != 0)
-				ret_val += write(1, str, 1);
+				ft_putchar(fd, ' ', &ret_val);
+			if (ft_controller(*str, list, &ret_val, fd) != 0)
+				ret_val += write(fd, str, 1);
 		}
 		else
-			ret_val += write(1, str, 1);
+			ret_val += write(fd, str, 1);
 		str++;
 	}
 	va_end(list);

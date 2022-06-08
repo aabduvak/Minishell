@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 05:50:54 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 06:05:13 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 			export(process);
 		}
 		else if (full)
-			printf("%s\n", full);
+			ft_printf(0, "%s\n", full);
 		else
 			perror("minishell");
 		free(full);

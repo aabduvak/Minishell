@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:37:14 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/05/12 14:25:44 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 06:04:35 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	echo(char *str, int flag)
 {
 	if (flag)
-		printf("%s", str);
+		ft_printf(0, "%s", str);
 	else
-		printf("%s\n", str);
+		ft_printf(0, "%s\n", str);
 }
