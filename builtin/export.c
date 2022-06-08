@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 05:50:15 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:09:29 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	contains_char(char *str, char c)
 
 void	export(t_process *process)
 {
-	char	**arr;
 	t_list	*tmp;
 
 	if (!process->args)
@@ -33,20 +32,11 @@ void	export(t_process *process)
 		tmp = process->envp;
 		while (tmp)
 		{
-			printf("declare -x %s\n", (char *) tmp->content);
+			ft_printf(process->stdfd->_stdout,
+				"declare -x %s\n", (char *) tmp->content);
 			tmp = tmp->next;
 		}
 		return ;
 	}
-	if (contains_char(process->args[0], '='))
-	{
-		arr = ft_split(process->args[0], '=');
-		if (arr[1])
-			ft_setenv(arr[0], arr[1], process->envp);
-		else
-			ft_lstadd_back(&process->envp, ft_lstnew(process->args[0]));
-		free_list(arr);
-	}
-	else
-		ft_lstadd_back(&process->envp, ft_lstnew(process->args[0]));
+	ft_setenv(process);
 }

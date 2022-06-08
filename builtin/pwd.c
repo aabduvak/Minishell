@@ -6,13 +6,13 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:37:11 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/12 14:26:06 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 06:48:38 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	pwd(void)
+void	pwd(t_process *process)
 {
 	char	*buf;
 
@@ -22,6 +22,6 @@ void	pwd(void)
 		perror("pwd");
 		return ;
 	}
-	printf("%s\n", buf);
+	ft_printf(process->stdfd->_stdout, "%s\n", buf);
 	free(buf);
 }

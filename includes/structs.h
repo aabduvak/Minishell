@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 03:09:12 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 07:45:10 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct s_stdfd {
 typedef struct s_process
 {
 	pid_t				pid;
-	char				*p_name;
+	char				*name;
 	char				*path;
 	char				**args;
 	t_list				*envp;
-	t_stdfd				stdfd;
+	t_stdfd				*stdfd;
 	t_redirect			*redirect;
 	struct s_process	*next;
 	struct s_process	*prev;

@@ -6,16 +6,31 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:37:14 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 06:04:35 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:27:24 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	echo(char *str, int flag)
+void	echo(t_process *process)
 {
-	if (flag)
-		ft_printf(0, "%s", str);
-	else
-		ft_printf(0, "%s\n", str);
+	int	i;
+	int	compare;
+
+	if (!process->args)
+	{
+		ft_printf(process->stdfd->_stdout, "\n");
+		return ;
+	}
+	compare = ft_strcmp(process->args[0], "-n");
+	i = compare == 0;
+	while (process->args[i])
+	{
+		if (process->args[i + 1])
+			ft_printf(process->stdfd->_stdout, "%s ", process->args[i++]);
+		else
+			ft_printf(process->stdfd->_stdout, "%s", process->args[i++]);
+	}
+	if (compare)
+		ft_printf(process->stdfd->_stdout, "\n");
 }

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 06:05:13 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:54:30 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	process = malloc(sizeof(t_process));
 	process->envp = construct(envp);
+	process->stdfd = malloc(sizeof(t_stdfd));
+	process->stdfd->_stdout = 0;
 	while (1)
 	{
 		line = ft_split(readline(">>> "), ' ');
+		process->name = line[0];
 		full = get_fullpath(ft_getenv("PATH", process->envp), line[0]);
-		if (is_builtin(line[0]))
+		if (is_builtin(process->name))
 		{
 			if (line[1])
 				process->args = line + 1;
 			else
 				process->args = 0;
-			export(process);
+			run_builtin(process);
 		}
 		else if (full)
 			ft_printf(0, "%s\n", full);
