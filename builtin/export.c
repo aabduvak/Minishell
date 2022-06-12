@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 16:09:29 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:13:48 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	contains_char(char *str, char c)
 
 void	export(t_process *process)
 {
-	t_list	*tmp;
+	t_envp	*tmp;
 
 	if (!process->args)
 	{
@@ -33,7 +33,7 @@ void	export(t_process *process)
 		while (tmp)
 		{
 			ft_printf(process->stdfd->_stdout,
-				"declare -x %s\n", (char *) tmp->content);
+				"declare -x %s\n", (char *) tmp->fullstr);
 			tmp = tmp->next;
 		}
 		return ;

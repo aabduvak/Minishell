@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 07:45:10 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:03:26 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,21 @@ typedef struct s_stdfd {
 	int	_stderr;
 }	t_stdfd;
 
+typedef struct s_envp
+{
+	char			*key;
+	char			*value;
+	char			*fullstr;
+	struct s_envp	*next;
+}	t_envp;
+
 typedef struct s_process
 {
 	pid_t				pid;
 	char				*name;
 	char				*path;
 	char				**args;
-	t_list				*envp;
+	t_envp				*envp;
 	t_stdfd				*stdfd;
 	t_redirect			*redirect;
 	struct s_process	*next;

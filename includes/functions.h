@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 14:42:43 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/12 07:43:31 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-# include <libft.h>
 # include <structs.h>
 
 void	cd(t_process *process);
@@ -27,13 +26,16 @@ int		is_builtin(char *command);
 
 //UTILS
 
-void	ft_setenv(t_process *process);
-char	*ft_getenv(char *name, t_list *envl);
-t_list	*construct(char	**envp);
-char	**deconstruct(t_list *envl);
-char	*get_fullpath(char *path, char *name);
-int		file_checker(char *path, char *name);
-int		contains_char(char *str, char c);
+t_envp	*ft_envpnew(char *str);
+t_envp	*construct(char	**envp);
+void	ft_envpadd_back(t_envp **lst, t_envp *new);
 void	free_list(char **list);
+void	ft_envpdelone(t_envp *lst, void (*del) (void *));
+void	ft_setenv(t_process *process);
+char	*ft_getenv(char *name, t_envp *envl);
+char	**deconstruct(t_envp *envl);
+char	*get_fullpath(char *path, char *name);
+int		ft_envpsize(t_envp *lst);
+int		contains_char(char *str, char c);
 
 #endif

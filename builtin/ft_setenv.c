@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:32 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/08 16:57:39 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:04:39 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	ft_setenv(t_process *process)
 	if (!process || !process->args)
 		return ;
 	unset(process);
-	ft_lstadd_back(&process->envp, ft_lstnew(process->args[0]));
+	ft_envpadd_back(&process->envp, ft_envpnew(process->args[0]));
 }

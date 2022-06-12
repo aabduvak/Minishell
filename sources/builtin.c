@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:54:53 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 07:56:13 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/12 07:45:07 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include "../includes/structs.h"
 
 int	is_builtin(char *command)
 {
@@ -43,4 +42,3 @@ void	run_builtin(t_process *process)
 	else
 		return (echo(process));
 }
-	

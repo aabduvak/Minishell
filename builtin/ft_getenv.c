@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:51:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/05/29 06:01:29 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:17:03 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	env_compare(char *s1, char *s2)
 	return (*s1 == '=' && !*s2);
 }
 
-char	*ft_getenv(char *name, t_list *envl)
+char	*ft_getenv(char *name, t_envp *envl)
 {
 	int		idx;
 	char	*env_name;
@@ -32,7 +32,7 @@ char	*ft_getenv(char *name, t_list *envl)
 	while (envl)
 	{
 		idx = 0;
-		env_name = (char *)envl->content;
+		env_name = (char *)envl->fullstr;
 		if (!env_name)
 			continue ;
 		while (env_name[idx] && env_name[idx] != '=')

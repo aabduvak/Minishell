@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:32:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 06:04:03 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/12 07:44:17 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_controller(char ch, va_list list, int *ret_val, int fd)
 	else if (ch == 'p')
 	{
 		ft_putstr(fd, "0x", ret_val);
-		ft_convert(fd, va_arg(list, unsigned long), 
+		ft_convert(fd, va_arg(list, unsigned long),
 			"0123456789abcdef", ret_val);
 	}
 	else if (ch == '%')
