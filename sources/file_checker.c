@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 06:00:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/01 16:22:50 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:32:31 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*get_fullpath(char *path, char *name)
 	char	*tmp;
 	int		access_result;
 
+	printf("\n---- before ----\n");
 	i = -1;
 	list = ft_split(path, ':');
 	fullpath = 0;
@@ -44,6 +45,7 @@ char	*get_fullpath(char *path, char *name)
 		free(tmp);
 		access_result = access(fullpath, F_OK);
 	}
+	printf("\n--- after ---\n");
 	free_list(list);
 	if (!access_result && !access(fullpath, X_OK))
 		return (fullpath);

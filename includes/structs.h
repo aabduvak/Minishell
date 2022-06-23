@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/11 21:03:26 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:57:14 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <../libft/sources/libft.h>
 
 typedef enum e_red {
-	READ,
-	WRITE,
-	DELIMETER,
-	OVERWRITE
+	NOPE = 0,
+	READ = 1,
+	WRITE = 2,
+	DELIMETER = 4,
+	OVERWRITE = 8
 }	t_red;
 
 typedef struct s_redirect {

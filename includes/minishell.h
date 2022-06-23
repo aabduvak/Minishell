@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:39:05 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 02:58:11 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:40:08 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 # include <libft.h>
 # include <ft_printf.h>
