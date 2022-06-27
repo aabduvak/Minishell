@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	main()
+int	main(int argc, char **argv)
 {
 	char	buf[2555];
 	int		readed;
@@ -11,12 +11,10 @@ int	main()
 	readed = 1;
 	while (readed)
 	{
-		printf("%i. input: ", ++i);
+		printf("%s. input: ", argv[1]);
 		readed = read(0, buf, 255);
-		buf[readed - 1] = 0;
-		printf("%s$\n", buf);
-		printf("%i. line writed\n", i);
+		buf[readed] = 0;
+		printf("%s$\nReaded %i bytes\n", buf, readed);
 	}
-	printf("program closed\n");
 	return (0);
 }
