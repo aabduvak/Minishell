@@ -6,13 +6,13 @@ int	main(int argc, char **argv, char **envp)
 	t_process	*process;
 	t_redirect	*redirect;
 
-	char		*args[] = {"cat", "ls_log", NULL};
+	char		*args[] = {"ls", NULL};
 
 	process = malloc(sizeof(t_process));
-	process->name = "cat";
+	process->name = "ls";
 	process->args = args;
 	process->envp = construct(envp);
-	process->path = "/bin/cat";
+	process->path = "/bin/ls";
 
 	stdfd = malloc(sizeof(t_stdfd));
 	stdfd->_stdin = 0;
@@ -21,12 +21,12 @@ int	main(int argc, char **argv, char **envp)
 	process->stdfd = stdfd;
 
 	redirect = malloc(sizeof(t_redirect));
-	redirect->type = WRITE;
-	redirect->name = "new";
+	redirect->type = OVERWRITE;
+	redirect->name = "file2";
 	process->redirect = redirect;
 	process->next = NULL;
 	process->prev = NULL;
-
+/*
 	t_process	*next;
 	char		*args2[] = {"read", "new",  NULL};
 
@@ -93,7 +93,8 @@ int	main(int argc, char **argv, char **envp)
 	next->next = NULL;
 	next->prev = tmp;
 	tmp->next = next;
-
+*/
 	printf("status: %i\n", start_process(process));
+	while (1);
 	return (0);
 }

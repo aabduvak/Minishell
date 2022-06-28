@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/23 14:41:08 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/06/28 08:22:32 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ char	**deconstruct(t_envp *envl);
 char	*get_fullpath(char *path, char *name);
 int		ft_envpsize(t_envp *lst);
 int		contains_char(char *str, char c);
+
+//process
+int		red_read(const char *file_name);
+int		red_write(const char *file_name);
+int		red_overwrite(const char *file_name);
+int		red_delimeter(const char *del);
 int		start_process(t_process *process);
 
 #endif
