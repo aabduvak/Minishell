@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:56:49 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/28 08:30:23 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/06/28 10:56:11 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ static int	run(t_process *process)
 			return (error);
 		if (execve(process->path, process->args, deconstruct(process->envp)) == -1)
 			return (ER_EXEC);
+		printf("project closed\n");
 		exit(0);
 	}
 	else
+	{
 		close(pipes[1]);
+		close(pipes[0]);
+		sleep(1);
+	}
 	return (0);
 }
 
