@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 08:08:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/28 08:27:48 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/02 01:16:09 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	red_write(const char *file_name)
 
 int	red_overwrite(const char *file_name)
 {
-	int	fd = open(file_name, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	int	fd;
+
+	fd = open(file_name, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	if (fd < 0 || dup2(fd, 1) == -1)
 		return (ERROR);
 	return (0);
@@ -50,7 +52,7 @@ int	red_delimeter(const char *del)
 		return (ERROR);
 	while (1)
 	{
-		write(1, "> ", 2);
+		ft_printf(1, "> ");
 		readed = read(0, buf, 255);
 		if (!ft_strncmp(buf, del, readed - (readed > 1)))
 			break ;

@@ -1,1 +1,0 @@
-gcc deneme.c start_process.c ../builtin/*.c ../libft/libft.a -I../includes -I../libft/sources -I../libft/ft_printf/sources -I../libft/GNL/sources

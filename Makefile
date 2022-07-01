@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/06/08 05:43:28 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/07/02 01:11:46 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ END				=	"\033[0;0m"
 
 # Files
 
-SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:sources/%.c=bin/%.o)
+SRCS			= $(shell find sources -type f -name "*.c")
+OBJS			= $(SRCS:sources/%.c=sources/bin/%.o)
 
 # Command and Flags
 
@@ -32,7 +32,7 @@ NAME			= minishell
 CC				= gcc
 RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
-LIB				= ./builtin/builtin.a
+LIB				= ./libft/libft.a
 
 # Directories
 
@@ -41,26 +41,28 @@ INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
 INC_BL			= ./builtin/
 INC				= ./includes/
-BIN				= bin/
+BIN				= ./sources/bin/
 
 # Rules
 
-all : $(LIB)  $(NAME)
+all : $(LIB) $(NAME)
 
 $(LIB):
-	@make -C ./builtin
+	@make -C ./libft
 
 $(BIN):
 	@mkdir $(BIN)
 
-$(NAME): $(BIN) $(OBJS)
-	@echo $(YELLOW) "Building... $(NAME)" $(END)
-	@$(CC) $(OBJS) -lreadline  -o $(NAME) $(LIB)
-	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 $(BIN)%.o: sources/%.c
+	@mkdir -p $(shell dirname $@)
 	@echo $(YELLOW) "Compiling..." $< $(END)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC_BL) -I$(INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
+
+$(NAME): $(BIN) $(OBJS)
+	@echo $(YELLOW) "Building... $(NAME)" $(END)
+	@$(CC) $(OBJS) -lreadline -o $(NAME) $(LIB)
+	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 # $< input files
 # $@ output files
@@ -78,13 +80,12 @@ fclean : clean
 	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 ffclean: fclean
-	@make fclean -C ./builtin
 	@make fclean -C ./libft
 
 norm :
 	@norminette libft/
-	@norminette sources/*.[ch]
-	@norminette includes/*.[ch]
+	@norminette sources
+	@norminette includes/*.h
 
 re : ffclean all
 

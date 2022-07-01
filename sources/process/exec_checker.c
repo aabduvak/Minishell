@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42ISTANBUL.COM.TR>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 06:00:26 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/23 14:32:31 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/02 01:17:11 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*get_fullpath(char *path, char *name)
 	char	*tmp;
 	int		access_result;
 
-	printf("\n---- before ----\n");
 	i = -1;
 	list = ft_split(path, ':');
 	fullpath = 0;
@@ -45,7 +44,6 @@ char	*get_fullpath(char *path, char *name)
 		free(tmp);
 		access_result = access(fullpath, F_OK);
 	}
-	printf("\n--- after ---\n");
 	free_list(list);
 	if (!access_result && !access(fullpath, X_OK))
 		return (fullpath);

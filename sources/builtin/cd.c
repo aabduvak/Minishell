@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:25:16 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/08 08:53:23 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/02 01:33:45 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	cd(t_process *process)
 {
+	char	*tmp;
+	char	*path;
+
 	if (!process->args)
 	{
 		if (chdir(ft_getenv("HOME", process->envp)))
@@ -21,10 +24,13 @@ void	cd(t_process *process)
 	}
 	else if (process->args[0][0] == '~')
 	{
-		if (chdir(ft_getenv("HOME", process->envp)))
+		path = ft_strjoin(ft_getenv("HOME", process->envp), "/");
+		tmp = ft_strjoin(path, process->args[0] + 2);
+		printf("%s\n", tmp);
+		if (chdir(tmp))
 			perror("cd");
-		if (chdir(process->args[0] + 2))
-			perror("cd");
+		free(tmp);
+		free(path);
 	}
 	else if (chdir(process->args[0]) == -1)
 		perror("cd");
