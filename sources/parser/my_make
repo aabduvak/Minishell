@@ -1,0 +1,1 @@
+gcc parse_line.c strings_join.c strings_bzero.c -I ../../includes -I ../../libft/sources/ -I../../libft/ft_printf/sources -I../../libft/GNL/sources ../../libft/libft.a
