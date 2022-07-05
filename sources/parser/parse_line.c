@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 04:18:47 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/05 16:18:37 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_cmdlist	*parse_line(char *line)
 {
 	char		c;
 	char		*cmd;
+	char		*env;
 	char		buf[STR_I][CHR_I];
 	size_t		index;
 	t_cmdlist	*list;
@@ -38,14 +39,47 @@ t_cmdlist	*parse_line(char *line)
 		if (line[index] == '"' || line[index] == '\'')
 		{
 			c = *(line++ + index);
+			if (c == '"')
+			{
+				while (line[index] && line[index] != c)
+				{
+					if (line[index] != '$')
+						buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
+					else
+					{
+						if (line[index] && line[index + 1] != c && ft_isalnum(line[index + 1]))
+						{
+							index++;
+							line += index;
+							index = 0;
+							while (line[index] && line[index] && ft_isalnum(line[index]))
+								index++;
+							env = ft_getenv(ft_substr(line, 0, ))
+						}
+						else
+							buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
+					}
+				}
+			}
 			while (line[index] && (line[index] != c))
 			{
 				buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
 				index++;
 			}
 			if (!line[index])
+			{
+				ft_cmdclear(&list, free);
 				return (NULL); 													//free allocated memory
+			}
 			line++;
+			if (!line[index])
+			{
+				buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
+				ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
+				strings_bzero(buf, 1, STR_I);
+				line = jump_space(line + index);
+				index = 0;
+			}
 		}
 		else if (!(GET_CHR_I(index + 1)) || (is_endcmd(line[index]) && index))
 		{
@@ -111,6 +145,8 @@ t_cmdlist	*parse_line(char *line)
 	}
 	if (buf[0][0])
 	{
+		printf("%s\n", buf[0]);
+		printf("you must not bulunmak here\n");
 		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
 		if (check_built_op(buf[GET_STR_I(index)]))
 			ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
