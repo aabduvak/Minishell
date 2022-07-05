@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 02:04:50 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/05 04:18:47 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 #define GET_STR_I(index) index / CHR_I % STR_I
 #define GET_CHR_I(index) index % (CHR_I - 1)
 
+static int	is_endcmd(char c);
 static char	*jump_space(char *str);
 
-t_list	*parse_line(char *line)
+t_cmdlist	*parse_line(char *line)
 {
-	char	c;
-	char	*cmd;
-	char	buf[STR_I][CHR_I];
-	size_t	index;
-	t_list	*list;
+	char		c;
+	char		*cmd;
+	char		buf[STR_I][CHR_I];
+	size_t		index;
+	t_cmdlist	*list;
 
 	list = 0;
 	index = 0;
@@ -33,6 +34,7 @@ t_list	*parse_line(char *line)
 	strings_bzero(buf, 1, STR_I);
 	while (line[index])
 	{
+		c = 0;
 		if (line[index] == '"' || line[index] == '\'')
 		{
 			c = *(line++ + index);
@@ -45,14 +47,59 @@ t_list	*parse_line(char *line)
 				return (NULL); 													//free allocated memory
 			line++;
 		}
-		else if (!(GET_CHR_I(index + 1)) || line[index] == ' ')
+		else if (!(GET_CHR_I(index + 1)) || (is_endcmd(line[index]) && index))
 		{
 			buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-			if (GET_STR_I(index) == STR_I - 1 || line[index] == ' ')
+			if (GET_STR_I(index) == STR_I - 1 || (is_endcmd(line[index]) && index))
 			{
-				ft_lstadd_back(&list, ft_lstnew(strings_join(buf, STR_I)));
+				ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
 				strings_bzero(buf, 1, STR_I);
 				line = jump_space(line + index);
+				index = 0;
+			}
+		}
+		else if (is_endcmd(*line) && line[index] != ' ')
+		{
+			buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
+			if (line[index] == '>')
+			{
+				if (line[index + 1] == '>')	
+				{
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 1] = line[index + 1];
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 2] = 0;
+					line++;
+				}
+				else
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 1] = 0;
+				line++;
+				line = jump_space(line + index);
+				index = 0;
+				ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
+				strings_bzero(buf, 1, STR_I);
+			}
+			else if (line[index] == '<')
+			{
+				if (line[index + 1] == '<')	
+				{
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 1] = line[index + 1];
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 2] = 0;
+					line++;
+				}
+				else
+					buf[GET_STR_I(index)][GET_CHR_I(index) + 1] = 0;
+				line++;
+				line = jump_space(line + index);
+				index = 0;
+				ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
+				strings_bzero(buf, 1, STR_I);
+			}
+			else if (line[index] == '|')
+			{
+				buf[GET_STR_I(index)][GET_CHR_I(index) + 1] = 0;
+				ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
+				line++;
+				line = jump_space(line + index);
+				strings_bzero(buf, 1, STR_I);
 				index = 0;
 			}
 		}
@@ -65,7 +112,9 @@ t_list	*parse_line(char *line)
 	if (buf[0][0])
 	{
 		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-		ft_lstadd_back(&list, ft_lstnew(strings_join(buf, STR_I)));
+		if (check_built_op(buf[GET_STR_I(index)]))
+			ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
+		ft_cmdadd_back(&list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
 	}
 	return (list);
 }
@@ -79,11 +128,16 @@ static char	*jump_space(char *str)
 	return (str);
 }
 
+static int	is_endcmd(char c)
+{
+	return (c == ' ' || c == '<' || c == '>' || c == '|');
+}
+
 #include <stdio.h>
 
 int	main()
 {
-	t_list *list;
+	t_cmdlist *list;
 	char	buf[500] = {0};
 	int		readed;
 	
@@ -95,7 +149,11 @@ int	main()
 	while (list)
 	{
 		//printf("while...\n");
-		printf("+ |%s|\n", (char *)list->content);
+		printf("+ |%s| ->", (char *)list->cmd);
+		if (list->type == TSTRING)
+			printf("string\n");
+		else
+			printf("b-in operation\n");
 		list = list->next;
 	}
 	return (0);
