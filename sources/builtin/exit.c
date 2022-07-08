@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strings_bzero.c                                    :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 00:13:41 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 01:10:53 by arelmas          ###   ########.fr       */
+/*   Created: 2022/07/08 02:32:13 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/07/08 02:36:00 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-void	strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len)
+void	ft_exit(int status)
 {
-	int	idx;
-
-	idx = 0;
-	while (idx < (int)len)
-		ft_memset(strings[idx++], 0, count);
+	exit(status);
 }

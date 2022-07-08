@@ -64,6 +64,7 @@ static char
 static void
 	end_block(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index)
 {
+	(void)line;
 	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
 	if (check_built_op(buf[GET_STR_I(index)]))
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
@@ -85,6 +86,7 @@ int	is_endcmd(char c)
 	return (c == ' ' || c == '<' || c == '>' || c == '|');
 }
 
+/*
 #include <stdio.h>
 
 int	main()
@@ -110,3 +112,4 @@ int	main()
 	}
 	return (0);
 }
+*/

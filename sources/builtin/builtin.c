@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:54:53 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/12 07:45:07 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/08 02:35:44 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_builtin(char *command)
 void	run_builtin(t_process *process)
 {
 	if (ft_strcmp(process->name, BT_EXIT) == 0)
-		return ;
+		return (ft_exit(0));
 	else if (ft_strcmp(process->name, BT_CD) == 0)
 		return (cd(process));
 	else if (ft_strcmp(process->name, BT_PWD) == 0)

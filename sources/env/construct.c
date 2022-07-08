@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:39:15 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/11 21:32:28 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:06:48 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_envp	*ft_envpnew(char *str)
 		first->value = parse[1];
 	first->fullstr = str;
 	first->next = NULL;
+	free_list(parse);
 	return (first);
 }
 
@@ -75,7 +76,7 @@ t_envp	*construct(char	**envp)
 	idx = 0;
 	envl = 0;
 	while (envp[idx])
-		ft_envpadd_back(&envl, ft_envpnew(ft_strdup(envp[idx++])));
+		ft_envpadd_back(&envl, ft_envpnew(envp[idx++]));
 	return (envl);
 }
 

@@ -21,14 +21,13 @@
 # define GET_STR_I(index) index / CHR_I % STR_I
 # define GET_CHR_I(index) index % (CHR_I - 1)
 
-
-
 void		cd(t_process *process);
 void		env(t_process *process);
 void		unset(t_process *process);
 void		echo(t_process *process);
 void		pwd(t_process *process);
 void		export(t_process *process);
+void		ft_exit(int status);
 void		run_builtin(t_process *process);
 int			is_builtin(char *command);
 
@@ -54,9 +53,12 @@ int			start_process(t_process *process);
 
 //PARSER
 t_cmdlist	*parse_line(char *str);
-char		*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index);
-char		*buf_over(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index);
-char		*parse_bop(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index);
+char		*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I],
+				char *line, int index);
+char		*buf_over(t_cmdlist **list, char buf[STR_I][CHR_I],
+				char *line, int index);
+char		*parse_bop(t_cmdlist **list, char buf[STR_I][CHR_I],
+				char *line, int index);
 char		*jump_space(char *str);
 int			is_endcmd(char c);
 int			check_built_op(char *str);

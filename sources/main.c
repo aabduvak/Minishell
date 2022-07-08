@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/08 14:54:30 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/08 09:49:22 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@ int	main(int argc, char **argv, char **envp)
 	char		**line;
 	char		*full;
 	t_process	*process;
+	char		*lines;
 
 	(void)argc;
 	(void)argv;
+	full = 0;
 	process = malloc(sizeof(t_process));
 	process->envp = construct(envp);
 	process->stdfd = malloc(sizeof(t_stdfd));
 	process->stdfd->_stdout = 0;
 	while (1)
 	{
-		line = ft_split(readline(">>> "), ' ');
+		lines = readline(">>> ");
+		add_history(lines);
+		line = ft_split(lines, ' ');
 		process->name = line[0];
-		full = get_fullpath(ft_getenv("PATH", process->envp), line[0]);
 		if (is_builtin(process->name))
 		{
 			if (line[1])
@@ -43,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		else
 			perror("minishell");
 		free(full);
-		free(line);
+		free_list(line);
 	}
 	return (0);
 }
