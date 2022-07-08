@@ -6,11 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 03:12:47 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 03:14:42 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:42:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <data_struct.h>
+#include <minishell.h>
 
 t_cmdlist	*ft_cmdnew(char *cmd, int type)
 {

@@ -6,11 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:41:43 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 15:44:47 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:43:16 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <data_struct.h>
+#include <minishell.h>
 
 void	ft_procinit(t_process *proc)
 {
@@ -26,5 +26,5 @@ void	ft_procinit(t_process *proc)
 	proc->redirect->read = 0;
 	proc->redirect->delimeter = 0;
 	proc->redirect->overwrite = 0;
-	proc->stdfd = (t_stdfd *)malloc(sizeof(t_rediect));
+	proc->stdfd = (t_stdfd *)malloc(sizeof(t_redirect));
 }

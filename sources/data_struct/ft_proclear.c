@@ -6,11 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:27:20 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 15:40:43 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:47:05 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <data_struct.h>
+#include <minishell.h>
 
 void	ft_proclear(t_process **proc, void (*del)(void *))
 {
@@ -25,7 +25,7 @@ void	ft_proclear(t_process **proc, void (*del)(void *))
 		del((*proc)->path);
 		free_list((*proc)->args);
 		ft_envpclear((*proc)->envp);
-		free((*proc)->stdfd)
+		free((*proc)->stdfd);
 		ft_redclear((*proc)->redirect);
 		free(*proc);
 		*proc = tmp;

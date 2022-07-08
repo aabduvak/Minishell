@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/08 02:07:50 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 19:43:45 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			red_delimeter(const char *del);
 int			start_process(t_process *process);
 
 //PARSER
+t_process	*convert(t_cmdlist *cmd, t_envp *evnl);
 t_cmdlist	*parse_line(char *str);
 char		*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
@@ -64,5 +65,12 @@ int			is_endcmd(char c);
 int			check_built_op(char *str);
 char		*strings_join(char strings[STR_I][CHR_I], size_t len);
 void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
+
+//STRUCTS
+void		ft_envpclear(t_envp *envl);
+void		ft_redclear(t_redirect *red);
+void		ft_procinit(t_process *proc);
+void		*ft_procadd_back(t_process **proc, t_process *new);
+t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl);
 
 #endif

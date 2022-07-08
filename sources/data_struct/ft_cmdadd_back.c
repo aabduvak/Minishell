@@ -6,11 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 03:14:57 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 03:17:22 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 18:42:02 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <data_struct.h>
+#include <minishell.h>
 
 void	ft_cmdadd_back(t_cmdlist **cmdlist, t_cmdlist *new)
 {

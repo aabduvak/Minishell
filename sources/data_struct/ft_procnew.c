@@ -6,20 +6,22 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 15:45:06 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 20:34:44 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <data_struct.h>
+#include <minishell.h>
 
 static void
 	ft_setname(t_process *proc, char *src, t_envp *envl);
 static char
 	*ft_setpath_env(t_envp *envl, char *name);
-static int
-	ft_setargs(t_process *proc, t_cmdlist *cmd);
+static t_cmdlist
+	*ft_setargs(t_process *proc, t_cmdlist *cmd);
+static void
+	*ft_setredirect(t_process *proc, t_cmdlist *cmd);
 
-t_process	*ft_procnew(t_cmdlist *cmd)
+t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 {
 	t_process	*process;
 
@@ -27,12 +29,13 @@ t_process	*ft_procnew(t_cmdlist *cmd)
 		return (NULL);
 	process = (t_process *)malloc(sizeof(t_process));
 	ft_procinit(process);
-	ft_setname(process, cmd->cmd);
+	ft_setname(process, cmd->cmd, envl);
 	if (!ft_setargs(process, cmd))
 	{
 		free(process->name);
 		free(process->path);
 		free(process);
+		return (NULL);
 	}
 	if (!ft_setredirect(process, cmd))
 	{
@@ -40,6 +43,7 @@ t_process	*ft_procnew(t_cmdlist *cmd)
 		free(process->path);
 		free_list(process->args);
 		free(process);
+		return (NULL);
 	}
 	process->next = NULL;
 	process->prev = NULL;
@@ -52,12 +56,12 @@ static void
 	char	*name;
 
 	if (!src)
-		return (NULL);
-	name = ft_strrchr(dst, '/');
+		return ;
+	name = ft_strrchr(src, '/');
 	if (!name)
 	{
 		proc->name = ft_strdup(src);
-		proc->path = ft_setpath(envl, src);
+		proc->path = ft_setpath_env(envl, src);
 		return ;
 	}
 	proc->name = ft_strdup(name);
@@ -104,26 +108,29 @@ static t_cmdlist
 }
 
 static void
-	ft_check_redirect(t_process *proc, t_cmdlist *cmd)
+	*ft_setredirect(t_process *proc, t_cmdlist *cmd)
 {
 	if (!cmd)
-		return ;
+		return (NULL);
 	while (cmd && ft_strcmp(cmd->cmd, "|"))
 	{
 		if (cmd->type == TCOMMAND && cmd->next && cmd->next->type == TSTRING)
 		{
 			if (!ft_strcmp(cmd->cmd, ">"))
-				proc->write = ft_strdup(cmd->next->cmd);
+				proc->redirect->write = ft_strdup(cmd->next->cmd);
 			else if (!ft_strcmp(cmd->cmd, ">>"))
-				proc->overwrite = ft_strdup(cmd->next->cmd);
+				proc->redirect->overwrite = ft_strdup(cmd->next->cmd);
 			else if (!ft_strcmp(cmd->cmd, "<"))
-				proc->read = ft_strdup(cmd->next->cmd);
+				proc->redirect->read = ft_strdup(cmd->next->cmd);
 			else if (!ft_strcmp(cmd->cmd, "<<"))
-				proc->delimeter = ft_strdup(cmd->next->cmd);
+				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
-		else
+		else if (cmd->type == TCOMMAND)
+		{
+			printf("here?\n");
 			return (NULL);
-		cmd = cmd->next->next;
+		}
+		cmd = cmd->next;
 	}
 	return (proc);
 }

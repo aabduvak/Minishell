@@ -6,13 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 01:16:43 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 02:29:27 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/08 19:35:00 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-#include <stdio.h>
 
 static char
 *ft_rdwrite(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index);
