@@ -31,5 +31,19 @@ int	main(int argc, char **argv, char **envp)
 	{
 		printf("\n-------------------------\n");
 		printf("process name: %s\n", proc->name);
+		printf("full path: %s\n", proc->path);
+		printf("args: ");
+		for (int i = 0; proc->args[i]; i++)
+			printf("%s ", proc->args[i]);
+		printf("\n");
+		if (proc->redirect->write)
+			printf("redirect to: %s\n", proc->redirect->write);
+		if (proc->redirect->read)
+			printf("read from: %s\n", proc->redirect->read);
+		if (proc->redirect->overwrite)
+			printf("overwrite to: %s\n", proc->redirect->overwrite);
+		if (proc->redirect->delimeter)
+			printf("delimeter with: %s\n", proc->redirect->delimeter);
+
 	}
 }
