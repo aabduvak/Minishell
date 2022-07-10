@@ -66,26 +66,26 @@ static int	initfd(t_process *process, int pipes[2])
 	result = redirect(process);
 	if (result)
 		return (result);
-	if (process->prev && !(process->redirect->type & (DELIMETER | READ)) && \
+	if (process->prev && !process->redirect->read && !process->redirect->delimeter &&\
 		dup2(process->prev->stdfd->_stdin, 0) == -1)
 		return (ERROR);
-	if (process->next && !(process->redirect->type & (WRITE | OVERWRITE)) && \
+	if (process->next && !process->redirect->write && !process->redirect->overwrite &&\
 		dup2(process->stdfd->_stdout, 1) == -1)
 		return (ERROR);
-	if (process->prev && process->prev->redirect->type & (WRITE | OVERWRITE))
+	if (process->prev && process->prev->redirect->write && process->prev->redirect->overwrite)
 		close(0);
 	return (result);
 }
 
 static int	redirect(t_process *process)
 {
-	if (process->redirect->type == READ)
-		return (red_read(process->redirect->name));
-	else if (process->redirect->type == WRITE)
-		return (red_write(process->redirect->name));
-	else if (process->redirect->type == DELIMETER)
-		return (red_delimeter(process->redirect->name));
-	else if (process->redirect->type == OVERWRITE)
-		return (red_overwrite(process->redirect->name));
+	if (process->redirect->read)
+		return (red_read(process->redirect->read));
+	else if (process->redirect->write)
+		return (red_write(process->redirect->write));
+	else if (process->redirect->delimeter)
+		return (red_delimeter(process->redirect->delimeter));
+	else if (process->redirect->overwrite)
+		return (red_overwrite(process->redirect->overwrite));
 	return (0);
 }

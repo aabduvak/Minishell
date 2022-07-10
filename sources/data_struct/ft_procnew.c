@@ -87,24 +87,24 @@ static t_cmdlist
 
 	arg_len = 0;
 	tmp_cmd = cmd;
-	while (tmp_cmd->type == TSTRING)
+	while (tmp_cmd && tmp_cmd->type == TSTRING)
 	{
 		arg_len++;
 		tmp_cmd = tmp_cmd->next;
 	}
-	args = (char **)malloc(sizeof(char *) * (arg_len + 2));
+	args = (char **)malloc(sizeof(char *) * (arg_len + 1));
 	if (!args)
 		return (NULL);
-	*args = ft_strdup(proc->name);
-	args[arg_len + 1] = NULL;
-	idx = 1;
-	while (cmd->type == TSTRING)
+	args[arg_len] = NULL;
+	idx = 0;
+	tmp_cmd = cmd;
+	while (cmd && cmd->type == TSTRING)
 	{
 		args[idx] = ft_strdup(cmd->cmd);
 		cmd = cmd->next;
 	}
 	proc->args = args;
-	return (cmd);
+	return (tmp_cmd);
 }
 
 static void
@@ -126,10 +126,7 @@ static void
 				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
 		else if (cmd->type == TCOMMAND)
-		{
-			printf("here?\n");
 			return (NULL);
-		}
 		cmd = cmd->next;
 	}
 	return (proc);
