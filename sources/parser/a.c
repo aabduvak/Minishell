@@ -12,7 +12,10 @@ int	main(int argc, char **argv, char **envp)
 
 	while (1)
 	{
+		write(1, ">>> ", 4);
 		readed = read(1, buf, 255);
+		if (*buf == 4)
+			printf("\nctrD\n");
 		buf[readed - 1] = 0;
 		cmd = parse_line(buf);
 		tmp = cmd;
@@ -52,6 +55,8 @@ int	main(int argc, char **argv, char **envp)
 				printf("delimeter with: %s\n", proc->redirect->delimeter);
 	
 		}
-		printf("process: %i\n", start_process(new_proc));
+		if (start_process(new_proc) < 0)
+			perror("minishell");
+		wait(0);
 	}
 }

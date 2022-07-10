@@ -28,7 +28,7 @@ t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 	if (!cmd)
 		return (NULL);
 	process = (t_process *)malloc(sizeof(t_process));
-	ft_procinit(process);
+	ft_procinit(process, envl);
 	ft_setname(process, cmd->cmd, envl);
 	if (!ft_setargs(process, cmd))
 	{
@@ -45,8 +45,6 @@ t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 		free(process);
 		return (NULL);
 	}
-	process->next = NULL;
-	process->prev = NULL;
 	return (process);
 }
 

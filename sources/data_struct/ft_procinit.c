@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-void	ft_procinit(t_process *proc)
+void	ft_procinit(t_process *proc, t_envp *envl)
 {
 	if (!proc)
 		return ;
@@ -21,6 +21,7 @@ void	ft_procinit(t_process *proc)
 	proc->args = 0;
 	proc->next = 0;
 	proc->prev = 0;
+	proc->envp = envl;
 	proc->redirect = (t_redirect *)malloc(sizeof(t_redirect));
 	proc->redirect->write = 0;
 	proc->redirect->read = 0;

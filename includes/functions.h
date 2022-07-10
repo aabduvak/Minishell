@@ -69,7 +69,7 @@ void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
 //STRUCTS
 void		ft_envpclear(t_envp *envl);
 void		ft_redclear(t_redirect *red);
-void		ft_procinit(t_process *proc);
+void		ft_procinit(t_process *proc, t_envp *envl);
 void		*ft_procadd_back(t_process **proc, t_process *new);
 t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl);
 
