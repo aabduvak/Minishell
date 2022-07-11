@@ -22,15 +22,15 @@ void	echo(t_process *process)
 		ft_printf(process->stdfd->_stdout, "\n");
 		return ;
 	}
-	compare = ft_strcmp(process->args[0], "-n");
-	i = compare == 0;
+	compare = ft_strcmp(process->args[1], "-n");
+	i = (compare == 0) + 1;
 	while (process->args[i])
 	{
 		if (process->args[i + 1])
-			ft_printf(process->stdfd->_stdout, "%s ", process->args[i++]);
+			ft_printf(1, "%s ", process->args[i++]);
 		else
-			ft_printf(process->stdfd->_stdout, "%s", process->args[i++]);
+			ft_printf(1, "%s", process->args[i++]);
 	}
 	if (compare)
-		ft_printf(process->stdfd->_stdout, "\n");
+		ft_printf(1, "\n");
 }

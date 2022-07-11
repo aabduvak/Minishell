@@ -45,7 +45,7 @@ static int	run(t_process *process)
 		error = initfd(process, pipes);
 		if (error)
 			return (error);
-		if (execve(process->path, process->args,
+		if (!exec_builtin(process) && execve(process->path, process->args,
 				deconstruct(process->envp)) == -1)
 			return (ER_EXEC);
 		exit(0);

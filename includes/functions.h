@@ -49,6 +49,7 @@ int			red_read(const char *file_name);
 int			red_write(const char *file_name);
 int			red_overwrite(const char *file_name);
 int			red_delimeter(const char *del);
+int			exec_builtin(t_process *proc);
 int			start_process(t_process *process);
 
 //PARSER

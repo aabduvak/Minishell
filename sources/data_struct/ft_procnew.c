@@ -98,7 +98,7 @@ static t_cmdlist
 	tmp_cmd = cmd;
 	while (cmd && cmd->type == TSTRING)
 	{
-		args[idx] = ft_strdup(cmd->cmd);
+		args[idx++] = ft_strdup(cmd->cmd);
 		cmd = cmd->next;
 	}
 	proc->args = args;
