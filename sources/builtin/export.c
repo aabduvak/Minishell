@@ -32,7 +32,7 @@ void	export(t_process *process)
 		tmp = process->envp;
 		while (tmp)
 		{
-			ft_printf(process->stdfd->_stdout,
+			ft_printf(1,
 				"declare -x %s\n", (char *) tmp->fullstr);
 			tmp = tmp->next;
 		}

@@ -14,14 +14,14 @@ int	main(int argc, char **argv, char **envp)
 	{
 		write(1, ">>> ", 4);
 		readed = read(1, buf, 255);
-		if (*buf == 4)
-			printf("\nctrD\n");
+		/*if (*buf == 4)
+			printf("\nctrD\n");*/
 		buf[readed - 1] = 0;
 		cmd = parse_line(buf);
 		tmp = cmd;
 		if (!cmd)
 			printf("error\n");
-		for (int i = 1; cmd; cmd = cmd->next, i++)
+		/*for (int i = 1; cmd; cmd = cmd->next, i++)
 		{
 			printf("%i. {%s}", i, cmd->cmd);
 			printf("-> ");
@@ -30,13 +30,13 @@ int	main(int argc, char **argv, char **envp)
 			else if (cmd->type == TCOMMAND)
 				printf("b-in oper");
 			printf("\n");
-		}
+		}*/
 		envl = construct(envp);
 		proc = convert(tmp, envl);
 		if (!proc)
 			printf("converting error\n");
 		new_proc = proc;
-		for (int i = 0; proc; proc = proc->next)
+	/*	for (int i = 0; proc; proc = proc->next)
 		{
 			printf("\n-------------------------\n");
 			printf("process name: %s\n", proc->name);
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 			if (proc->redirect->delimeter)
 				printf("delimeter with: %s\n", proc->redirect->delimeter);
 	
-		}
+		}*/
 		if (start_process(new_proc) < 0)
 			perror("minishell");
 		wait(0);

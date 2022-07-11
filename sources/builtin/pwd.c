@@ -22,6 +22,6 @@ void	pwd(t_process *process)
 		perror("pwd");
 		return ;
 	}
-	ft_printf(process->stdfd->_stdout, "%s\n", buf);
+	ft_printf(1, "%s\n", buf);
 	free(buf);
 }

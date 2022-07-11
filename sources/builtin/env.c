@@ -19,10 +19,11 @@ void	env(t_process *process)
 	if (!process)
 		return ;
 	lst = process->envp;
+	printf("env address: %p\n", lst);
 	while (lst)
 	{
 		if (contains_char(lst->fullstr, '='))
-			ft_printf(process->stdfd->_stdout, "%s\n", (char *) lst->fullstr);
+			ft_printf(1, "%s\n", (char *) lst->fullstr);
 		lst = lst->next;
 	}
 }

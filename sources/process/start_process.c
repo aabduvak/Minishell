@@ -39,13 +39,16 @@ static int	run(t_process *process)
 		return (ER_PIPES);
 	process->stdfd->_stdin = pipes[0];
 	process->stdfd->_stdout = pipes[1];
+	error = initfd(process, pipes);
+	if (error || exec_builtin(process))
+		return (error);
 	child = fork();
 	if (!child)
 	{
 		error = initfd(process, pipes);
 		if (error)
 			return (error);
-		if (!exec_builtin(process) && execve(process->path, process->args,
+		if (execve(process->path, process->args,
 				deconstruct(process->envp)) == -1)
 			return (ER_EXEC);
 		exit(0);

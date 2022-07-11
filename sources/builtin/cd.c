@@ -16,22 +16,30 @@ void	cd(t_process *process)
 {
 	char	*tmp;
 	char	*path;
-
-	if (!process->args)
+	int	argc;
+	
+	if (!process || !process->args)
+		return ;
+	argc = 0;
+	while (process->args[argc])
+		argc++;
+	if (argc == 1)
 	{
+		printf("home: %s\n", ft_getenv("home", process->envp));
 		if (chdir(ft_getenv("HOME", process->envp)))
 			perror("cd");
+		return ;
 	}
-	else if (process->args[0][0] == '~')
+	else if (process->args[1][0] == '~')
 	{
 		path = ft_strjoin(ft_getenv("HOME", process->envp), "/");
-		tmp = ft_strjoin(path, process->args[0] + 2);
+		tmp = ft_strjoin(path, process->args[1] + 2);
 		printf("%s\n", tmp);
 		if (chdir(tmp))
 			perror("cd");
 		free(tmp);
 		free(path);
 	}
-	else if (chdir(process->args[0]) == -1)
+	else if (chdir(process->args[1]) == -1)
 		perror("cd");
 }
