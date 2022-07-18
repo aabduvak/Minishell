@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/18 20:52:03 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:06:11 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl);
 void		clearsignals(void);
 void		connectsignals(void);
 void		signalhandler(int sig);
+
+//PROMPT
+char		*get_input(void);
+char		*create_prompt(void);
 
 #endif
