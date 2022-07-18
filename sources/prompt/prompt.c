@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 21:00:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/18 21:05:43 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/07/18 22:12:52 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/07/19 00:10:53 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Mkaramuk'tan çalındı :D 
 
 char	*get_input(void)
 {
@@ -20,6 +18,8 @@ char	*get_input(void)
 	char	*prompt;
 
 	prompt = create_prompt();
+	if (!prompt)
+		prompt = ":> ";
 	input = readline(prompt);
 	add_history(input);
 	free(prompt);
@@ -31,21 +31,22 @@ char	*create_prompt(void)
 	static char	*username;
 	char		*prompt;
 	char		*cwd;
+	char		*tmp;
 	int			len;
 
+	username = getenv("USER");
 	if (!username)
-	{
-		username = getenv("USER");
-		if (!username)
-			username = "NOUSERNAME";
-	}
-	cwd = getcwd(NULL, 0);
-	prompt = ft_calloc(sizeof(char), ft_strlen(username) + ft_strlen(cwd) + 5);
+		username = "NOUSERNAME";
 	len = ft_strlen(username);
-	ft_memcpy(username, prompt, len);
+	cwd = getcwd(NULL, 0);
+	tmp = ft_strrchr(cwd, '/');
+	tmp = ft_substr(tmp, 1, ft_strlen(tmp));
+	prompt = ft_calloc(sizeof(char), ft_strlen(username) + ft_strlen(tmp) + 5);
+	ft_memcpy(prompt, username, len);
 	prompt[len] = '@';
-	ft_memcpy(cwd, prompt + ft_strlen(prompt), ft_strlen(cwd));
-	ft_memcpy(":> ", prompt + ft_strlen(prompt), 3);
+	ft_memcpy(prompt + ft_strlen(prompt), tmp, ft_strlen(tmp));
+	ft_memcpy(prompt + ft_strlen(prompt), ":> ", 5);
 	free(cwd);
+	free(tmp);
 	return (prompt);
 }

@@ -6,12 +6,11 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/18 20:53:22 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/18 22:10:57 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <readline/readline.h>
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -30,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	connectsignals();
 	while (1)
 	{
-		lines = readline(">>> ");
+		lines = get_input();
 		line = ft_split(lines, ' ');
 		process->name = line[0];
 		if (is_builtin(process->name))

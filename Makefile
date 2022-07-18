@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/07/18 20:58:03 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/07/18 21:39:50 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,14 @@ END				=	"\033[0;0m"
 SRCS			= $(shell find sources -type f -name "*.c")
 OBJS			= $(SRCS:sources/%.c=sources/bin/%.o)
 LOG				= output.file
+
 # Command and Flags
 
 NAME			= minishell
 CC				= gcc
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -I/home/bismillah/readline/include
+LDFLAGS			= -L/home/bismillah/readline/lib -lreadline
 LIB				= ./libft/libft.a
 
 # Directories
@@ -60,7 +62,7 @@ $(BIN)%.o: sources/%.c
 
 $(NAME): $(BIN) $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
-	@$(CC) $(OBJS) -lreadline -o $(NAME) $(LIB)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME) $(LIB)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 # $< input files

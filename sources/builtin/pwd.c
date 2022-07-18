@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:37:11 by arelmas           #+#    #+#             */
-/*   Updated: 2022/06/08 06:48:38 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:41:36 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	pwd(t_process *process)
 	char	*buf;
 
 	buf = getcwd(0, 0);
-	if (!buf)
+	if (!buf || !process)
 	{
 		perror("pwd");
 		return ;

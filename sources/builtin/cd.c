@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:25:16 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/02 01:33:45 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/19 00:08:30 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	cd(t_process *process)
 {
 	char	*tmp;
 	char	*path;
-	int	argc;
-	
+	int		argc;
+
 	if (!process || !process->args)
 		return ;
 	argc = 0;
@@ -25,7 +25,6 @@ void	cd(t_process *process)
 		argc++;
 	if (argc == 1)
 	{
-		printf("home: %s\n", ft_getenv("home", process->envp));
 		if (chdir(ft_getenv("HOME", process->envp)))
 			perror("cd");
 		return ;
@@ -34,7 +33,6 @@ void	cd(t_process *process)
 	{
 		path = ft_strjoin(ft_getenv("HOME", process->envp), "/");
 		tmp = ft_strjoin(path, process->args[1] + 2);
-		printf("%s\n", tmp);
 		if (chdir(tmp))
 			perror("cd");
 		free(tmp);
