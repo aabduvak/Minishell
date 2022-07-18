@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/07/02 01:11:46 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/07/18 20:58:03 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ END				=	"\033[0;0m"
 
 SRCS			= $(shell find sources -type f -name "*.c")
 OBJS			= $(SRCS:sources/%.c=sources/bin/%.o)
-
+LOG				= output.file
 # Command and Flags
 
 NAME			= minishell
@@ -52,7 +52,6 @@ $(LIB):
 
 $(BIN):
 	@mkdir $(BIN)
-
 
 $(BIN)%.o: sources/%.c
 	@mkdir -p $(shell dirname $@)
@@ -92,6 +91,10 @@ re : ffclean all
 run : $(NAME)
 	@./$(NAME)
 
+leaks: $(NAME)
+	@valgrind --log-file=$(LOG) --leak-check=yes --tool=memcheck ./$(NAME)  
+	@cat $(LOG)
+
 help :
 	@echo "------------------------------------ <<HELP COMMAND>> ------------------------------------"
 	@echo ""
@@ -100,6 +103,7 @@ help :
 	@echo "make fclean 	   --------- cleans all *.o files in sources and libftprintf.a library"
 	@echo "make re         --------- cleans all files and compiles again"
 	@echo "make norm       --------- controls all *.c and *.h codes to norminette standart"
-	@echo "                --------- if finds norminette error will break"
+	@echo "make run        --------- compile and run program"
+	@echo "make leaks      --------- checks all leaks in the program and creates output.file"
 
 .PHONY: all clean fclean re run

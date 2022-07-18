@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/08 09:49:22 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/18 20:53:22 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int argc, char **argv, char **envp)
 	process->envp = construct(envp);
 	process->stdfd = malloc(sizeof(t_stdfd));
 	process->stdfd->_stdout = 0;
+	connectsignals();
 	while (1)
 	{
 		lines = readline(">>> ");
-		add_history(lines);
 		line = ft_split(lines, ' ');
 		process->name = line[0];
 		if (is_builtin(process->name))
