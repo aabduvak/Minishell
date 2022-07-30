@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/07/31 01:03:27 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/07/31 02:07:20 by arelmas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ END				=	"\033[0;0m"
 
 SRCS			= $(shell find sources -type f -name "*.c")
 OBJS			= $(SRCS:sources/%.c=sources/bin/%.o)
+USR				= $(shell echo $(USER))
 LOG				= output.file
 
 # Command and Flags
@@ -32,8 +33,8 @@ LOG				= output.file
 NAME			= minishell
 CC				= gcc
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -I/Users/aabduvak/readline/include
-LDFLAGS			= -L/Users/aabduvak//readline/lib -lreadline
+CFLAGS			= -Wall -Wextra -Werror -I/Users/$(USR)/readline/include
+LDFLAGS			= -L/Users/$(USR)/readline/lib -lreadline
 LIB				= ./libft/libft.a
 
 # Directories
@@ -46,6 +47,7 @@ INC				= ./includes/
 BIN				= ./sources/bin/
 
 # Rules
+
 
 all : $(LIB) $(NAME)
 

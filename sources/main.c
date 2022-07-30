@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 01:16:09 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:25:49 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*get_inputstr(void)
 
 int	main(int argc, char **argv, char **envp)
 {
+	int			err;
 	t_cmdlist	*cmd;
 	t_cmdlist	*tmp;
 	t_envp		*envl;
@@ -36,13 +37,38 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd = parse_line(get_inputstr());
+		if (!cmd)
+		{
+			perror("Parse error");
+			continue ;
+		}
 		tmp = cmd;
 		envl = construct(envp);
-		proc = convert(tmp, envl);
-		if (!cmd)
+		if (!envl)
+		{
+			perror("Contruct error");
 			continue ;
+		}
+		proc = convert(tmp, envl);
+		if (!proc)
+		{
+			perror("Convertation error");
+			continue ;
+		}
 		new_proc = proc;
-		start_process(new_proc);
+		err = start_process(new_proc);
+		if (err)
+		{
+			if (err == ER_PIPES)
+				printf("Pipes error\n");
+			else if (err == ER_EXEC)
+				perror("Minishell");
+			else if (err == ER_RUNPROC)
+				perror("Minishell");
+			else
+				perror("Minishell");
+			continue ;
+		}
 		wait(0);
 	}
 	return (0);

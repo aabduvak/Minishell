@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/30 12:30:49 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 02:23:52 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	start_process(t_process *process)
 {
 	if (!process)
 		return (ER_NOPROC);
+	printf("path: %s: %i\n", process->path, access(process->path, F_OK));
 	while (process)
 	{
-		if (run(process))
+		if (access(process->path, F_OK) || run(process))
 			return (ER_RUNPROC);
 		process = process->next;
 	}
