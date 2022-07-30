@@ -36,7 +36,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!proc)
 			printf("converting error\n");
 		new_proc = proc;
-	/*	for (int i = 0; proc; proc = proc->next)
+		/*
+		for (int i = 0; proc; proc = proc->next)
 		{
 			printf("\n-------------------------\n");
 			printf("process name: %s\n", proc->name);
@@ -54,9 +55,13 @@ int	main(int argc, char **argv, char **envp)
 			if (proc->redirect->delimeter)
 				printf("delimeter with: %s\n", proc->redirect->delimeter);
 	
-		}*/
-		if (start_process(new_proc) < 0)
+		}
+		exit(0);
+		*/
+		int proc = start_process(new_proc);
+		if (proc < 0)
 			perror("minishell");
 		wait(0);
+		printf("proc: %i\n", proc);
 	}
 }

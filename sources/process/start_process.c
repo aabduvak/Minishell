@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/03 20:46:03 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/30 12:30:49 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ static int	run(t_process *process)
 		return (ER_PIPES);
 	process->stdfd->_stdin = pipes[0];
 	process->stdfd->_stdout = pipes[1];
-	error = initfd(process, pipes);
-	if (error || exec_builtin(process))
-		return (error);
+	/*error = initfd(process, pipes);
+	if (exec_builtin(process))
+		return (0);
+	*/
 	child = fork();
 	if (!child)
 	{
@@ -56,7 +57,7 @@ static int	run(t_process *process)
 	else
 	{
 		close(pipes[1]);
-		close(pipes[0]);
+		//close(pipes[0]);
 	}
 	return (0);
 }

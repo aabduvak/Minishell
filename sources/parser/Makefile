@@ -12,4 +12,8 @@ CC	=	gcc
 CFLAG	=	-Wall -Wextra -Werror
 
 all:
+	make -C ../../libft
 	${CC} ${SRC} ${INC} -o shell
+
+clean:
+	make fclean -C ../../libft
