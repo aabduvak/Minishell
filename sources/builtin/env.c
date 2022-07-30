@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:53:08 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/06/11 21:13:27 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 01:18:59 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	env(t_process *process)
 	if (!process)
 		return ;
 	lst = process->envp;
-	printf("env address: %p\n", lst);
 	while (lst)
 	{
 		if (contains_char(lst->fullstr, '='))

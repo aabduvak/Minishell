@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:12:52 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/19 00:10:53 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 01:05:19 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_input(void)
 	if (!prompt)
 		prompt = ":> ";
 	input = readline(prompt);
+	if (!input)
+		return (input);
 	add_history(input);
 	free(prompt);
 	return (input);

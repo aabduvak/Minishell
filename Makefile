@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/07/18 21:39:50 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/07/31 01:03:27 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ LOG				= output.file
 NAME			= minishell
 CC				= gcc
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -I/home/bismillah/readline/include
-LDFLAGS			= -L/home/bismillah/readline/lib -lreadline
+CFLAGS			= -Wall -Wextra -Werror -I/Users/aabduvak/readline/include
+LDFLAGS			= -L/Users/aabduvak//readline/lib -lreadline
 LIB				= ./libft/libft.a
 
 # Directories
