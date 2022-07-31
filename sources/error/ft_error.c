@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:06:55 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:56:21 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,22 @@ static void	ft_printerr(char *name, int status)
 		printf("%s: %s\n", name, E_CONNREFUSED);
 }
 
-static void	ft_update_status(int status, t_process *process)
+void	ft_update_status(int status, t_process *process)
 {
 	t_envp	*envp;
-	int		i;
+	char	*tmp;
 
 	envp = process->envp;
 	while (envp)
 	{
+		printf("env: %s\n", envp->key);
 		if (!ft_strcmp("?", envp->key))
 		{
+			printf("buldum\n");
 			envp->value = ft_itoa(status);
+			tmp = ft_strjoin(envp->key, "=");
+			envp->fullstr = ft_strjoin(tmp, envp->value);
+			printf("ekledim: %s\n", envp->fullstr);
 			break ;
 		}
 		envp = envp->next;
@@ -60,7 +65,7 @@ static void	ft_update_status(int status, t_process *process)
 int	ft_error(t_process *process, int status)
 {
 	if (!process)
-		return ;
+		return (1);
 	if (!process->name)
 		ft_printerr("minishell", status);
 	else

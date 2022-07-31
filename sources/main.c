@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 03:52:11 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 12:33:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = get_inputstr();
 		cmd = parse_line(line);
-		//free(line);
 		if (!cmd)
 		{
 			perror("Parse error");
@@ -50,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		tmp = cmd;
 		proc = convert(tmp, envl);
+		proc->envp = envl;
 		ft_cmdclear(&tmp, free);
 		if (!proc)
 		{
@@ -58,20 +58,14 @@ int	main(int argc, char **argv, char **envp)
 		}
 		new_proc = proc;
 		err = start_process(new_proc);
-		ft_proclear(&proc, free);
-		if (err)
-		{
-			if (err == ER_PIPES)
-				printf("Pipes error\n");
-			else if (err == ER_EXEC)
-				perror("Minishell");
-			else if (err == ER_RUNPROC)
-				perror("Minishell");
-			else
-				perror("Minishell");
-			continue ;
-		}
 		wait(0);
+		waitpid(0, &err, 0);
+		if (!err)
+		{
+			printf("----evet------\n");
+			ft_update_status(err % 255, proc);
+		}
+		ft_proclear(&proc, free);
 	}
 	ft_envpclear(envl);
 	return (0);

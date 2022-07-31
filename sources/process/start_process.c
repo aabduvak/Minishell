@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/31 02:23:52 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 06:30:42 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ static int	redirect(t_process *process);
 
 int	start_process(t_process *process)
 {
+	int	ret;
+
 	if (!process)
 		return (ER_NOPROC);
-	printf("path: %s: %i\n", process->path, access(process->path, F_OK));
 	while (process)
 	{
-		if (access(process->path, F_OK) || run(process))
-			return (ER_RUNPROC);
+		ret = run(process);
+		if (ret)
+			return (ret);
 		process = process->next;
 	}
 	return (0);
@@ -36,8 +38,12 @@ static int	run(t_process *process)
 	int		pipes[2];
 	pid_t	child;
 
+	if (access(process->path, F_OK))
+		return (ft_error(process, ER_NOFILE));
+	if (access(process->path, X_OK))
+		return (ft_error(process, ER_ACCES));
 	if (pipe(pipes))
-		return (ER_PIPES);
+		return (ft_error(process, ER_PIPES));
 	process->stdfd->_stdin = pipes[0];
 	process->stdfd->_stdout = pipes[1];
 	/*error = initfd(process, pipes);

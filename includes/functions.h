@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:02:58 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:20:30 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_envp		*construct(char	**envp);
 t_envp		*ft_envpnew(char *env_name);
 void		ft_envpadd_back(t_envp **lst, t_envp *new);
 void		free_list(char **list);
+void		ft_update_status(int status, t_process *process);
 void		ft_envpdelone(t_envp *lst, void (*del) (void *));
 void		ft_setenv(t_process *process);
 char		*ft_getenv(char *name, t_envp *envl);
