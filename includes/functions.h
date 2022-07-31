@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 02:56:56 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 05:14:43 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void		signalhandler(int sig);
 //PROMPT
 char		*get_input(void);
 char		*create_prompt(void);
+
+void		ft_error(t_process *process, int status);
 
 #endif
