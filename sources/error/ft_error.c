@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:02:33 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:06:55 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ static void	ft_printerr(char *name, int status)
 static void	ft_update_status(int status, t_process *process)
 {
 	t_envp	*envp;
-	t_envp	*tmp;
 	int		i;
 
-	i = -1;
 	envp = process->envp;
 	while (envp)
 	{
