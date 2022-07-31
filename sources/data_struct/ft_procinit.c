@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:41:43 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 18:43:16 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 03:21:54 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	ft_procinit(t_process *proc, t_envp *envl)
 	proc->redirect->read = 0;
 	proc->redirect->delimeter = 0;
 	proc->redirect->overwrite = 0;
-	proc->stdfd = (t_stdfd *)malloc(sizeof(t_redirect));
+	proc->stdfd = (t_stdfd *)malloc(sizeof(t_stdfd));
 }

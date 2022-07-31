@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:39:15 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 05:06:48 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 03:10:08 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_envp	*ft_envpnew(char *str)
 		first->value = ft_strdup("");
 	else
 		first->value = parse[1];
-	first->fullstr = str;
+	first->fullstr = strdup(str);
 	first->next = NULL;
 	free_list(parse);
 	return (first);

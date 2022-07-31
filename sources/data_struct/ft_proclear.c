@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:27:20 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 18:47:05 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 04:08:13 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_proclear(t_process **proc, void (*del)(void *))
 		del((*proc)->name);
 		del((*proc)->path);
 		free_list((*proc)->args);
-		ft_envpclear((*proc)->envp);
 		free((*proc)->stdfd);
 		ft_redclear((*proc)->redirect);
 		free(*proc);
