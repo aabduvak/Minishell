@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 05:14:43 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:02:58 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		*get_fullpath(char *path, char *name);
 int			ft_envpsize(t_envp *lst);
 int			contains_char(char *str, char c);
 
-//process
+//PROCESS
 int			red_read(const char *file_name);
 int			red_write(const char *file_name);
 int			red_overwrite(const char *file_name);
@@ -84,6 +84,7 @@ void		signalhandler(int sig);
 char		*get_input(void);
 char		*create_prompt(void);
 
-void		ft_error(t_process *process, int status);
+//ERROR
+int			ft_error(t_process *process, int status);
 
 #endif

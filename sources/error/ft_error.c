@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printerr.c                                      :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 05:13:58 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/07/31 06:02:33 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,33 @@ static void	ft_printerr(char *name, int status)
 		printf("%s: %s\n", name, E_CONNREFUSED);
 }
 
-void	ft_error(t_process *process, int status)
+static void	ft_update_status(int status, t_process *process)
 {
-	
+	t_envp	*envp;
+	t_envp	*tmp;
+	int		i;
+
+	i = -1;
+	envp = process->envp;
+	while (envp)
+	{
+		if (!ft_strcmp("?", envp->key))
+		{
+			envp->value = ft_itoa(status);
+			break ;
+		}
+		envp = envp->next;
+	}
+}
+
+int	ft_error(t_process *process, int status)
+{
+	if (!process)
+		return ;
+	if (!process->name)
+		ft_printerr("minishell", status);
+	else
+		ft_printerr(process->name, status);
+	ft_update_status(status, process);
+	return (status);
 }
