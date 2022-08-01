@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 11:22:38 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 18:15:46 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 18:29:55 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parse_env(t_cmdlist *list, t_envp *envl)
 			printf("parsed: |%s|\n", parsed);
 			free(list->cmd);
 			list->cmd = parsed;
+			list->type = TSTRING;
 		}
 		list = list->next;
 	}

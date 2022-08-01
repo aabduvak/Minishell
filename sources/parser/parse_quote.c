@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 15:48:09 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 18:30:52 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char
 	if (is_endcmd(line[index]) || !line[index])
 	{
 		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-		if (c == '\'' && find_env(line - 1))
+		if (c == '"' && find_env(line - 1))
 			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV));
 		else
 			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
