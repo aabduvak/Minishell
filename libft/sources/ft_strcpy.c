@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 04:58:06 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 10:57:52 by arelmas          ###   ########.fr       */
+/*   Created: 2022/08/01 15:19:57 by arelmas           #+#    #+#             */
+/*   Updated: 2022/08/01 15:22:47 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+void	ft_strcpy(char *dst, char *src)
 {
-	while (str && *str && *str != c)
-		str++;
-	return ((char *)str);
+	if (!src || !dst)
+		return ;
+	while (*src)
+		*dst++ = *src++;
+	*dst = 0;
 }

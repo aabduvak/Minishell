@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 05:24:15 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:48:09 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char
 	char	c;
 
 	c = *(line++ + index);
-	if (c == ''')
-			envline(list, buf);
 	while (line[index] && line[index] != c)
 	{
 		buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
@@ -35,7 +33,7 @@ char
 	if (is_endcmd(line[index]) || !line[index])
 	{
 		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-		if (c == ''' && find_env(line))
+		if (c == '\'' && find_env(line - 1))
 			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV));
 		else
 			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
@@ -48,40 +46,9 @@ char
 static int
 	find_env(char *line)
 {
-	int	envi;
-
-	envi = ft_strchr(line, '$') - line;
-	if (!envi || !check_env(line + 1))
+	while (line && *line && *line != '$')
+		line++;
+	if (!*line || !check_env(line + 1))
 		return (0);
 	return (1);
-}
-
-static int
-	envline_len(char *line)
-{
-	int		len;
-	int		tmp;
-	char	*env_name;
-	char	*env_val;
-
-	len = 0;
-	while (*line)
-	{
-		tmp = ft_strchr(line, '$') - line;
-		line += tmp;
-		len += tmp;
-		if (!*line)
-			break ;
-		tmp = check_env(line + 1);
-		len += !tmp;
-		if (tmp)
-		{
-			env_name = ft_substr(line, 1, tmp);
-			env_val = ft_getenv();
-		}
-
-	}
-
-
-
 }

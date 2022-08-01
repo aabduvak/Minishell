@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 16:42:09 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 04:32:39 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 10:58:45 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_setenv(t_process *process)
 {
 	t_envp	*tmp;
-	char	*key;
+	char	**key;
 
 	if (!process || !process->args)
 		return ;
-	key = ft_split(process->args[1]);
+	key = ft_split(process->args[1], '=');
 	if (!check_env(key[0]))
 	{
 		printf("export: not an identifier: %s\n", key[0]);

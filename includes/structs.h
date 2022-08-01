@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/08 18:39:18 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:15:27 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define GET_CHR_I(index) index % (CHR_I - 1)
 # define TSTRING 0
 # define TCOMMAND 1
+# define TENV 2
 
 typedef enum e_red {
 	NOPE = 0,

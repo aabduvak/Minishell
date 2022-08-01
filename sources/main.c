@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/01 01:23:06 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 15:13:32 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 			perror("Parse error");
 			continue ;
 		}
+		parse_env(cmd, envl);
 		tmp = cmd;
 		proc = convert(tmp, envl);
 		//ft_cmdclear(&tmp, free);
