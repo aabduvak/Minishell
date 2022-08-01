@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 18:48:19 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 20:53:34 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_cmdlist	*parse_line(char *line)
 			return (ft_cmdclear(&list, free));
 		if (tmp == line)
 		{
-			printf("+++ o zaman buraya girmiyor: %c +++\n", line[index]);
 			if (line[index] == '$')
 				type = TENV;
 			buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
@@ -47,10 +46,7 @@ t_cmdlist	*parse_line(char *line)
 		line = tmp;
 	}
 	if (buf[0][0])
-	{
-		printf("--- buraya geliyor ---\n");
 		end_block(&list, buf, type, index);
-	}
 	return (list);
 }
 
@@ -74,20 +70,11 @@ static void
 {
 	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
 	if (type == TENV)
-	{
-		printf("==== TENV ====\n");
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV));
-	}
-	if (check_built_op(buf[GET_STR_I(index)]))
-	{
-		printf("==== TCOMMAND ====\n");
+	else if (check_built_op(buf[GET_STR_I(index)]))
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
-	}
 	else
-	{
-		printf("==== TSTRING ====\n");
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
-	}
 }
 
 char	*jump_space(char *str)

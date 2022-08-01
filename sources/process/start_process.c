@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 18:52:12 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 20:54:00 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,13 @@ static int	run(t_process *process)
 			return (error);
 		if (exec_builtin(process))
 			exit(0);
-		printf("args: %s %s %s\n", process->args[0], process->args[1], process->args[2]);
 		if (execve(process->path, process->args,
 				deconstruct(process->envp)) == -1)
 			return (ER_EXEC);
 		exit(0);
 	}
 	else
-	{
 		close(pipes[1]);
-		//close(pipes[0]);
-	}
 	return (0);
 }
 
