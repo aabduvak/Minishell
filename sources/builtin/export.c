@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:04:37 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/02 02:11:22 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	export(t_process *process)
 {
 	t_envp	*tmp;
 
-	if (!process->args)
+	if (process && !*(process->args + 1))
 	{
 		tmp = process->envp;
 		while (tmp)
