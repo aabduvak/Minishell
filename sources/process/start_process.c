@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/31 06:30:42 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 17:47:35 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int	start_process(t_process *process)
 static int	run(t_process *process)
 {
 	int		error;
+	int		nofile;
 	int		pipes[2];
 	pid_t	child;
 
-	if (access(process->path, F_OK))
+	nofile = proc_access(process->name);
+	if (access(process->path, F_OK) && nofile)
 		return (ft_error(process, ER_NOFILE));
-	if (access(process->path, X_OK))
+	if (access(process->path, X_OK) && nofile)
 		return (ft_error(process, ER_ACCES));
 	if (pipe(pipes))
 		return (ft_error(process, ER_PIPES));
@@ -50,12 +52,26 @@ static int	run(t_process *process)
 	if (exec_builtin(process))
 		return (0);
 	*/
+	if (!process->next && !process->prev && (!ft_strcmp(process->name, "cd") || !ft_strcmp(process->name, "export") || !ft_strcmp(process->name, "exit")))
+	{
+		close(pipes[0]);
+		close(pipes[1]);
+		if (!ft_strcmp(process->name, "cd"))
+			cd(process);
+		else if (!ft_strcmp(process->name, "exit"))
+			ft_exit(0);
+		else
+			export(process);
+		return (0);
+	}
 	child = fork();
 	if (!child)
 	{
 		error = initfd(process, pipes);
 		if (error)
 			return (error);
+		if (exec_builtin(process))
+			exit(0);
 		if (execve(process->path, process->args,
 				deconstruct(process->envp)) == -1)
 			return (ER_EXEC);

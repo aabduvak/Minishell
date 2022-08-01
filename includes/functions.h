@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:20:30 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 04:35:24 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			red_overwrite(const char *file_name);
 int			red_delimeter(const char *del);
 int			exec_builtin(t_process *proc);
 int			start_process(t_process *process);
+int			proc_access(char *name);
 
 //PARSER
 t_process	*convert(t_cmdlist *cmd, t_envp *evnl);
@@ -65,6 +66,7 @@ char		*parse_bop(t_cmdlist **list, char buf[STR_I][CHR_I],
 char		*jump_space(char *str);
 int			is_endcmd(char c);
 int			check_built_op(char *str);
+int			check_env(char *env_name);
 char		*strings_join(char strings[STR_I][CHR_I], size_t len);
 void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
 

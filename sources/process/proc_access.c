@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_setenv.c                                        :+:      :+:    :+:   */
+/*   proc_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 16:42:09 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 04:32:39 by arelmas          ###   ########.fr       */
+/*   Created: 2022/07/31 16:11:34 by arelmas           #+#    #+#             */
+/*   Updated: 2022/07/31 23:24:51 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_setenv(t_process *process)
+int	proc_access(char *name)
 {
-	t_envp	*tmp;
-	char	*key;
-
-	if (!process || !process->args)
-		return ;
-	key = ft_split(process->args[1]);
-	if (!check_env(key[0]))
-	{
-		printf("export: not an identifier: %s\n", key[0]);
-		free_list(key);
-		return ;
-	}
-	unset(process);
-	ft_envpadd_back(&process->envp, (t_envp *)ft_envpnew(process->args[1]));
-	tmp = process->envp;
-	while (tmp->next)
-		tmp = tmp->next;
+	return (ft_strcmp(name, "cd") && ft_strcmp(name, "env") &&
+		ft_strcmp(name, "unset") && ft_strcmp(name, "echo") &&
+		ft_strcmp(name, "pwd") && ft_strcmp(name, "export") &&
+		ft_strcmp(name, "exit"));
 }

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 12:33:36 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/01 01:23:06 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*get_inputstr(void)
 int	main(int argc, char **argv, char **envp)
 {
 	int			err;
+	int			status;
 	char		*line;
 	t_cmdlist	*cmd;
 	t_cmdlist	*tmp;
@@ -42,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = get_inputstr();
 		cmd = parse_line(line);
+	//	free(line);
 		if (!cmd)
 		{
 			perror("Parse error");
@@ -49,24 +51,20 @@ int	main(int argc, char **argv, char **envp)
 		}
 		tmp = cmd;
 		proc = convert(tmp, envl);
-		proc->envp = envl;
-		ft_cmdclear(&tmp, free);
+		//ft_cmdclear(&tmp, free);
 		if (!proc)
 		{
-			perror("Convertation error");
+			printf("Minishell: syntax error near unexpected token `|'\n");
 			continue ;
 		}
+		proc->envp = envl;
 		new_proc = proc;
 		err = start_process(new_proc);
-		wait(0);
-		waitpid(0, &err, 0);
+		waitpid(0, &status, 0);
 		if (!err)
-		{
-			printf("----evet------\n");
-			ft_update_status(err % 255, proc);
-		}
-		ft_proclear(&proc, free);
+			ft_update_status(status % 255, proc);
+	//	ft_proclear(&proc, free);
 	}
-	ft_envpclear(envl);
+//	ft_envpclear(envl);
 	return (0);
 }

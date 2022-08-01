@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:56:21 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/07/31 15:58:08 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,11 @@ void	ft_update_status(int status, t_process *process)
 	envp = process->envp;
 	while (envp)
 	{
-		printf("env: %s\n", envp->key);
 		if (!ft_strcmp("?", envp->key))
 		{
-			printf("buldum\n");
 			envp->value = ft_itoa(status);
 			tmp = ft_strjoin(envp->key, "=");
 			envp->fullstr = ft_strjoin(tmp, envp->value);
-			printf("ekledim: %s\n", envp->fullstr);
 			break ;
 		}
 		envp = envp->next;
