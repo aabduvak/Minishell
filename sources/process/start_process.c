@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 20:54:00 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/02 03:08:59 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,16 @@ static int	run(t_process *process)
 	if (exec_builtin(process))
 		return (0);
 	*/
-	if (!process->next && !process->prev && (!ft_strcmp(process->name, "cd") || !ft_strcmp(process->name, "export") || !ft_strcmp(process->name, "exit")))
+	if (!process->next && !process->prev && (!ft_strcmp(process->name, BT_CD) || !ft_strcmp(process->name, BT_EXPORT) || !ft_strcmp(process->name, BT_EXIT) || !ft_strcmp(process->name, BT_UNSET)))
 	{
 		close(pipes[0]);
 		close(pipes[1]);
-		if (!ft_strcmp(process->name, "cd"))
+		if (!ft_strcmp(process->name, BT_CD))
 			cd(process);
-		else if (!ft_strcmp(process->name, "exit"))
+		else if (!ft_strcmp(process->name, BT_EXIT))
 			ft_exit(0);
+		else if (!ft_strcmp(process->name, BT_UNSET))
+			unset(process);
 		else
 			export(process);
 		return (0);
