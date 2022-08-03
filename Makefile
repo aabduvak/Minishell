@@ -25,7 +25,7 @@ END				=	"\033[0;0m"
 
 SRCS			= $(shell find sources -type f -name "*.c")
 OBJS			= $(SRCS:sources/%.c=sources/bin/%.o)
-USR				= $(shell echo $(USER))
+ROOT			= $(shell echo $(HOME))
 LOG				= output.file
 
 # Command and Flags
@@ -33,26 +33,28 @@ LOG				= output.file
 NAME			= minishell
 CC				= gcc
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror -I/Users/$(USR)/readline/include
-LDFLAGS			= -L/Users/$(USR)/readline/lib -lreadline
-LIB				= ./libft/libft.a
+CFLAGS			= -Wall -Wextra -Werror -I./lib/readline/include
+LDFLAGS			= -L./lib/readline/lib -lreadline
+LIBFT			= ./libft/libft.a
 
 # Directories
 
 INC_FT			= ./libft/sources
 INC_GN			= ./libft/GNL/sources
 INC_PR			= ./libft/ft_printf/sources
-INC_BL			= ./builtin/
 INC				= ./includes/
 BIN				= ./sources/bin/
+LIB				= ./lib/.minishell
 
 # Rules
 
+all : $(LIB) $(LIBFT) $(NAME)
 
-all : $(LIB) $(NAME)
+$(LIBFT):
+	@make -C ./libft
 
 $(LIB):
-	@make -C ./libft
+	@make -C ./lib
 
 $(BIN):
 	@mkdir $(BIN)
@@ -64,7 +66,7 @@ $(BIN)%.o: sources/%.c
 
 $(NAME): $(BIN) $(OBJS)
 	@echo $(YELLOW) "Building... $(NAME)" $(END)
-	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME) $(LIB)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME) $(LIBFT)
 	@echo $(GREEN) "$(NAME) created successfully!\n" $(END)
 
 # $< input files
@@ -85,6 +87,12 @@ fclean : clean
 ffclean: fclean
 	@make fclean -C ./libft
 
+fffclean: ffclean
+	@echo $(YELLOW) "Removing $(ROOT)/readline..." $(END)
+	@$(RM) $(LIB)
+	@make fclean -C ./lib
+	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
+
 norm :
 	@norminette libft/
 	@norminette sources
@@ -94,10 +102,6 @@ re : ffclean all
 
 run : $(NAME)
 	@./$(NAME)
-
-leaks: $(NAME)
-	@valgrind --log-file=$(LOG) --leak-check=yes --tool=memcheck ./$(NAME)  
-	@cat $(LOG)
 
 help :
 	@echo "------------------------------------ <<HELP COMMAND>> ------------------------------------"
