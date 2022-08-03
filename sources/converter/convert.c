@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:19:49 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 01:23:39 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 02:57:33 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_process	*convert(t_cmdlist *list, t_envp *envl)
 	while (list)
 	{
 		new_proc = ft_procnew(list, envl);
+		if (!new_proc)
+			return (NULL);
 		if (!ft_procadd_back(&process, new_proc))
 			return (NULL);
 		while (list && !(!ft_strcmp(list->cmd, "|") && list->type == TCOMMAND))

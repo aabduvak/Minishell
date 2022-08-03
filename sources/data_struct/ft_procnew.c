@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 20:34:44 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 02:57:56 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 		free(process->path);
 		free_list(process->args);
 		free(process);
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (NULL);
 	}
 	return (process);
@@ -114,16 +115,22 @@ static void
 	{
 		if (cmd->type == TCOMMAND && cmd->next && cmd->next->type == TSTRING)
 		{
-			if (!ft_strcmp(cmd->cmd, ">"))
+			if (!ft_strcmp(cmd->cmd, ">") && cmd->next)
+			{
+				close(open(cmd->next->cmd, O_CREAT, 0644));
 				proc->redirect->write = ft_strdup(cmd->next->cmd);
-			else if (!ft_strcmp(cmd->cmd, ">>"))
+			}
+			else if (!ft_strcmp(cmd->cmd, ">>") && cmd->next)
+			{
+				close(open(cmd->next->cmd, O_CREAT, 0644));
 				proc->redirect->overwrite = ft_strdup(cmd->next->cmd);
-			else if (!ft_strcmp(cmd->cmd, "<"))
+			}
+			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
 				proc->redirect->read = ft_strdup(cmd->next->cmd);
-			else if (!ft_strcmp(cmd->cmd, "<<"))
+			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
 				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
-		else if (cmd->type == TCOMMAND)
+		else
 			return (NULL);
 		cmd = cmd->next;
 	}

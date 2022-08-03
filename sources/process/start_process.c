@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 20:46:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/02 03:08:59 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/03 02:27:01 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ static int	run(t_process *process)
 		return (ft_error(process, ER_PIPES));
 	process->stdfd->_stdin = pipes[0];
 	process->stdfd->_stdout = pipes[1];
-	/*error = initfd(process, pipes);
-	if (exec_builtin(process))
-		return (0);
-	*/
-	if (!process->next && !process->prev && (!ft_strcmp(process->name, BT_CD) || !ft_strcmp(process->name, BT_EXPORT) || !ft_strcmp(process->name, BT_EXIT) || !ft_strcmp(process->name, BT_UNSET)))
+	if (!process->next && !process->prev && (!ft_strcmp(process->name, BT_CD) ||
+				!ft_strcmp(process->name, BT_EXPORT) || !ft_strcmp(process->name, BT_EXIT) ||
+				!ft_strcmp(process->name, BT_UNSET)))
 	{
 		close(pipes[0]);
 		close(pipes[1]);

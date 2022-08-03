@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/01 20:54:14 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 03:10:08 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,22 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line = get_inputstr();
+		//printf("parsing...\n");
 		cmd = parse_line(line);
+		//printf("parsed.\n");
 	//	free(line);
 		if (!cmd)
 		{
 			perror("Parse error");
 			continue ;
 		}
+		//printf("env detecting...\n");
 		parse_env(cmd, envl);
+		//printf("end...\n");
 		tmp = cmd;
+		//printf("converting...\n");
 		proc = convert(tmp, envl);
+		//printf("converted\n");
 		//ft_cmdclear(&tmp, free);
 		if (!proc)
 		{
@@ -60,8 +66,10 @@ int	main(int argc, char **argv, char **envp)
 		}
 		proc->envp = envl;
 		new_proc = proc;
+		//printf("starting...\n");
 		err = start_process(new_proc);
 		waitpid(0, &status, 0);
+		//printf("OK!\n");
 		if (!err)
 			ft_update_status(status % 255, proc);
 	//	ft_proclear(&proc, free);
