@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 02:57:56 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 04:49:04 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static void
 			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
 				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
-		else
+		else if (cmd->type == TCOMMAND)
 			return (NULL);
 		cmd = cmd->next;
 	}
