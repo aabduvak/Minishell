@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 08:08:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 17:16:05 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 20:42:22 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	red_overwrite(const char *file_name)
 	return (0);
 }
 
-int	red_delimeter(t_list *del)
+int	red_delimeter(t_list *del, int read_red)
 {
 	int		readed;
 	int		pipes[2];
 	char	buf[255];
 
-	if (pipe(pipes))
+	if (!read_red && pipe(pipes))
 		return (ERROR);
 	while (1)
 	{
@@ -59,8 +59,9 @@ int	red_delimeter(t_list *del)
 			if (!del->next)
 				break ;
 			del = del->next;
+			continue ;
 		}
-		if (readed > 0 && !del->next)
+		if (readed > 0 && !del->next && !read_red)
 			write(pipes[1], buf, readed);
 	}
 	if (close(pipes[1]) || dup2(pipes[0], 0) == -1)

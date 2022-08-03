@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 16:42:15 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 20:32:23 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,12 @@ static void
 			if (!ft_strcmp(cmd->cmd, ">") && cmd->next)
 			{
 				close(open(cmd->next->cmd, O_CREAT, 0644));
-				ft_redrestart(proc, &proc->redirect->write, cmd->next->cmd);
+				ft_write_restart(proc, &proc->redirect->write, cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, ">>") && cmd->next)
 			{
 				close(open(cmd->next->cmd, O_CREAT, 0644));
-				ft_redrestart(proc, &proc->redirect->overwrite, cmd->next->cmd);
+				ft_write_restart(proc, &proc->redirect->overwrite, cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
 			{
@@ -140,13 +140,20 @@ static void
 					return (0); //freelemeye unutma
 				}
 				else
-					proc->redirect->read = ft_strdup(cmd->next->cmd);
+					ft_read_restart(proc, &proc->redirect->read, cmd->next->cmd);
 				free(tmp);
 				free(buf);
 				free(f_path);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
+			{
+				if (proc->redirect->read)
+				{
+					free(proc->redirect->read);
+					proc->redirect->read = 0;
+				}
 				ft_lstadd_back(&proc->redirect->delimeter, ft_lstnew(ft_strdup(cmd->next->cmd)));
+			}
 				//proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
 		else if (cmd->type == TCOMMAND)
