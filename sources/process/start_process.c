@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 15:33:36 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 20:44:48 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,13 @@ static int	initfd(t_process *process, int pipes[2])
 }
 
 static int	redirect(t_process *process)
-{
+{	
+	if (process->redirect->delimeter)
+		red_delimeter(process->redirect->delimeter, !!process->redirect->read);
 	if (process->redirect->read)
 		red_read(process->redirect->read);
 	if (process->redirect->write)
 		red_write(process->redirect->write);
-	if (process->redirect->delimeter)
-		red_delimeter(process->redirect->delimeter);
 	if (process->redirect->overwrite)
 		red_overwrite(process->redirect->overwrite);
 	return (0);

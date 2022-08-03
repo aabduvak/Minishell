@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_redrestart.c                                    :+:      :+:    :+:   */
+/*   ft_read_restart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 15:09:54 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 15:17:06 by arelmas          ###   ########.fr       */
+/*   Created: 2022/08/03 20:19:29 by arelmas           #+#    #+#             */
+/*   Updated: 2022/08/03 20:29:01 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_redrestart(t_process *proc, char **dst, char *src)
+void	ft_read_restart(t_process *proc, char **dst, char *src)
 {
-	if (proc->redirect->write)
+	if (proc->redirect->read)
 	{
-		free(proc->redirect->write);
-		proc->redirect->write = 0;
-	}
-	if (proc->redirect->overwrite)
-	{
-		free(proc->redirect->overwrite);
-		proc->redirect->overwrite = 0;
+		free(proc->redirect->read);
+		proc->redirect->read = 0;
+		if (proc->redirect->delimeter)
+			ft_lstclear(&proc->redirect->delimeter, free);
 	}
 	*dst = ft_strdup(src);
 }
