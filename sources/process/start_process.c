@@ -19,9 +19,7 @@ static int	redirect(t_process *process);
 int	start_process(t_process *process)
 {
 	int			ret;
-	t_process	*tmp;
 
-	tmp = process;
 	if (!process)
 		return (ER_NOPROC);
 	while (process)

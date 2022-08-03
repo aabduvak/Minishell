@@ -20,7 +20,6 @@ void	ft_redclear(t_redirect *red)
 		free(red->write);
 	if (red->delimeter)
 		ft_lstclear(&red->delimeter, free);
-		free(red->delimeter);
 	if (red->overwrite)
 		free(red->overwrite);
 	free(red);

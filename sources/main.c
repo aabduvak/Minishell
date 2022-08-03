@@ -6,11 +6,12 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 10:38:26 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 19:42:27 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <info.h>
 
 char	*get_inputstr(void)
 {
@@ -24,7 +25,6 @@ char	*get_inputstr(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int			err;
 	int			status;
 	char		*line;
 	t_cmdlist	*cmd;
@@ -33,8 +33,11 @@ int	main(int argc, char **argv, char **envp)
 	t_process	*proc;
 	t_process	*new_proc;
 
-	(void)argc;
-	(void)argv;
+	if (argc > 1)
+	{
+		show_info(argc, argv);
+		return (0);
+	}
 	connectsignals();
 	envl = construct(envp);
 	if (!envl)
@@ -64,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		proc->envp = envl;
 		new_proc = proc;
 		//printf("starting...\n");
-		err = start_process(new_proc);
+		start_process(new_proc);
 		//waitpid(0, &status, 0);
 		//if (!err)
 	//		ft_update_status(status % 255, proc);
