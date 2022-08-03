@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 04:57:32 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 15:26:38 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ static void
 			if (!ft_strcmp(cmd->cmd, ">") && cmd->next)
 			{
 				close(open(cmd->next->cmd, O_CREAT, 0644));
-				proc->redirect->write = ft_strdup(cmd->next->cmd);
+				ft_redrestart(proc, &proc->redirect->write, cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, ">>") && cmd->next)
 			{
 				close(open(cmd->next->cmd, O_CREAT, 0644));
-				proc->redirect->overwrite = ft_strdup(cmd->next->cmd);
+				ft_redrestart(proc, &proc->redirect->overwrite, cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
 				proc->redirect->read = ft_strdup(cmd->next->cmd);

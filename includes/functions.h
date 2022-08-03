@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/01 15:14:41 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 15:17:22 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
 //STRUCTS
 void		ft_envpclear(t_envp *envl);
 void		ft_redclear(t_redirect *red);
+void		ft_redrestart(t_process *proc, char **dst, char *src);
 void		ft_procinit(t_process *proc, t_envp *envl);
 void		ft_proclear(t_process **proc, void (*del)(void *));
 void		*ft_procadd_back(t_process **proc, t_process *new);
