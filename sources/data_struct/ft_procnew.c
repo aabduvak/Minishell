@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 04:49:04 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 04:57:32 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void
 		return ;
 	}
 	proc->name = ft_strdup(name);
-	proc->path = ft_substr(src, 0, name - src);
+	proc->path = ft_strdup(src);
 }
 
 static char
