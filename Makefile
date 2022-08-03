@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/08/02 23:59:27 by arelmas          ###   ########.fr        #
+#    Updated: 2022/08/03 05:13:12 by arelmas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,7 @@ BIN				= ./sources/bin/
 # Rules
 
 
-all : $(LIB) $(NAME) add_path
-
-add_path:
-	export PATH=$(PATH):pwd
-	
+all : $(LIB) $(NAME)
 
 $(LIB):
 	@make -C ./libft
