@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 05:52:31 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 10:38:26 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,15 @@ int	main(int argc, char **argv, char **envp)
 		new_proc = proc;
 		//printf("starting...\n");
 		err = start_process(new_proc);
-		waitpid(0, &status, 0);
-		//printf("OK!\n");
-		if (!err)
-			ft_update_status(status % 255, proc);
+		//waitpid(0, &status, 0);
+		//if (!err)
+	//		ft_update_status(status % 255, proc);
+		(void)status;
+		while (new_proc)
+		{
+			wait(0);
+			new_proc = new_proc->next;
+		}
 	//	ft_proclear(&proc, free);
 	}
 //	ft_envpclear(envl);
