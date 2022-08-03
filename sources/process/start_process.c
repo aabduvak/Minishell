@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 04:58:21 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 05:31:07 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ static int	run(t_process *process)
 
 	nofile = proc_access(process->name);
 	if (access(process->path, F_OK) && nofile)
+	{
+		if (!process->path)
+			return (ft_error(process, ER_NOCOMM));
 		return (ft_error(process, ER_NOFILE));
+	}
 	if (access(process->path, X_OK) && nofile)
 		return (ft_error(process, ER_ACCES));
 	if (pipe(pipes))

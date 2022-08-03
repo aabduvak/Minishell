@@ -6,14 +6,19 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 15:58:08 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 05:47:55 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	ft_printerr(char *name, int status)
+static void	ft_printerr(t_process *proc, int status)
 {
+	char	*name;
+
+	name = proc->name;
+	if (!name)
+		name = "minishell";
 	if (status == ER_NOTPERMITTED)
 		printf("%s: %s\n", name, E_NOTPERMITTED);
 	else if (status == ER_EXEC)
@@ -23,13 +28,11 @@ static void	ft_printerr(char *name, int status)
 	else if (status == ER_NOPROC)
 		printf("%s: %s\n", name, E_NOPROC);
 	else if (status == ER_NOFILE)
-		printf("%s: %s\n", name, E_NOFILE);
+		printf("minishell: %s: %s\n", E_NOFILE, proc->path);
 	else if (status == ER_RUNPROC)
 		printf("%s: %s\n", name, E_RUNPROC);
 	else if (status == ER_ISDIR)
 		printf("%s: %s\n", name, E_ISDIR);
-	else if (status == ER_NOTDIR)
-		printf("%s: %s\n", name, E_NOTDIR);
 	else if (status == ER_NOTDIR)
 		printf("%s: %s\n", name, E_NOTDIR);
 	else if (status == ER_PIPES)
@@ -63,10 +66,7 @@ int	ft_error(t_process *process, int status)
 {
 	if (!process)
 		return (1);
-	if (!process->name)
-		ft_printerr("minishell", status);
-	else
-		ft_printerr(process->name, status);
+	ft_printerr(process, status);
 	ft_update_status(status, process);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 03:10:08 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 05:52:31 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		//printf("parsed.\n");
 	//	free(line);
 		if (!cmd)
-		{
-			perror("Parse error");
 			continue ;
-		}
 		//printf("env detecting...\n");
 		parse_env(cmd, envl);
 		//printf("end...\n");
