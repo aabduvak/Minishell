@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 16:16:27 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 16:42:15 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ static void
 				free(f_path);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
-				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
+				ft_lstadd_back(&proc->redirect->delimeter, ft_lstnew(ft_strdup(cmd->next->cmd)));
+				//proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
 		else if (cmd->type == TCOMMAND)
 			return (NULL);

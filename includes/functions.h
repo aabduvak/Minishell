@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 15:17:22 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 16:35:30 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			contains_char(char *str, char c);
 int			red_read(const char *file_name);
 int			red_write(const char *file_name);
 int			red_overwrite(const char *file_name);
-int			red_delimeter(const char *del);
+int			red_delimeter(t_list *del);
 int			exec_builtin(t_process *proc);
 int			start_process(t_process *process);
 int			proc_access(char *name);

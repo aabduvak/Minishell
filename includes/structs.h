@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/01 15:15:27 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 16:32:45 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_cmdlist {
 typedef struct s_redirect {
 	char	*read;
 	char	*write;
-	char	*delimeter;
 	char	*overwrite;
+	t_list	*delimeter;
 }	t_redirect;
 
 typedef struct s_stdfd {
