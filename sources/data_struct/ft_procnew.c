@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 15:26:38 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 16:16:27 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ static t_cmdlist
 static void
 	*ft_setredirect(t_process *proc, t_cmdlist *cmd)
 {
+	char	*tmp;
+	char	*buf;
+	char	*f_path;
+
 	if (!cmd)
 		return (NULL);
 	while (cmd && ft_strcmp(cmd->cmd, "|"))
@@ -126,7 +130,21 @@ static void
 				ft_redrestart(proc, &proc->redirect->overwrite, cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
-				proc->redirect->read = ft_strdup(cmd->next->cmd);
+			{
+				buf = getcwd(0, 0);
+				tmp = ft_strjoin(buf, "/");
+				f_path = ft_strjoin(tmp, cmd->next->cmd);
+				if (access(f_path, F_OK))
+				{
+					printf("minishell: no such file or directory: %s\n", cmd->next->cmd);
+					return (0); //freelemeye unutma
+				}
+				else
+					proc->redirect->read = ft_strdup(cmd->next->cmd);
+				free(tmp);
+				free(buf);
+				free(f_path);
+			}
 			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
 				proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}
