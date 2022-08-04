@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 02:31:39 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 10:38:31 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:13:54 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static size_t	get_len(t_envp *envl, char *input)
 				continue ;
 			while (check_letter(input[env_idx + params_len]))
 				params_len++;
-			parsed_len += parse_len(input, &env_idx, params_len, envl);
+			parsed_len += parse_len(input, (int *)&env_idx, params_len, envl);
 		}
 		else
 		{

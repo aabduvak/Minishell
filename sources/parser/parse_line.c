@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 08:27:49 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:28:56 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_cmdlist	*parse_line(char *line)
 	}
 	if (buf[0][0])
 		end_block(&list, buf, type, index);
-
 /*
 	t_cmdlist	*tmp_list;
 

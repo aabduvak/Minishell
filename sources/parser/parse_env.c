@@ -6,14 +6,14 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 11:22:38 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 09:09:29 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:28:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static int	envline_len(char *line, t_envp *envl);
-static char	*getenv_val(char *line, char *src, int *idx, t_envp *envl);
+static int	ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl);
 static char	*parse_cmd(char *line, t_envp *envl);
 
 void	parse_env(t_cmdlist *list, t_envp *envl)
@@ -35,10 +35,10 @@ void	parse_env(t_cmdlist *list, t_envp *envl)
 
 static char	*parse_cmd(char *line, t_envp *envl)
 {
-	int		idx;
-	int		jdx;
-	int		tmp;
-	int		line_len;
+	size_t	idx;
+	size_t	jdx;
+	size_t	tmp;
+	size_t	line_len;
 	char	*parsed;
 
 	line_len = envline_len(line, envl);
@@ -50,7 +50,7 @@ static char	*parse_cmd(char *line, t_envp *envl)
 	while (jdx < line_len)
 	{
 		if (line[idx] == '$')
-			jdx += ft_getenv_val(line, parsed + jdx, &idx envl);
+			jdx += ft_getenv_val(line, parsed + jdx, &idx, envl);
 		else
 		{
 			tmp = ft_strchr(line + idx, '$') - (line + idx);
@@ -91,17 +91,17 @@ static int	envline_len(char *line, t_envp *envl)
 	return (len);
 }
 
-static int	ft_getenv_val(char *line, char *src, int *idx, t_envp *envl)
+static int	ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl)
 {
 	int		env_len;
 	char	*env_name;
 	char	*env_val;
 
 	env_len = check_env(line + *idx + 1);
-	if (env_len)
-		return ;
+	if (!env_len)
+		return 0;
 	env_name = ft_substr(line + *idx, 1, env_len);
-	env_val = ft_getchar(env_name, envl);
+	env_val = ft_getenv(env_name, envl);
 	ft_strcpy(src, env_val);
 	*idx += ft_strlen(env_name) + 1;
 	return (ft_strlen(env_val));
