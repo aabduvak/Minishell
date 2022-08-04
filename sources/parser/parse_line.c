@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 20:28:56 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 02:26:48 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ static char
 static void
 	end_block(t_cmdlist **list, char buf[STR_I][CHR_I], int type, int index);
 
+int	type;
+
 t_cmdlist	*parse_line(char *line)
 {
 	char		*tmp;
 	char		buf[STR_I][CHR_I];
 	int			index;
-	int			type;
 	t_cmdlist	*list;
 
 	list = 0;
@@ -40,6 +41,7 @@ t_cmdlist	*parse_line(char *line)
 		{
 			if (line[index] == '$')
 				type = TENV;
+			//printf("finded env: %s\n", line + index);
 			buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
 			index++;
 		}
@@ -84,11 +86,28 @@ static char
 		line = parse_quote(list, buf, line, *index);
 	}
 	else if (!(GET_CHR_I(*index + 1)) || (is_endcmd(line[*index]) && *index))
-		line = buf_over(list, buf, line, *index);
+	{
+		//line = buf_over(list, buf, line, *index);
+
+		buf[GET_STR_I(*index)][GET_CHR_I(*index)] = 0;
+		if (GET_STR_I(*index) == STR_I - 1 || (is_endcmd(line[*index]) && *index))
+		{
+			if (type == TENV)
+				ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV, 0));
+			else
+				ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING, 0));
+			strings_bzero(buf, 1, STR_I);
+			line = jump_space(line + *index);
+		}	
+	}
 	else if (is_endcmd(*line) && *line != ' ')
+	{
 		line = parse_bop(list, buf, line, *index);
+	}
 	else
+	{
 		return (line);
+	}
 	*index = 0;
 	return (line);
 }

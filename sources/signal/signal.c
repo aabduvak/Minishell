@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 20:49:07 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/18 20:50:52 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 01:15:29 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	connectsignals(void)
 void	signalhandler(int sig)
 {
 	(void)sig;
+	rl_on_new_line();
 	rl_replace_line("", 0);
 	printf("\n");
-	rl_on_new_line();
 	rl_redisplay();
 }
