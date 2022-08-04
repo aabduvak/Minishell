@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 06:45:16 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 08:41:47 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	main(int argc, char **argv, char **envp)
 		(void)status;
 		while (new_proc)
 		{
-			wait(0);
+			wait(&status);
+			ft_update_status(status % 255, proc);
 			new_proc = new_proc->next;
 		}
 	//	ft_proclear(&proc, free);

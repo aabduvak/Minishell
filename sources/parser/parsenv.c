@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 02:31:39 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/08 02:31:40 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 10:38:31 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,39 @@ static void	envcpy(char *dst, char *src, size_t size)
 	*dst = 0;
 }
 
+static size_t
+	parse_len(char *input, int *env_idx, size_t params_len, t_envp *envl)
+{
+	char	*env_name;
+	size_t	size;
+
+	env_name = ft_substr(input, *env_idx + 1, params_len);
+	*env_idx += params_len;
+	size = ft_strlen(ft_getenv(env_name, envl));
+	free(env_name);
+	return (size + 2);
+}
+
 static size_t	get_len(t_envp *envl, char *input)
 {
 	size_t	params_len;
 	size_t	parsed_len;
 	size_t	env_idx;
-	char	*env_name;
+	char	c;
 
 	env_idx = 0;
 	parsed_len = 0;
 	while (input[env_idx])
 	{
 		params_len = 0;
-		if (input[env_idx + params_len++] == '$')
+		c = input[env_idx + params_len++];
+		if (c == '$')
 		{
-			if (!check_first_letter(input[env_idx + params_len++]) && ++env_idx)
+			if (params_len++ && !(ft_isalpha(c) || c == '_') && ++env_idx)
 				continue ;
 			while (check_letter(input[env_idx + params_len]))
 				params_len++;
-			env_name = ft_substr(input, env_idx + 1, params_len);
-			env_idx += params_len;
-			parsed_len += ft_strlen(ft_getenv(env_name, envl));
-			free(env_name);
-			parsed_len += 2;
+			parsed_len += parse_len(input, &env_idx, params_len, envl);
 		}
 		else
 		{
