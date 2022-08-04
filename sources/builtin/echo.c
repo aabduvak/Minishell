@@ -12,6 +12,19 @@
 
 #include <minishell.h>
 
+static int	contains_only(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] != '-')
+		return (1);
+	while (str[++i])
+		if (str[i] != c)
+			return (1);
+	return (0);
+}
+
 void	echo(t_process *process)
 {
 	int	i;
@@ -19,10 +32,10 @@ void	echo(t_process *process)
 
 	if (!process->args)
 	{
-		ft_printf(process->stdfd->_stdout, "\n");
+		ft_printf(1, "\n");
 		return ;
 	}
-	compare = ft_strcmp(process->args[1], "-n");
+	compare = contains_only(process->args[1], 'n');
 	i = (compare == 0) + 1;
 	while (process->args[i])
 	{

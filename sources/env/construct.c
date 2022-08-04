@@ -32,14 +32,16 @@ void	ft_envpadd_back(t_envp **lst, t_envp *new)
 
 int	ft_envpsize(t_envp *lst)
 {
-	int	count;
+	int		count;
+	t_envp	*tmp;
 
-	count = 1;
+	count = 0;
 	if (!lst)
 		return (0);
-	while (lst->next != NULL)
+	tmp = lst;
+	while (tmp)
 	{
-		lst = lst->next;
+		tmp = tmp->next;
 		count++;
 	}
 	return (count);
@@ -69,8 +71,9 @@ t_envp	*ft_envpnew(char *str)
 
 t_envp	*construct(char	**envp)
 {
-	int		idx;
-	t_envp	*envl;
+	int			idx;
+	static int	init = 0;
+	t_envp		*envl;
 
 	if (!envp)
 		return (0);
@@ -78,7 +81,8 @@ t_envp	*construct(char	**envp)
 	envl = 0;
 	while (envp[idx])
 		ft_envpadd_back(&envl, ft_envpnew(envp[idx++]));
-	ft_envpadd_back(&envl, ft_envpnew("?=0"));
+	if (!init++)
+		ft_envpadd_back(&envl, ft_envpnew("?=0"));
 	return (envl);
 }
 

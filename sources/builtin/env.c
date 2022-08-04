@@ -21,7 +21,7 @@ void	env(t_process *process)
 	lst = process->envp;
 	while (lst)
 	{
-		if (contains_char(lst->fullstr, '=') && lst->fullstr[0] != '?')
+		if (contains_char(lst->fullstr, '='))
 			ft_printf(1, "%s\n", (char *) lst->fullstr);
 		lst = lst->next;
 	}

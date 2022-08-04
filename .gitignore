@@ -2,3 +2,6 @@
 bin
 *.a
 .vscode
+.minishell
+readline
+minishell
