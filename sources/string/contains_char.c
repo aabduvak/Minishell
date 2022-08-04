@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_env.c                                        :+:      :+:    :+:   */
+/*   contains_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 04:20:32 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 23:30:01 by aabduvak         ###   ########.fr       */
+/*   Created: 2022/08/04 23:01:59 by aabduvak          #+#    #+#             */
+/*   Updated: 2022/08/04 23:02:09 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_env(char *env_name)
+int	contains_char(char *str, char c)
 {
-	char	*tmp;
-
-	tmp = env_name;
-	if (!env_name)
-		return (0);
-	if (*env_name == '?')
-		return (++env_name - tmp);
-	if (!ft_isalpha(*env_name) && *env_name != '_')
-		return (0);
-	while (*++env_name)
-		if (!ft_isalnum(*env_name) && *env_name != '_')
-			break ;
-	return (env_name - tmp);
+	while (*str)
+	{
+		if (*str == c)
+			return (FT_TRUE);
+		str++;
+	}
+	return (FT_FALSE);
 }

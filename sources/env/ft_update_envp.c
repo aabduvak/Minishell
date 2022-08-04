@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_update_envp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 20:37:11 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 20:46:09 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 23:23:04 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	ft_update_envp(char *key, char *value, t_envp *envl)
 		{
 			free(envl->value);
 			free(envl->fullstr);
-			envl->value = ft_strdup(value);
+			if (value)
+				envl->value = ft_strdup(value);
+			else
+				envl->value = NULL;
 			envl->fullstr = envl_join(key, value);
 			return ;
 		}

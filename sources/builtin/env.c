@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 02:53:08 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/31 06:03:42 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:20:46 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	env(t_process *process)
 	lst = process->envp;
 	while (lst)
 	{
-		if (contains_char(lst->fullstr, '='))
+		if (contains_char(lst->fullstr, '=') && lst->key[0] != '?')
 			ft_printf(1, "%s\n", (char *) lst->fullstr);
 		lst = lst->next;
 	}

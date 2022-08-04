@@ -6,24 +6,13 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/02 02:11:22 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:21:08 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	contains_char(char *str, char c)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (FT_TRUE);
-		str++;
-	}
-	return (FT_FALSE);
-}
-
-t_envp	*swap(t_envp *ptr1, t_envp *ptr2)
+static t_envp	*swap(t_envp *ptr1, t_envp *ptr2)
 {
 	t_envp	*tmp;
 
@@ -70,26 +59,39 @@ static void	bubble_sort(t_envp **head, int count)
 	}
 }
 
-void	export(t_process *process)
+static void	print_export(t_process *process)
 {
 	t_envp	*tmp;
 	t_envp	*copy;
 	char	**envp;
 
+	tmp = process->envp;
+	envp = deconstruct(tmp);
+	copy = construct(envp);
+	bubble_sort(&copy, ft_envpsize(copy));
+	while (copy)
+	{
+		if (contains_char(copy->fullstr, '=') && copy->key[0] != '?')
+			printf("declare -x %s=\"%s\"\n", (char *) copy->key, copy->value);
+		else if (copy->key[0] != '?')
+			printf("declare -x %s\n", (char *) copy->key);
+		copy = copy->next;
+	}
+	free_list(envp);
+	ft_envpclear(copy);
+}
+
+void	export(t_process *process)
+{
 	if (process && !*(process->args + 1))
 	{
-		tmp = process->envp;
-		envp = deconstruct(tmp);
-		copy = construct(envp);
-		bubble_sort(&copy, ft_envpsize(copy));
-		while (copy)
-		{
-			printf("declare -x %s=\"%s\"\n", (char *) copy->key, copy->value);
-			copy = copy->next;
-		}
-		free_list(envp);
-		ft_envpclear(copy);
+		print_export(process);
 		return ;
 	}
-	ft_setenv(process);
+	process->args = process->args + 1;
+	while (*process->args)
+	{
+		ft_setenv(process);
+		process->args = process->args + 1;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:44 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/02 03:41:39 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:02:55 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	unset(t_process *process)
 
 	i = 0;
 	envp = process->envp;
-	if (contains_char(process->args[1], '='))
+	if (contains_char(process->args[0], '='))
 	{
-		keys = ft_split(process->args[1], '=');
+		keys = ft_split(process->args[0], '=');
 		delete_node(&envp, keys[0]);
 		free_list(keys);
 		return ;
@@ -55,6 +55,5 @@ void	unset(t_process *process)
 	{
 		key = process->args[i];
 		delete_node(&envp, key);
-		free(key);
 	}
 }

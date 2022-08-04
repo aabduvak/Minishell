@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:39:15 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/31 17:31:41 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 22:51:40 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,19 @@ int	ft_envpsize(t_envp *lst)
 t_envp	*ft_envpnew(char *str)
 {
 	t_envp	*first;
-	char	**parse;
+	char	*tmp;
 
-	parse = ft_split(str, '=');
-	if (!parse)
-		return (NULL);
+	tmp = ft_strchr(str, '=');
 	first = malloc(sizeof(t_envp));
 	if (!first)
 		return (NULL);
-	first->key = parse[0];
-	if (!parse[1])
+	first->key = ft_substr(str, 0, ft_strlen(str) - ft_strlen(tmp));
+	if (!(tmp + 1))
 		first->value = ft_strdup("");
 	else
-		first->value = parse[1];
+		first->value = ft_substr(tmp + 1, 0, ft_strlen(tmp) - 1);
 	first->fullstr = strdup(str);
 	first->next = NULL;
-	free(parse);
 	return (first);
 }
 
