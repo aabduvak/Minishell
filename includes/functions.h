@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 06:43:02 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:46:37 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		free_list(char **list);
 void		ft_update_status(int status, t_process *process);
 void		ft_envpdelone(t_envp *lst, void (*del) (void *));
 void		ft_setenv(t_process *process);
+void		ft_update_envp(char *key, char *value, t_envp *envl);
 char		*ft_getenv(char *name, t_envp *envl);
 char		**deconstruct(t_envp *envl);
 char		*get_fullpath(char *path, char *name);
