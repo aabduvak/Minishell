@@ -6,14 +6,14 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 18:30:52 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 08:28:17 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static int
-find_env(char *line);
+find_env(char *line, int quote);
 
 char
 	*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I],
@@ -29,26 +29,25 @@ char
 	}
 	if (!line[index])
 		return (NULL);
-	line++;
-	if (is_endcmd(line[index]) || !line[index])
-	{
-		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-		if (c == '"' && find_env(line - 1))
-			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV));
-		else
-			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
-		strings_bzero(buf, 1, STR_I);
-		return (jump_space(line + index));
-	}
-	return (line + index);
+	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
+	if (c == '"' && find_env(line - 1, 1))
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV, line[index + 1] && line[index + 1] != ' '));
+	else
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING, line[index + 1] && line[index + 1] != ' '));
+	strings_bzero(buf, 1, STR_I);
+	return (jump_space(line + index + 1));
 }
 
 static int
-	find_env(char *line)
+	find_env(char *line, int quote)
 {
 	while (line && *line && *line != '$')
+	{
 		line++;
-	if (!*line || !check_env(line + 1))
+		if (quote && *line != '"')
+			break ;
+	}
+	if (!*line || !check_env(line + 1) || (quote && *line == '"'))
 		return (0);
 	return (1);
 }

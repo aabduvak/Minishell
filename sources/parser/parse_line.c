@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 03:09:28 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 08:27:49 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ t_cmdlist	*parse_line(char *line)
 	}
 	if (buf[0][0])
 		end_block(&list, buf, type, index);
+
+/*
+	t_cmdlist	*tmp_list;
+
+	tmp_list = list;
+	printf("-----------------\n");
+	while (tmp_list)
+	{
+		printf("cmd: %s | type: ", tmp_list->cmd);
+		if (tmp_list->type == TSTRING)
+			printf("TSTRING");
+		else if (tmp_list->type == TCOMMAND)
+			printf("TCOMMAND");
+		else
+			printf("TENV");
+		printf(" | piece: %s\n", !tmp_list->piece? "no": "yes");
+		tmp_list = tmp_list->next;
+	}
+	printf("----------------------\n");
+*/
 	return (list);
 }
 
@@ -54,7 +74,16 @@ static char
 	*parse(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int *index)
 {
 	if (line[*index] == '"' || line[*index] == '\'')
+	{
+		if (*index && line[*index - 1] != ' ')
+		{
+			ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV, 1));
+			strings_bzero(buf, 1, STR_I);
+			line += *index;
+			*index = 0;
+		}
 		line = parse_quote(list, buf, line, *index);
+	}
 	else if (!(GET_CHR_I(*index + 1)) || (is_endcmd(line[*index]) && *index))
 		line = buf_over(list, buf, line, *index);
 	else if (is_endcmd(*line) && *line != ' ')
@@ -70,11 +99,11 @@ static void
 {
 	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
 	if (type == TENV)
-		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV));
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV, 0));
 	else if (check_built_op(buf[GET_STR_I(index)]))
-		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND));
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND, 0));
 	else
-		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING));
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING, 0));
 }
 
 char	*jump_space(char *str)

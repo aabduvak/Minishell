@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 20:41:45 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 06:43:02 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int			proc_access(char *name);
 //PARSER
 t_process	*convert(t_cmdlist *cmd, t_envp *evnl);
 t_cmdlist	*parse_line(char *str);
+t_cmdlist	*combinate_quote(t_cmdlist *cmd);
 void		parse_env(t_cmdlist *cmd, t_envp *envl);
 char		*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);

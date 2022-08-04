@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 04:20:32 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/01 15:47:19 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/04 01:16:14 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	check_env(char *env_name)
 	tmp = env_name;
 	if (!env_name)
 		return (0);
+	printf("tenv: %s\n", env_name);
 	if (!ft_isalpha(*env_name) && *env_name != '_')
 		return (0);
 	while (*++env_name)

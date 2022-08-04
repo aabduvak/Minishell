@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 16:32:45 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/03 21:49:24 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_red {
 typedef struct s_cmdlist {
 	char				*cmd;
 	int					type;
+	int					piece;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 

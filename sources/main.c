@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 19:42:27 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/04 06:45:16 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	main(int argc, char **argv, char **envp)
 		//printf("env detecting...\n");
 		parse_env(cmd, envl);
 		//printf("end...\n");
-		tmp = cmd;
+		tmp = combinate_quote(cmd);
+		//ft_lstclear(&cmd);
 		//printf("converting...\n");
 		proc = convert(tmp, envl);
 		//printf("converted\n");

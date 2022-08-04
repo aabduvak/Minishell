@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buf_over.c                                         :+:      :+:    :+:   */
+/*   combinate_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 17:48:42 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 01:28:24 by arelmas          ###   ########.fr       */
+/*   Created: 2022/08/03 21:57:21 by arelmas           #+#    #+#             */
+/*   Updated: 2022/08/04 07:38:16 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char
-	*buf_over(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index)
+t_cmdlist	*combinate_quote(t_cmdlist *cmd)
 {
-	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
-	if (GET_STR_I(index) == STR_I - 1 || (is_endcmd(line[index]) && index))
+	char		*join;
+	char		*tmp;
+	t_cmdlist	*res;
+	t_cmdlist	*tmp_res;
+
+	res = 0;
+	while (cmd)
 	{
-		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING, 0));
-		strings_bzero(buf, 1, STR_I);
-		return (jump_space(line + index));
+		tmp_res = cmd;
+		join = cmd->cmd;
+		while (cmd && cmd->piece)
+		{
+			tmp = join;
+			if (cmd->next)
+			{
+				join = ft_strjoin(tmp, cmd->next->cmd);
+				free(tmp);
+			}
+			cmd = cmd->next;
+		}
+		cmd = cmd->next;
+		ft_cmdadd_back(&res, ft_cmdnew(join, tmp_res->type, tmp_res->piece));
 	}
-	return (line);
+	return (res);
 }
