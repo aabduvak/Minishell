@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 03:08:15 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 04:41:18 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		export(t_process *process);
 void		ft_exit(t_process *process);
 void		run_builtin(t_process *process);
 int			is_builtin(char *command);
+int			is_relatedbuiltin(char *name);
 
 //UTILt_envp	*ft_envpnew(char *str);
 t_envp		*construct(char	**envp);

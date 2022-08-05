@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_procnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 20:32:23 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:30:45 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void
-	ft_setname(t_process *proc, char *src, t_envp *envl);
-static char
-	*ft_setpath_env(t_envp *envl, char *name);
-static t_cmdlist
-	*ft_setargs(t_process *proc, t_cmdlist *cmd);
-static void
-	*ft_setredirect(t_process *proc, t_cmdlist *cmd);
+static void			ft_setname(t_process *proc, char *src, t_envp *envl);
+static char			*ft_setpath_env(t_envp *envl, char *name);
+static t_cmdlist	*ft_setargs(t_process *proc, t_cmdlist *cmd);
+static void			*ft_setredirect(t_process *proc, t_cmdlist *cmd);
 
 t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 {
@@ -106,8 +102,7 @@ static t_cmdlist
 	return (tmp_cmd);
 }
 
-static void
-	*ft_setredirect(t_process *proc, t_cmdlist *cmd)
+static void	*ft_setredirect(t_process *proc, t_cmdlist *cmd)
 {
 	char	*tmp;
 	char	*buf;
@@ -127,7 +122,8 @@ static void
 			else if (!ft_strcmp(cmd->cmd, ">>") && cmd->next)
 			{
 				close(open(cmd->next->cmd, O_CREAT, 0644));
-				ft_write_restart(proc, &proc->redirect->overwrite, cmd->next->cmd);
+				ft_write_restart(proc, &proc->redirect->overwrite,
+					cmd->next->cmd);
 			}
 			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
 			{
@@ -136,11 +132,13 @@ static void
 				f_path = ft_strjoin(tmp, cmd->next->cmd);
 				if (access(f_path, F_OK))
 				{
-					printf("minishell: no such file or directory: %s\n", cmd->next->cmd);
-					return (0); //freelemeye unutma
+					printf("minishell: no such file or directory: %s\n",
+						cmd->next->cmd);
+					return (0);
 				}
 				else
-					ft_read_restart(proc, &proc->redirect->read, cmd->next->cmd);
+					ft_read_restart(proc, &proc->redirect->read,
+						cmd->next->cmd);
 				free(tmp);
 				free(buf);
 				free(f_path);
@@ -152,7 +150,8 @@ static void
 					free(proc->redirect->read);
 					proc->redirect->read = 0;
 				}
-				ft_lstadd_back(&proc->redirect->delimeter, ft_lstnew(ft_strdup(cmd->next->cmd)));
+				ft_lstadd_back(&proc->redirect->delimeter,
+					ft_lstnew(ft_strdup(cmd->next->cmd)));
 			}
 				//proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
 		}

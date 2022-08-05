@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 02:43:28 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 04:37:10 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	start_process(t_process *process)
 			return (ret);
 		process = process->next;
 	}
+	return (0);
+}
 	/*
 	while (tmp)
 	{
@@ -38,7 +40,27 @@ int	start_process(t_process *process)
 		close(tmp->stdfd->_stdout);
 		tmp = tmp->next;
 	}*/
-	return (0);
+
+static void	run_builtin(t_process *process, int pipes[2])
+{
+	if (!process->next && !process->prev && \
+	(!ft_strcmp(process->name, BT_CD) || \
+	!ft_strcmp(process->name, BT_EXPORT) || \
+	!ft_strcmp(process->name, BT_EXIT) || \
+	!ft_strcmp(process->name, BT_UNSET)))
+	{
+		close(pipes[0]);
+		close(pipes[1]);
+		if (!ft_strcmp(process->name, BT_CD))
+			cd(process);
+		else if (!ft_strcmp(process->name, BT_EXIT))
+			ft_exit(process);
+		else if (!ft_strcmp(process->name, BT_UNSET))
+			unset(process);
+		else
+			export(process);
+		return (0);
+	}
 }
 
 static int	run(t_process *process)
@@ -67,22 +89,8 @@ static int	run(t_process *process)
 		process->stdfd->_stdin = pipes[0];
 		process->stdfd->_stdout = pipes[1];
 	}
-	if (!process->next && !process->prev && (!ft_strcmp(process->name, BT_CD) ||
-				!ft_strcmp(process->name, BT_EXPORT) || !ft_strcmp(process->name, BT_EXIT) ||
-				!ft_strcmp(process->name, BT_UNSET)))
-	{
-		close(pipes[0]);
-		close(pipes[1]);
-		if (!ft_strcmp(process->name, BT_CD))
-			cd(process);
-		else if (!ft_strcmp(process->name, BT_EXIT))
-			ft_exit(process);
-		else if (!ft_strcmp(process->name, BT_UNSET))
-			unset(process);
-		else
-			export(process);
-		return (0);
-	}
+	
+	
 	process->pid = fork();
 	if (!process->pid)
 	{
@@ -117,18 +125,21 @@ static int	initfd(t_process *process, int pipes[2])
 	result = redirect(process);
 	if (result)
 		return (result);
-	if (process->prev && !process->redirect->read && !process->redirect->delimeter &&\
+	if (process->prev && \
+		!process->redirect->read && !process->redirect->delimeter && \
 		dup2(process->prev->stdfd->_stdin, 0) == -1)
 		return (ERROR);
-	if (process->next && !process->redirect->write && !process->redirect->overwrite &&\
+	if (process->next && \
+		!process->redirect->write && !process->redirect->overwrite && \
 		dup2(process->stdfd->_stdout, 1) == -1)
 		return (ERROR);
-	//if (process->prev && process->prev->redirect->write && process->prev->redirect->overwrite)
-	//	close(0);
-	//if (!process->next)
-	//	close(process->stdfd->_stdout);
 	return (result);
 }
+	/* if (process->prev && process->prev->redirect->write && \ 
+		process->prev->redirect->overwrite)
+		close(0);
+	if (!process->next)
+		close(process->stdfd->_stdout); */
 
 static int	redirect(t_process *process)
 {	

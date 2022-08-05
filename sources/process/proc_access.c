@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proc_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 16:11:34 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/31 23:24:51 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:18:58 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	proc_access(char *name)
 {
-	return (ft_strcmp(name, "cd") && ft_strcmp(name, "env") &&
-		ft_strcmp(name, "unset") && ft_strcmp(name, "echo") &&
-		ft_strcmp(name, "pwd") && ft_strcmp(name, "export") &&
-		ft_strcmp(name, "exit"));
+	return (ft_strcmp(name, BT_CD) && ft_strcmp(name, BT_ENV) && \
+		ft_strcmp(name, BT_UNSET) && ft_strcmp(name, BT_ECHO) && \
+		ft_strcmp(name, BT_PWD) && ft_strcmp(name, BT_EXPORT) && \
+		ft_strcmp(name, BT_EXIT));
 }
