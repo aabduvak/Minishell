@@ -6,13 +6,13 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 02:31:39 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 05:04:47 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:23:26 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-size_t	copy_env(char *dst, char *input, size_t p_len, t_envp *envl)
+static size_t	copy_env(char *dst, char *input, size_t p_len, t_envp *envl)
 {
 	char	*env_name;
 	char	*env_val;
@@ -43,7 +43,7 @@ char	*parsenv(t_envp *envl, char *input)
 		p_len = 0;
 		if (input[p_len++] == '$' && ft_check_first_letter(input[p_len++]))
 		{
-			while (check_letter(*(input + p_len)))
+			while (ft_check_letter(*(input + p_len)))
 				p_len++;
 			idx += copy_env(parsed + idx, input, p_len, envl);
 			input += p_len;

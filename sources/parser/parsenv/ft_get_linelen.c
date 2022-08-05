@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:06:58 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 09:57:12 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:23:57 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_get_linelen(t_envp *envl, char *input)
 		{
 			if (params_len++ && !(ft_isalpha(c) || c == '_') && ++env_idx)
 				continue ;
-			while (check_letter(input[env_idx + params_len]))
+			while (ft_check_letter(input[env_idx + params_len]))
 				params_len++;
 			parsed_len += ft_parse_len(input,
 					(int *)&env_idx, params_len, envl);

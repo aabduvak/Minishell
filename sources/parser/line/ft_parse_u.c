@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:22:17 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 04:30:40 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 10:20:22 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char
 	*is_end(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index);
 
 char
-	*parse(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index)
+	*ft_parse_u(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index)
 {
 	if (line[*index] == '"' || line[*index] == '\'')
 		line = is_quote(data, buf, line, index);

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 09:55:19 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:25:57 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ char		*ft_rdpipe(t_cmdlist **list, char buf[STR_I][CHR_I],
 char		*ft_rdread(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
 char		*jump_space(char *str);
-char		*parse_cmd(char *line, t_envp *envl);
+char		*ft_parse_cmd(char *line, t_envp *envl);
 int			is_endcmd(char c);
-int			check_letter(char c);
+int			ft_check_letter(char c);
 int			ft_check_first_letter(char c);
 int			check_built_op(char *str);
 int			check_env(char *env_name);
