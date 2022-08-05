@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 05:07:15 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:55:19 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int			red_delimeter(t_list *del, int read_red);
 int			exec_builtin(t_process *proc);
 int			start_process(t_process *process);
 int			proc_access(char *name);
+int			run_related_builtins(t_process *process, int pipes[2]);
+int			child(t_process *process, int pipes[2]);
+void		parent(t_process *process);
+void		set_stdfd(t_process *process, int pipes[2]);
+int			initfd(t_process *process, int pipes[2]);
 
 //PARSER
 t_process	*convert(t_cmdlist *cmd, t_envp *evnl);

@@ -6,14 +6,13 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 05:09:50 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:55:31 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static int	run(t_process *process);
-static int	initfd(t_process *process, int pipes[2]);
 static int	redirect(t_process *process);
 
 int	start_process(t_process *process)
@@ -41,78 +40,34 @@ int	start_process(t_process *process)
 		tmp = tmp->next;
 	}*/
 
-static void	run_related_builtins(t_process *process, int pipes[2])
-{
-	close(pipes[0]);
-	close(pipes[1]);
-	if (!ft_strcmp(process->name, BT_CD))
-		cd(process);
-	else if (!ft_strcmp(process->name, BT_EXIT))
-		ft_exit(process);
-	else if (!ft_strcmp(process->name, BT_UNSET))
-		unset(process);
-	else
-		export(process);
-}
-
 static int	run(t_process *process)
 {
-	int		error;
-	int		nofile;
 	int		pipes[2];
 
 	pipes[0] = -1;
 	pipes[1] = -1;
-	process->stdfd->_stdin = -1;
-	process->stdfd->_stdout = -1;
-	nofile = proc_access(process->name);
-	if (access(process->path, F_OK) && nofile)
+	if (access(process->path, F_OK) && proc_access(process->name))
 	{
 		if (!process->path)
 			return (ft_error(process, ER_NOCOMM));
 		return (ft_error(process, ER_NOFILE));
 	}
-	if (access(process->path, X_OK) && nofile)
+	if (access(process->path, X_OK) && proc_access(process->name))
 		return (ft_error(process, ER_ACCES));
 	if (process->next && pipe(pipes))
 		return (ft_error(process, ER_PIPES));
-	if (process->next)
-	{
-		process->stdfd->_stdin = pipes[0];
-		process->stdfd->_stdout = pipes[1];
-	}
+	set_stdfd(process, pipes);
 	if (!process->next && !process->prev && is_relatedbuiltin(process->name))
-	{
-		run_related_builtins(process, pipes);
-		return (0);
-	}
+		return (run_related_builtins(process, pipes));
 	process->pid = fork();
 	if (!process->pid)
-	{
-		error = initfd(process, pipes);
-		if (error)
-			return (error);
-		if (exec_builtin(process))
-			exit(0);
-		if (execve(process->path, process->args,
-				deconstruct(process->envp)) == -1)
-		{
-			close(pipes[0]);
-			close(pipes[1]);
-			return (ER_EXEC);
-		}
-		exit(0);
-	}
+		child(process, pipes);
 	else
-	{
-		close(process->stdfd->_stdout);
-		if (process->prev)
-			close(process->prev->stdfd->_stdin);
-	}
+		parent(process);
 	return (0);
 }
 
-static int	initfd(t_process *process, int pipes[2])
+int	initfd(t_process *process, int pipes[2])
 {
 	int	result;
 
