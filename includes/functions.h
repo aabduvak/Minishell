@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 04:41:18 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 03:25:28 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ void		unset(t_process *process);
 void		echo(t_process *process);
 void		pwd(t_process *process);
 void		export(t_process *process);
-void		ft_exit(t_process *process);
+void		ft_exit(int status);
 void		run_builtin(t_process *process);
 int			is_builtin(char *command);
-int			is_relatedbuiltin(char *name);
 
 //UTILt_envp	*ft_envpnew(char *str);
 t_envp		*construct(char	**envp);
@@ -67,12 +66,27 @@ char		*buf_over(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
 char		*parse_bop(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
+char		*ft_rdpipe(t_cmdlist **list, char buf[STR_I][CHR_I],
+				char *line, int index);
+char		*ft_rdread(t_cmdlist **list, char buf[STR_I][CHR_I],
+				char *line, int index)
 char		*jump_space(char *str);
+char		*parse_cmd(char *line, t_envp *envl);
 int			is_endcmd(char c);
+int			check_letter(char c);
+int			ft_check_first_letter(char c);
 int			check_built_op(char *str);
 int			check_env(char *env_name);
+int			find_env(char *line, int quote);
+int			ft_envline_len(char *line, t_envp *envl)
+int			ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl);
+size_t		ft_get_buflen(char strings[STR_I][CHR_I], size_t len);
+size_t		ft_parse_len(char *input, int *env_idx, size_t params_len, t_envp *envl);
 char		*strings_join(char strings[STR_I][CHR_I], size_t len);
+char		*parse(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int *index);
+void		envcpy(char *dst, char *src, size_t size);
 void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
+void		end_block(t_cmdlist **list, char buf[STR_I][CHR_I], int type, int index);
 
 //STRUCTS
 void		ft_envpclear(t_envp *envl);
