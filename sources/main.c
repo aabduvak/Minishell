@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 20:48:19 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 02:26:24 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,24 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		//printf("env detecting...\n");
 		parse_env(cmd, envl);
+		//t_cmdlist	*tmp_list = cmd;
+		/*
+		printf("-----------------\n");
+	while (tmp_list)
+	{
+		printf("cmd: %s | type: ", tmp_list->cmd);
+		if (tmp_list->type == TSTRING)
+			printf("TSTRING");
+		else if (tmp_list->type == TCOMMAND)
+			printf("TCOMMAND");
+		else
+			printf("TENV");
+		printf(" | piece: %s\n", !tmp_list->piece? "no": "yes");
+		tmp_list = tmp_list->next;
+	}
+	printf("----------------------\n");
+*/
+
 		//printf("end...\n");
 		tmp = combinate_quote(cmd);
 		//ft_lstclear(&cmd);
