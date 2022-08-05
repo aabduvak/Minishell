@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 03:00:21 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:56:12 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static int
-find_env(char *line, int quote);
 
 char
 	*parse_quote(t_cmdlist **list, char buf[STR_I][CHR_I],

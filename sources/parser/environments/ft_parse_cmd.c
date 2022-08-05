@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:52:46 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 02:53:36 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:56:43 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_parse_cmd(char *line, t_envp *envl)
 	size_t	line_len;
 	char	*parsed;
 
-	line_len = envline_len(line, envl);
+	line_len = ft_envline_len(line, envl);
 	parsed = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!parsed)
 		return (NULL);

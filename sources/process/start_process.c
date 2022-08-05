@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 04:37:10 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 05:09:50 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,18 @@ int	start_process(t_process *process)
 		tmp = tmp->next;
 	}*/
 
-static void	run_builtin(t_process *process, int pipes[2])
+static void	run_related_builtins(t_process *process, int pipes[2])
 {
-	if (!process->next && !process->prev && \
-	(!ft_strcmp(process->name, BT_CD) || \
-	!ft_strcmp(process->name, BT_EXPORT) || \
-	!ft_strcmp(process->name, BT_EXIT) || \
-	!ft_strcmp(process->name, BT_UNSET)))
-	{
-		close(pipes[0]);
-		close(pipes[1]);
-		if (!ft_strcmp(process->name, BT_CD))
-			cd(process);
-		else if (!ft_strcmp(process->name, BT_EXIT))
-			ft_exit(process);
-		else if (!ft_strcmp(process->name, BT_UNSET))
-			unset(process);
-		else
-			export(process);
-		return (0);
-	}
+	close(pipes[0]);
+	close(pipes[1]);
+	if (!ft_strcmp(process->name, BT_CD))
+		cd(process);
+	else if (!ft_strcmp(process->name, BT_EXIT))
+		ft_exit(process);
+	else if (!ft_strcmp(process->name, BT_UNSET))
+		unset(process);
+	else
+		export(process);
 }
 
 static int	run(t_process *process)
@@ -89,8 +81,11 @@ static int	run(t_process *process)
 		process->stdfd->_stdin = pipes[0];
 		process->stdfd->_stdout = pipes[1];
 	}
-	
-	
+	if (!process->next && !process->prev && is_relatedbuiltin(process->name))
+	{
+		run_related_builtins(process, pipes);
+		return (0);
+	}
 	process->pid = fork();
 	if (!process->pid)
 	{

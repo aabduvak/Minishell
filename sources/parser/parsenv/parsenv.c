@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsenv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 02:31:39 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 03:21:03 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 05:04:47 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ size_t	copy_env(char *dst, char *input, size_t p_len, t_envp *envl)
 	env_name = ft_substr(input, 1, p_len - 1);
 	env_val = ft_getenv(env_name, envl);
 	env_len = ft_strlen(env_val);
-	*parsed++ = '\"';
-	envcpy(parsed, env_val, env_len);
-	*parsed = '\"';
+	*dst++ = '\"';
+	envcpy(dst, env_val, env_len);
+	*dst = '\"';
 	return (env_len + 2);
 }
 
@@ -32,17 +32,16 @@ char	*parsenv(t_envp *envl, char *input)
 	size_t	idx;
 	size_t	p_len;
 	char	*parsed;
-	char	*env_name;
 
 	if (!input)
 		return (0);
 	idx = 0;
-	p_len = get_len(envl, input);
+	p_len = ft_get_linelen(envl, input);
 	parsed = (char *)malloc(sizeof(char) * (p_len + 1));
 	while (*input)
 	{
 		p_len = 0;
-		if (input[p_len++] == '$' && check_first_letter(input[p_len++]))
+		if (input[p_len++] == '$' && ft_check_first_letter(input[p_len++]))
 		{
 			while (check_letter(*(input + p_len)))
 				p_len++;

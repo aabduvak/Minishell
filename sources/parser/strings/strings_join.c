@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 00:04:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 02:57:49 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:55:11 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*strings_join(char strings[STR_I][CHR_I], size_t len)
 
 	idx = 0;
 	res_len = 0;
-	all_len = get_len(strings, len);
+	all_len = ft_get_buflen(strings, len);
 	res = (char *)malloc(sizeof(char) * (all_len) + 1);
 	while (idx < len)
 	{
