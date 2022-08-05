@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 20:46:37 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 03:08:15 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		unset(t_process *process);
 void		echo(t_process *process);
 void		pwd(t_process *process);
 void		export(t_process *process);
-void		ft_exit(int status);
+void		ft_exit(t_process *process);
 void		run_builtin(t_process *process);
 int			is_builtin(char *command);
 

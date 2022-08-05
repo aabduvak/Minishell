@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:39:15 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/04 22:51:40 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 03:02:35 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_envpadd_back(t_envp **lst, t_envp *new)
 	while (item->next != NULL)
 		item = item->next;
 	item->next = new;
-
 }
 
 int	ft_envpsize(t_envp *lst)

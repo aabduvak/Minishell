@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 04:53:44 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/03 20:44:48 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 02:43:28 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	run(t_process *process)
 		if (!ft_strcmp(process->name, BT_CD))
 			cd(process);
 		else if (!ft_strcmp(process->name, BT_EXIT))
-			ft_exit(0);
+			ft_exit(process);
 		else if (!ft_strcmp(process->name, BT_UNSET))
 			unset(process);
 		else

@@ -6,7 +6,7 @@
 #    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/08/03 05:13:12 by arelmas          ###   ########.fr        #
+#    Updated: 2022/08/05 03:06:16 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ fffclean: ffclean
 norm :
 	@norminette libft/
 	@norminette sources
-	@norminette includes/*.h
+	@norminette includes/*.[ch]
 
 re : ffclean all
 

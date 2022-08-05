@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:15:24 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 19:29:31 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 02:47:49 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	show_info(int argc, char **argv)
 	while (argc > ++i)
 	{
 		fd = open("INFO", O_RDONLY);
+		if (fd == -1)
+			return ;
 		while (1)
 		{
 			line = get_next_line(fd);
@@ -78,7 +80,5 @@ void	show_info(int argc, char **argv)
 		close(fd);
 		if (!ft_strcmp(argv[i], HELP))
 			print_help();
-		else if (!ft_strcmp(argv[i], UPDATE))
-			printf("update\n");
 	}
 }

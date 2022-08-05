@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:39:05 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/07/18 21:43:47 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 02:59:45 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@
 # include <macro.h>
 # include <functions.h>
 # include <structs.h>
+
 #endif

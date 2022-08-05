@@ -6,11 +6,26 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/03 05:47:55 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 02:51:45 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	ft_printerr_helper(t_process *proc, int status)
+{
+	char	*name;
+
+	name = proc->name;
+	if (!name)
+		name = "minishell";
+	if (status == ER_PIPES)
+		printf("%s: %s\n", name, E_PIPES);
+	else if (status == ER_TIMEDOUT)
+		printf("%s: %s\n", name, E_TIMEDOUT);
+	else if (status == ER_CONNREFUSED)
+		printf("%s: %s\n", name, E_CONNREFUSED);
+}
 
 static void	ft_printerr(t_process *proc, int status)
 {
@@ -35,12 +50,8 @@ static void	ft_printerr(t_process *proc, int status)
 		printf("%s: %s\n", name, E_ISDIR);
 	else if (status == ER_NOTDIR)
 		printf("%s: %s\n", name, E_NOTDIR);
-	else if (status == ER_PIPES)
-		printf("%s: %s\n", name, E_PIPES);
-	else if (status == ER_TIMEDOUT)
-		printf("%s: %s\n", name, E_TIMEDOUT);
-	else if (status == ER_CONNREFUSED)
-		printf("%s: %s\n", name, E_CONNREFUSED);
+	else
+		ft_printerr_helper(proc, status);
 }
 
 void	ft_update_status(int status, t_process *process)
