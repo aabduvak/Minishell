@@ -6,13 +6,11 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 00:04:00 by arelmas           #+#    #+#             */
-/*   Updated: 2022/07/05 01:08:49 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 02:57:49 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static size_t	get_len(char strings[STR_I][CHR_I], size_t len);
 
 char	*strings_join(char strings[STR_I][CHR_I], size_t len)
 {
@@ -35,23 +33,4 @@ char	*strings_join(char strings[STR_I][CHR_I], size_t len)
 	}
 	res[res_len] = 0;
 	return (res);
-}
-
-static size_t	get_len(char strings[STR_I][CHR_I], size_t len)
-{
-	size_t	idx;
-	size_t	jdx;
-	size_t	strs_len;
-
-	idx = 0;
-	strs_len = 0;
-	while (idx < len)
-	{
-		jdx = 0;
-		while (strings[idx][jdx])
-			jdx++;
-		strs_len += jdx;
-		idx++;
-	}
-	return (strs_len);
 }
