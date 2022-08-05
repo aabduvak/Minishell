@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 02:26:24 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 10:38:25 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line = get_inputstr();
-		//printf("parsing...\n");
+		printf("parsing...\n");
 		cmd = parse_line(line);
-		//printf("parsed.\n");
+		printf("parsed.\n");
 	//	free(line);
 		if (!cmd)
 			continue ;
-		//printf("env detecting...\n");
+		printf("env detecting...\n");
 		parse_env(cmd, envl);
 		//t_cmdlist	*tmp_list = cmd;
 		/*
@@ -71,12 +71,12 @@ int	main(int argc, char **argv, char **envp)
 	printf("----------------------\n");
 */
 
-		//printf("end...\n");
+		printf("end...\n");
 		tmp = combinate_quote(cmd);
 		//ft_lstclear(&cmd);
-		//printf("converting...\n");
+		printf("converting...\n");
 		proc = convert(tmp, envl);
-		//printf("converted\n");
+		printf("converted\n");
 		//ft_cmdclear(&tmp, free);
 		if (!proc)
 		{
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		proc->envp = envl;
 		new_proc = proc;
-		//printf("starting...\n");
+		printf("starting...\n");
 		start_process(new_proc);
 		//waitpid(0, &status, 0);
 		//if (!err)

@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:22:17 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 10:20:22 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 10:47:12 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char
 	}
 	else if (is_endcmd(*line) && *line != ' ')
 	{
-		line = parse_bop(data->list, buf, line, *index);
+		line = parse_bop(&data->list, buf, line, *index);
 	}
 	else
 	{
@@ -42,11 +42,11 @@ char
 }
 
 static char
-	*is_quote(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index)
+	*is_quote(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int *index)
 {
 	if (*index && line[*index - 1] != ' ')
 	{
-		ft_cmdadd_back(data->list, ft_cmdnew(strings_join(buf, STR_I),
+		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I),
 				TENV, 1));
 		strings_bzero(buf, 1, STR_I);
 		line += *index;
