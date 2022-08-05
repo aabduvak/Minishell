@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 03:08:18 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/05 04:16:20 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ typedef struct s_cmdlist {
 	char				*cmd;
 	int					type;
 	int					piece;
+	int					cur_tp;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
+
+typedef struct s_parser {
+	int			type;
+	t_cmdlist **list;
+}	t_parser;
 
 typedef struct s_redirect {
 	char	*read;

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 03:25:28 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/05 04:51:37 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char		*parse_bop(t_cmdlist **list, char buf[STR_I][CHR_I],
 char		*ft_rdpipe(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
 char		*ft_rdread(t_cmdlist **list, char buf[STR_I][CHR_I],
-				char *line, int index)
+				char *line, int index);
 char		*jump_space(char *str);
 char		*parse_cmd(char *line, t_envp *envl);
 int			is_endcmd(char c);
@@ -78,7 +78,7 @@ int			ft_check_first_letter(char c);
 int			check_built_op(char *str);
 int			check_env(char *env_name);
 int			find_env(char *line, int quote);
-int			ft_envline_len(char *line, t_envp *envl)
+int			ft_envline_len(char *line, t_envp *envl);
 int			ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl);
 size_t		ft_get_buflen(char strings[STR_I][CHR_I], size_t len);
 size_t		ft_parse_len(char *input, int *env_idx, size_t params_len, t_envp *envl);
