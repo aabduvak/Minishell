@@ -42,7 +42,7 @@ typedef struct s_cmdlist {
 
 typedef struct s_parser {
 	int			type;
-	t_cmdlist **list;
+	t_cmdlist *list;
 }	t_parser;
 
 typedef struct s_redirect {

@@ -78,6 +78,8 @@ char		*ft_rdread(t_cmdlist **list, char buf[STR_I][CHR_I],
 				char *line, int index);
 char		*jump_space(char *str);
 char		*ft_parse_cmd(char *line, t_envp *envl);
+int			ft_get_stri(int index);
+int			ft_get_chri(int index);
 int			is_endcmd(char c);
 int			ft_check_letter(char c);
 int			ft_check_first_letter(char c);

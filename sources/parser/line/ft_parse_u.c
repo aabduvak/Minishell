@@ -22,10 +22,10 @@ char
 {
 	if (line[*index] == '"' || line[*index] == '\'')
 		line = is_quote(data, buf, line, index);
-	else if (!(GET_CHR_I(*index + 1)) || (is_endcmd(line[*index]) && *index))
+	else if (!(ft_get_chri(*index + 1)) || (is_endcmd(line[*index]) && *index))
 	{
-		buf[GET_STR_I(*index)][GET_CHR_I(*index)] = 0;
-		if (GET_STR_I(*index) == STR_I - 1
+		buf[ft_get_stri(*index)][ft_get_chri(*index)] = 0;
+		if (ft_get_stri(*index) == STR_I - 1
 			|| (is_endcmd(line[*index]) && *index))
 			line = is_end(data, buf, line, index);
 	}
@@ -42,27 +42,27 @@ char
 }
 
 static char
-	*is_quote(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int *index)
+	*is_quote(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index)
 {
 	if (*index && line[*index - 1] != ' ')
 	{
-		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I),
+		ft_cmdadd_back(&data->list, ft_cmdnew(strings_join(buf, STR_I),
 				TENV, 1));
 		strings_bzero(buf, 1, STR_I);
 		line += *index;
 		*index = 0;
 	}
-	return (parse_quote(data->list, buf, line, *index));
+	return (parse_quote(&data->list, buf, line, *index));
 }
 
 static char
 	*is_end(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index)
 {
 	if (data->type == TENV)
-		ft_cmdadd_back(data->list,
+		ft_cmdadd_back(&data->list,
 			ft_cmdnew(strings_join(buf, STR_I), TENV, 0));
 	else
-		ft_cmdadd_back(data->list,
+		ft_cmdadd_back(&data->list,
 			ft_cmdnew(strings_join(buf, STR_I), TSTRING, 0));
 	strings_bzero(buf, 1, STR_I);
 	return (jump_space(line + *index));

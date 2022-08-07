@@ -15,10 +15,10 @@
 void
 	end_block(t_cmdlist **list, char buf[STR_I][CHR_I], int type, int index)
 {
-		buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
+		buf[ft_get_stri(index)][ft_get_chri(index)] = 0;
 	if (type == TENV)
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TENV, 0));
-	else if (check_built_op(buf[GET_STR_I(index)]))
+	else if (check_built_op(buf[ft_get_stri(index)]))
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TCOMMAND, 0));
 	else
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I), TSTRING, 0));
