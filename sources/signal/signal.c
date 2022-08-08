@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 20:49:07 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 01:15:29 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 23:41:50 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,18 @@ void	signalhandler(int sig)
 	rl_replace_line("", 0);
 	printf("\n");
 	rl_redisplay();
+}
+
+void	del_handler(int sig)
+{
+	if (sig != SIGINT)
+		return ;
+	close(0);
+}
+
+void	nothing(int sig)
+{
+	(void)sig;
+	printf("\n");
+	return ;
 }
