@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:22:17 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/08 19:04:00 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 22:51:32 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char
 		line = is_quote(data, buf, line, index);
 	else if (!(ft_get_chri(*index + 1)) || (is_endcmd(line[*index]) && *index))
 	{
-		printf("buraya giriyom abi\n");
 		buf[ft_get_stri(*index)][ft_get_chri(*index)] = 0;
 		if (ft_get_stri(*index) == STR_I - 1
 			|| (is_endcmd(line[*index]) && *index))
@@ -35,10 +34,7 @@ char
 		line = parse_bop(&data->list, buf, line, *index);
 	}
 	else
-	{
-		printf("yok buraya\n");
 		return (line);
-	}
 	*index = 0;
 	return (line);
 }
@@ -48,7 +44,7 @@ static char
 {
 	if (*index && line[*index - 1] != ' ')
 	{
-		printf("TUUUUT2\n");
+		buf[ft_get_stri(*index)][ft_get_chri(*index)] = 0;
 		ft_cmdadd_back(&data->list, ft_cmdnew(strings_join(buf, STR_I),
 				TENV, 1));
 		strings_bzero(buf, 1, STR_I);
@@ -63,7 +59,6 @@ static char
 {
 	if (data->type == TENV)
 	{
-		printf("TUUUUT3\n");
 		ft_cmdadd_back(&data->list,
 			ft_cmdnew(strings_join(buf, STR_I), TENV, 0));
 	}
