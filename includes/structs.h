@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 05:51:22 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 04:16:20 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:48:03 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 # define STR_I 2
 # define CHR_I 255
-# define GET_STR_I(index) index / CHR_I % STR_I
-# define GET_CHR_I(index) index % (CHR_I - 1)
 # define TSTRING 0
 # define TCOMMAND 1
 # define TENV 2
@@ -42,7 +40,7 @@ typedef struct s_cmdlist {
 
 typedef struct s_parser {
 	int			type;
-	t_cmdlist *list;
+	t_cmdlist	*list;
 }	t_parser;
 
 typedef struct s_redirect {

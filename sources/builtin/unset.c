@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:44 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 23:02:55 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:46:58 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	unset(t_process *process)
 		free_list(keys);
 		return ;
 	}
-	while (process->args[++i])
+	while (process->args[i])
 	{
-		key = process->args[i];
+		key = process->args[i++];
 		delete_node(&envp, key);
 	}
 }

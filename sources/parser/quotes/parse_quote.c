@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 04:56:12 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:00:33 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char
 	c = *(line++ + index);
 	while (line[index] && line[index] != c)
 	{
-		buf[GET_STR_I(index)][GET_CHR_I(index)] = line[index];
+		buf[ft_get_stri(index)][ft_get_chri(index)] = line[index];
 		index++;
 	}
 	if (!line[index])
 		return (NULL);
-	buf[GET_STR_I(index)][GET_CHR_I(index)] = 0;
+	buf[ft_get_stri(index)][ft_get_chri(index)] = 0;
 	if (c == '"' && find_env(line - 1, 1))
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I),
 				TENV, line[index + 1] && line[index + 1] != ' '));

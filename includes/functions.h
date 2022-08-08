@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 10:25:57 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:47:36 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 # define STR_I 2
 # define CHR_I 255
-# define GET_STR_I(index) index / CHR_I % STR_I
-# define GET_CHR_I(index) index % (CHR_I - 1)
 
 void		cd(t_process *process);
 void		env(t_process *process);
@@ -89,14 +87,18 @@ int			find_env(char *line, int quote);
 int			ft_envline_len(char *line, t_envp *envl);
 int			ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl);
 size_t		ft_get_buflen(char strings[STR_I][CHR_I], size_t len);
-size_t		ft_parse_len(char *input, int *env_idx, size_t params_len, t_envp *envl);
+size_t		ft_parse_len(char *input, int *env_idx,
+				size_t params_len, t_envp *envl);
 char		*strings_join(char strings[STR_I][CHR_I], size_t len);
-char		*ft_parse_u(t_parser *data, char buf[STR_I][CHR_I], char *line, int *index);
+char		*ft_parse_u(t_parser *data, char buf[STR_I][CHR_I],
+				char *line, int *index);
 void		envcpy(char *dst, char *src, size_t size);
 void		strings_bzero(char strings[STR_I][CHR_I], size_t count, size_t len);
-void		end_block(t_cmdlist **list, char buf[STR_I][CHR_I], int type, int index);
+void		end_block(t_cmdlist **list,
+				char buf[STR_I][CHR_I], int type, int index);
 size_t		ft_get_linelen(t_envp *envl, char *input);
-char		*ft_rdwrite(t_cmdlist **list, char buf[STR_I][CHR_I], char *line, int index);
+char		*ft_rdwrite(t_cmdlist **list, \
+				char buf[STR_I][CHR_I], char *line, int index);
 
 //STRUCTS
 void		ft_envpclear(t_envp *envl);

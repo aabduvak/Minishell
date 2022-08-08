@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/08/03 05:13:12 by arelmas          ###   ########.fr        #
+#    Updated: 2022/08/08 12:00:50 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ all : $(LIB)
 fclean : 
 	@echo $(YELLOW) "Removing readline..." $(END)
 	@$(RM) ./readline $(LIB)
-	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
+	@echo $(RED) "readline deleted successfully!\n" $(END)
 
 re : fclean all
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+         #
+#    By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:23:46 by aabduvak          #+#    #+#              #
-#    Updated: 2022/08/05 03:06:16 by aabduvak         ###   ########.fr        #
+#    Updated: 2022/08/08 11:57:40 by aabduvak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,15 +88,12 @@ ffclean: fclean
 	@make fclean -C ./libft
 
 fffclean: ffclean
-	@echo $(YELLOW) "Removing $(ROOT)/readline..." $(END)
-	@$(RM) $(LIB)
 	@make fclean -C ./lib
-	@echo $(RED) "$(NAME) deleted successfully!\n" $(END)
 
 norm :
 	@norminette libft/
+	@norminette includes/
 	@norminette sources
-	@norminette includes/*.[ch]
 
 re : ffclean all
 
