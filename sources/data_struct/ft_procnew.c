@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_procnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
+/*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 10:04:18 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:53:21 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,56 +104,14 @@ static t_cmdlist
 
 static void	*ft_setredirect(t_process *proc, t_cmdlist *cmd)
 {
-	char	*tmp;
-	char	*buf;
-	char	*f_path;
-
 	if (!cmd)
 		return (NULL);
 	while (cmd && ft_strcmp(cmd->cmd, "|"))
 	{
 		if (cmd->type == TCOMMAND && cmd->next && cmd->next->type == TSTRING)
 		{
-			if (!ft_strcmp(cmd->cmd, ">") && cmd->next)
-			{
-				close(open(cmd->next->cmd, O_CREAT, 0644));
-				ft_write_restart(proc, &proc->redirect->write, cmd->next->cmd);
-			}
-			else if (!ft_strcmp(cmd->cmd, ">>") && cmd->next)
-			{
-				close(open(cmd->next->cmd, O_CREAT, 0644));
-				ft_write_restart(proc, &proc->redirect->overwrite,
-					cmd->next->cmd);
-			}
-			else if (!ft_strcmp(cmd->cmd, "<") && cmd->next)
-			{
-				buf = getcwd(0, 0);
-				tmp = ft_strjoin(buf, "/");
-				f_path = ft_strjoin(tmp, cmd->next->cmd);
-				if (access(f_path, F_OK))
-				{
-					printf("minishell: no such file or directory: %s\n",
-						cmd->next->cmd);
-					return (0);
-				}
-				else
-					ft_read_restart(proc, &proc->redirect->read,
-						cmd->next->cmd);
-				free(tmp);
-				free(buf);
-				free(f_path);
-			}
-			else if (!ft_strcmp(cmd->cmd, "<<") && cmd->next)
-			{
-				if (proc->redirect->read)
-				{
-					free(proc->redirect->read);
-					proc->redirect->read = 0;
-				}
-				ft_lstadd_back(&proc->redirect->delimeter,
-					ft_lstnew(ft_strdup(cmd->next->cmd)));
-			}
-				//proc->redirect->delimeter = ft_strdup(cmd->next->cmd);
+			if (!ft_procherlper(proc, cmd))
+				return (NULL);
 		}
 		else if (cmd->type == TCOMMAND)
 			return (NULL);

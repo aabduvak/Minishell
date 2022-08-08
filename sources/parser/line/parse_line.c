@@ -6,11 +6,17 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:58:29 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/08 22:52:33 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 23:03:24 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static	void	set_parser(t_parser *parser)
+{
+	parser->type = -1;
+	parser->list = 0;
+}
 
 t_cmdlist	*parse_line(char *line)
 {
@@ -20,8 +26,7 @@ t_cmdlist	*parse_line(char *line)
 	t_parser	data;
 
 	i = 0;
-	data.type = -1;
-	data.list = 0;
+	set_parser(&data);
 	line = jump_space(line);
 	strings_bzero(buf, 1, STR_I);
 	while (line[i])
@@ -37,7 +42,6 @@ t_cmdlist	*parse_line(char *line)
 		}
 		line = tmp;
 	}
-	
 	if (buf[0][0])
 		end_block(&data.list, buf, data.type, i);
 	return (data.list);
