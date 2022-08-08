@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/08 15:47:36 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/08 23:02:12 by aabduvak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void		ft_procinit(t_process *proc, t_envp *envl);
 void		ft_proclear(t_process **proc, void (*del)(void *));
 void		*ft_procadd_back(t_process **proc, t_process *new);
 t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl);
+int			ft_procherlper(t_process *proc, t_cmdlist *cmd);
 
 //SIGNALS
 void		clearsignals(void);
