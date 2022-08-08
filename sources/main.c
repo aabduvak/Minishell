@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 10:38:25 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/08 18:38:43 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		line = get_inputstr();
 		printf("parsing...\n");
 		cmd = parse_line(line);
-		printf("parsed.\n");
+		printf("parsed: %p\n", cmd);
 	//	free(line);
 		if (!cmd)
 			continue ;
