@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/08 23:02:12 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 00:09:51 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int			ft_procherlper(t_process *proc, t_cmdlist *cmd);
 void		clearsignals(void);
 void		connectsignals(void);
 void		signalhandler(int sig);
+void		del_handler(int sig);
+void		nothing(int sig);
 
 //PROMPT
 char		*get_input(void);

@@ -6,12 +6,14 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/08 22:53:08 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 02:51:13 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <info.h>
+
+t_envp *envl;
 
 char	*get_inputstr(void)
 {
@@ -29,7 +31,6 @@ int	main(int argc, char **argv, char **envp)
 	char		*line;
 	t_cmdlist	*cmd;
 	t_cmdlist	*tmp;
-	t_envp		*envl;
 	t_process	*proc;
 	t_process	*new_proc;
 
@@ -38,17 +39,19 @@ int	main(int argc, char **argv, char **envp)
 		show_info(argc, argv);
 		return (0);
 	}
-	connectsignals();
 	envl = construct(envp);
 	if (!envl)
 		perror("Contruct error");
 	while (1)
 	{
+
+		connectsignals();
 		line = get_inputstr();
+		signal(SIGINT, nothing);
 	//	printf("parsing...\n");
 		cmd = parse_line(line);
 	//	printf("parsed: %p\n", cmd);
-	//	free(line);
+		free(line);
 		if (!cmd)
 			continue ;
 	//	printf("env detecting...\n");
@@ -73,11 +76,11 @@ int	main(int argc, char **argv, char **envp)
 
 //		printf("end...\n");
 		tmp = combinate_quote(cmd);
-		//ft_lstclear(&cmd);
+		ft_cmdclear(&cmd, free);
 //		printf("converting...\n");
 		proc = convert(tmp, envl);
 //		printf("converted\n");
-		//ft_cmdclear(&tmp, free);
+		ft_cmdclear(&tmp, free);
 		if (!proc)
 		{
 			printf("Minishell: syntax error near unexpected token `|'\n");
@@ -87,10 +90,8 @@ int	main(int argc, char **argv, char **envp)
 		new_proc = proc;
 //		printf("starting...\n");
 		start_process(new_proc);
-		//waitpid(0, &status, 0);
-		//if (!err)
-	//		ft_update_status(status % 255, proc);
 		(void)status;
+		
 		while (new_proc)
 		{
 			wait(&status);
@@ -98,8 +99,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_update_envp("_", new_proc->path, new_proc->envp);
 			new_proc = new_proc->next;
 		}
-	//	ft_proclear(&proc, free);
+		ft_proclear(&proc, free);
 	}
-//	ft_envpclear(envl);
 	return (0);
 }

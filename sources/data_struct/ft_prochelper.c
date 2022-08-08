@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 22:05:00 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/08 22:51:26 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:04:14 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	ft_otherredirect(t_process *proc, t_cmdlist *cmd)
 	{
 		printf("minishell: no such file or directory: %s\n",
 			cmd->next->cmd);
+		free(f_path);
 		return (0);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:12:52 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/01 23:09:54 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:38:56 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ char	*get_input(void)
 	char	*prompt;
 
 	prompt = create_prompt();
-	if (!prompt)
-		prompt = "$: ";
 	input = readline(prompt);
 	if (!input)
 		return (input);
@@ -45,6 +43,7 @@ char	*create_prompt(void)
 	char		*prompt;
 	char		*cwd;
 	char		*tmp;
+	char		*tmp2;
 	int			len;
 
 	username = getenv("USER");
@@ -55,7 +54,9 @@ char	*create_prompt(void)
 	cwd = getcwd(NULL, 0);
 	tmp = ft_strrchr(cwd, '/');
 	tmp = ft_substr(tmp, 1, ft_strlen(tmp));
+	tmp2 = tmp;
 	tmp = change_color(tmp, BOLD_BLUE);
+	free(tmp2);
 	prompt = ft_calloc(sizeof(char), ft_strlen(username) + ft_strlen(tmp) + 5);
 	ft_memcpy(prompt, username, len);
 	prompt[len] = ':';

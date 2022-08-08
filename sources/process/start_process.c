@@ -30,15 +30,6 @@ int	start_process(t_process *process)
 	}
 	return (0);
 }
-	/*
-	while (tmp)
-	{
-		printf("closing: %i\n", tmp->stdfd->_stdin);
-		printf("closing: %i\n\n", tmp->stdfd->_stdout);
-		close(tmp->stdfd->_stdin);
-		close(tmp->stdfd->_stdout);
-		tmp = tmp->next;
-	}*/
 
 static int	run(t_process *process)
 {
@@ -85,11 +76,6 @@ int	initfd(t_process *process, int pipes[2])
 		return (ERROR);
 	return (result);
 }
-	/* if (process->prev && process->prev->redirect->write && \ 
-		process->prev->redirect->overwrite)
-		close(0);
-	if (!process->next)
-		close(process->stdfd->_stdout); */
 
 static int	redirect(t_process *process)
 {	

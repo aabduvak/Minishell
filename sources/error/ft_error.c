@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 03:37:30 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 02:51:45 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:22:07 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void	ft_update_status(int status, t_process *process)
 	{
 		if (!ft_strcmp("?", envp->key))
 		{
+			free(envp->value);
 			envp->value = ft_itoa(status);
 			tmp = ft_strjoin(envp->key, "=");
+			free(envp->fullstr);
 			envp->fullstr = ft_strjoin(tmp, envp->value);
+			free(tmp);
 			break ;
 		}
 		envp = envp->next;

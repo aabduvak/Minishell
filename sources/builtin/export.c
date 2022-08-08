@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/04 23:21:08 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 02:43:39 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ static void	print_export(t_process *process)
 {
 	t_envp	*tmp;
 	t_envp	*copy;
+	t_envp	*tmp_cpy;
 	char	**envp;
 
 	tmp = process->envp;
 	envp = deconstruct(tmp);
 	copy = construct(envp);
 	bubble_sort(&copy, ft_envpsize(copy));
+	tmp_cpy = copy;
 	while (copy)
 	{
 		if (contains_char(copy->fullstr, '=') && copy->key[0] != '?')
@@ -78,14 +80,15 @@ static void	print_export(t_process *process)
 		copy = copy->next;
 	}
 	free_list(envp);
-	ft_envpclear(copy);
+	ft_envpclear(tmp_cpy);
 }
 
 void	export(t_process *process)
 {
 	if (process && !*(process->args + 1))
 	{
-		print_export(process);
+		print_export(process);	
+		system("leaks minishell");
 		return ;
 	}
 	process->args = process->args + 1;
