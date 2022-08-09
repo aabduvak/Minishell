@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:15:45 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/09 05:21:30 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 13:59:17 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_process	*ft_procnew(t_cmdlist *cmd, t_envp *envl)
 		free(process->name);
 		free(process->path);
 		free_list(process->args);
+		printf("minishell: syntax error near unexpected token `newline'\n");
 		free(process);
 		return (NULL);
 	}

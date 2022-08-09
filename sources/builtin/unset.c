@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 03:16:44 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/08 16:46:58 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:04:17 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	delete_node(t_envp **head_ref, char *name)
 	if (temp != NULL && !ft_strcmp(temp->key, name))
 	{
 		*head_ref = temp->next;
-		free(temp);
+		ft_envpclear(temp);
 		return ;
 	}
 	while (temp != NULL && ft_strcmp(temp->key, name))
@@ -32,7 +32,7 @@ static void	delete_node(t_envp **head_ref, char *name)
 	if (temp == NULL)
 		return ;
 	prev->next = temp->next;
-	free(temp);
+	ft_envpclear(temp);
 }
 
 void	unset(t_process *process)

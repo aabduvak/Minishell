@@ -12,6 +12,12 @@
 
 #include <minishell.h>
 
+static void	*pipe_error(void)
+{
+	printf("minishell: syntax error near unexpected token  `|'\n");
+	return (NULL);
+}
+
 t_process	*convert(t_cmdlist *list, t_envp *envl)
 {
 	t_process	*process;
@@ -32,7 +38,7 @@ t_process	*convert(t_cmdlist *list, t_envp *envl)
 		if (list && !ft_strcmp(list->cmd, "|"))
 		{
 			if (!list->next || !ft_strcmp(list->next->cmd, "|"))
-				return (0);
+				return (pipe_error());
 			if (list->type == TCOMMAND)
 				list = list->next;
 		}
