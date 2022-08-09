@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 03:43:49 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 05:28:07 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	export(t_process *process)
 
 	if (process && !*(process->args + 1))
 	{
-		print_export(process);	
+		print_export(process);
 		return ;
 	}
 	tmp = process->args;
