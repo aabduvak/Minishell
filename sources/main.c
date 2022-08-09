@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 02:51:13 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 03:39:50 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 t_envp *envl;
 
-char	*get_inputstr(void)
+char	*get_inputstr(char *username)
 {
 	char		*line;
 
-	line = get_input();
+	line = get_input(username);
 	if (!line)
 		exit(0);
 	return (line);
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmdlist	*tmp;
 	t_process	*proc;
 	t_process	*new_proc;
+	char		*username;
 
 	if (argc > 1)
 	{
@@ -42,11 +43,11 @@ int	main(int argc, char **argv, char **envp)
 	envl = construct(envp);
 	if (!envl)
 		perror("Contruct error");
+	username = ft_getenv("USER", envl);
 	while (1)
 	{
-
 		connectsignals();
-		line = get_inputstr();
+		line = get_inputstr(username);
 		signal(SIGINT, nothing);
 	//	printf("parsing...\n");
 		cmd = parse_line(line);
@@ -95,8 +96,8 @@ int	main(int argc, char **argv, char **envp)
 		while (new_proc)
 		{
 			wait(&status);
-			ft_update_status(status % 255, proc);
-			ft_update_envp("_", new_proc->path, new_proc->envp);
+		//	ft_update_status(status % 255, proc);
+		//	ft_update_envp("_", new_proc->path, new_proc->envp);
 			new_proc = new_proc->next;
 		}
 		ft_proclear(&proc, free);

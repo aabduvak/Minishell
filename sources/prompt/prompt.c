@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:12:52 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 01:38:56 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 03:29:29 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static char	*change_color(char *str, char *color)
 	return (res);
 }
 
-char	*get_input(void)
+char	*get_input(char *username)
 {
 	char	*input;
 	char	*prompt;
 
-	prompt = create_prompt();
+	prompt = create_prompt(username);
 	input = readline(prompt);
 	if (!input)
 		return (input);
@@ -37,18 +37,14 @@ char	*get_input(void)
 	return (input);
 }
 
-char	*create_prompt(void)
+char	*create_prompt(char *username)
 {
-	static char	*username;
 	char		*prompt;
 	char		*cwd;
 	char		*tmp;
 	char		*tmp2;
 	int			len;
 
-	username = getenv("USER");
-	if (!username)
-		username = "NOUSERNAME";
 	username = change_color(username, BOLD_GREEN);
 	len = ft_strlen(username);
 	cwd = getcwd(NULL, 0);
@@ -64,5 +60,6 @@ char	*create_prompt(void)
 	ft_memcpy(prompt + ft_strlen(prompt), "$ ", 5);
 	free(cwd);
 	free(tmp);
+	free(username);
 	return (prompt);
 }

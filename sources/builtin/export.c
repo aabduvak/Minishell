@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 02:44:38 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 02:43:39 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 03:43:49 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,19 @@ static void	print_export(t_process *process)
 
 void	export(t_process *process)
 {
+	char	**tmp;
+
 	if (process && !*(process->args + 1))
 	{
 		print_export(process);	
-		system("leaks minishell");
 		return ;
 	}
+	tmp = process->args;
 	process->args = process->args + 1;
 	while (*process->args)
 	{
 		ft_setenv(process);
 		process->args = process->args + 1;
 	}
+	process->args = tmp;
 }

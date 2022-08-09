@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:02:55 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 00:09:51 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 03:15:35 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void		del_handler(int sig);
 void		nothing(int sig);
 
 //PROMPT
-char		*get_input(void);
-char		*create_prompt(void);
+char		*get_input(char *username);
+char		*create_prompt(char *username);
 
 //ERROR
 int			ft_error(t_process *process, int status);
