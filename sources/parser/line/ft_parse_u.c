@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 03:22:17 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/09 04:41:16 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 11:37:04 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char
 			line = is_end(data, buf, line, index);
 	}
 	else if (is_endcmd(*line) && *line != ' ')
-	{
 		line = parse_bop(&data->list, buf, line, *index);
-	}
 	else
 		return (line);
 	*index = 0;

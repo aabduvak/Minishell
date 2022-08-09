@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:51:08 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 02:52:32 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 11:45:15 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	ft_getenv_val(char *line, char *src, size_t *idx, t_envp *envl)
 	env_val = ft_getenv(env_name, envl);
 	ft_strcpy(src, env_val);
 	*idx += ft_strlen(env_name) + 1;
+	free(env_name);
 	return (ft_strlen(env_val));
 }

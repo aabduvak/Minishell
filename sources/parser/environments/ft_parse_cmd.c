@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:52:46 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 04:56:43 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:59:31 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_parse_cmd(char *line, t_envp *envl)
 	jdx = 0;
 	while (jdx < line_len)
 	{
-		if (line[idx] == '$')
+		if (line[idx] == '$' && check_env(line + idx + 1))
 			jdx += ft_getenv_val(line, parsed + jdx, &idx, envl);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 09:51:02 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/05 09:53:54 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:14:59 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	child(t_process *process, int pipes[2])
 		return (error);
 	if (exec_builtin(process))
 		exit(0);
-	if (execve(process->path, process->args,
+	if (process->path && execve(process->path, process->args,
 			deconstruct(process->envp)) == -1)
 	{
 		close(pipes[0]);

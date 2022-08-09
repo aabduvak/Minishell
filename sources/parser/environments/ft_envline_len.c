@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:49:48 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/05 02:50:22 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 12:06:46 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ int	ft_envline_len(char *line, t_envp *envl)
 	{
 		tmp = ft_strchr(line, '$') - line;
 		line += tmp;
-		len += tmp;
 		if (!*line)
 			break ;
+		len += tmp;
 		tmp = check_env(++line);
-		len += !tmp;
 		if (tmp)
 		{
 			env_name = ft_substr(line, 0, tmp);

@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@42istanbul.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:38:51 by aabduvak          #+#    #+#             */
-/*   Updated: 2022/08/09 05:20:33 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 13:18:18 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, nothing);
 	//	printf("parsing...\n");
 		cmd = parse_line(line);
-	//	printf("parsed: %p\n", cmd);
+		//printf("parsed: %p\n", cmd);
 		free(line);
 		if (!cmd)
 			continue ;
-	//	printf("env detecting...\n");
+		//printf("env detecting...\n");
 		parse_env(cmd, envl);
 		//t_cmdlist	*tmp_list = cmd;
 		/*
@@ -74,8 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	printf("----------------------\n");
 */
-
-//		printf("end...\n");
+	//	printf("end...\n");
 		tmp = combinate_quote(cmd);
 		ft_cmdclear(&cmd, free);
 //		printf("converting...\n");

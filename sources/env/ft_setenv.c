@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 16:42:09 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/08 16:01:14 by aabduvak         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:26:48 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void	ft_setenv(t_process *process)
 	}
 	unset(process);
 	ft_envpadd_back(&process->envp, (t_envp *)ft_envpnew(process->args[0]));
+	free_list(key);
 }
-
-/* free_list(key) */
