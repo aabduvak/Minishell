@@ -6,7 +6,7 @@
 /*   By: arelmas <arelmas@42istanbul.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 21:57:21 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/09 00:59:04 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 05:18:16 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmdlist	*combinate_quote(t_cmdlist *cmd)
 	while (cmd)
 	{
 		tmp_res = cmd;
-		join = cmd->cmd;
+		join = ft_strdup(cmd->cmd);
 		while (cmd && cmd->piece)
 		{
 			tmp = join;
@@ -35,7 +35,7 @@ t_cmdlist	*combinate_quote(t_cmdlist *cmd)
 			cmd = cmd->next;
 		}
 		cmd = cmd->next;
-		ft_cmdadd_back(&res, ft_cmdnew(ft_strdup(join), tmp_res->type, tmp_res->piece));
+		ft_cmdadd_back(&res, ft_cmdnew(join, tmp_res->type, tmp_res->piece));
 	}
 	return (res);
 }

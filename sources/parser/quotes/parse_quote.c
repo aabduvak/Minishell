@@ -6,7 +6,7 @@
 /*   By: aabduvak <aabduvak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:25:35 by arelmas           #+#    #+#             */
-/*   Updated: 2022/08/08 19:15:50 by arelmas          ###   ########.fr       */
+/*   Updated: 2022/08/09 04:49:36 by arelmas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char
 	if (!line[index])
 		return (NULL);
 	buf[ft_get_stri(index)][ft_get_chri(index)] = 0;
-	if (c == '"' && find_env(line - 1, 1))
+	if (c == '"' && find_env(line, 1))
 		ft_cmdadd_back(list, ft_cmdnew(strings_join(buf, STR_I),
 				TENV, line[index + 1] && line[index + 1] != ' '));
 	else
